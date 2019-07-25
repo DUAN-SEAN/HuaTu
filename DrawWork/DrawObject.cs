@@ -357,12 +357,9 @@ namespace DrawWork
         public virtual void LoadFromXml(XmlTextReader reader)
         {
         }
-
-        #endregion
-
         #region 段瑞 旋转
         /// <summary>
-        /// 一个点绕着另一个点旋转angle度
+        /// 一个点顺时针绕着另一个点旋转angle度
         /// </summary>
         /// <param name="center">绕点坐标</param>
         /// <param name="p1">要旋转的点</param>
@@ -376,6 +373,18 @@ namespace DrawWork
             float y1 = -(p1.X - center.X) * (float)Math.Sin(angleHude) +
                         (p1.Y - center.Y) * (float)Math.Cos(angleHude) + center.Y;
             return new PointF(x1, y1);
+        }
+        /// <summary>
+        /// 一个点逆时针绕着另一个点旋转angle度
+        /// </summary>
+        /// <param name="center"></param>
+        /// <param name="p1"></param>
+        /// <param name="angle"></param>
+        /// <returns></returns>
+        protected virtual PointF RotatePointReverse(PointF center, PointF p1, float angle)
+        {
+            angle = 360f - angle;
+            return RotatePoint(center, p1, angle);
         }
         /// <summary>
         /// 将图形绕中心点旋转
@@ -489,6 +498,9 @@ namespace DrawWork
         }
 
         #endregion
+        #endregion
+
+
 
 
 

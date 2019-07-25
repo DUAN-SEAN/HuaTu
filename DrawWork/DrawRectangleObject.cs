@@ -131,15 +131,9 @@ namespace DrawWork
                 return angle;
             }
         }
-
         protected float angle = 0f;//当前旋转角度
 
-        protected PointF _center
-        {
-            get { return new PointF((rectangle.X + rectangle.Width) / 2, (rectangle.Y + rectangle.Height) / 2); }
-        }
-
-        private PointF fixedCenter;//没有旋转前固定旋转点
+        private PointF fixedCenter = default;//没有旋转前固定旋转点
         #endregion
 
         #region 函数
@@ -465,7 +459,7 @@ namespace DrawWork
                 case 1:
 
 
-                    toRectangleMousePoint = RotatePoint(center, point, 360 - _angle);
+                    toRectangleMousePoint = RotatePointReverse(center, point, _angle);
 
                     left = toRectangleMousePoint.X;
                     top = toRectangleMousePoint.Y;
@@ -478,7 +472,7 @@ namespace DrawWork
                     top = toRectangleMousePoint.Y;
                     break;
                 case 3:
-                    toRectangleMousePoint = RotatePoint(center, point, 360 - _angle);
+                    toRectangleMousePoint = RotatePointReverse(center, point, _angle);
                     right = toRectangleMousePoint.X;
                     top = toRectangleMousePoint.Y;
                     break;
@@ -490,7 +484,7 @@ namespace DrawWork
                     right = toRectangleMousePoint.X;
                     break;
                 case 5:
-                    toRectangleMousePoint = RotatePoint(center, point, 360 - _angle);
+                    toRectangleMousePoint = RotatePointReverse(center, point, _angle);
                     right = toRectangleMousePoint.X;
                     bottom = toRectangleMousePoint.Y;
                     break;
@@ -502,7 +496,7 @@ namespace DrawWork
                     bottom = toRectangleMousePoint.Y;
                     break;
                 case 7:
-                    toRectangleMousePoint = RotatePoint(center, point, 360 - _angle);
+                    toRectangleMousePoint = RotatePointReverse(center, point, _angle);
                     left = toRectangleMousePoint.X;
                     bottom = toRectangleMousePoint.Y;
                     break;
@@ -528,7 +522,7 @@ namespace DrawWork
         {
             var temp2 = RotatePoint(center, handleLocalPoint, _angle);
             var interactPoint = PointForPointToABLine(mousePoint.X, mousePoint.Y, temp2.X, temp2.Y, center.X, center.Y);//鼠标位置到中心和handle线段的垂直交点，作为新的handle
-            var toRectangleMousePoint = RotatePoint(center, interactPoint, 360f - _angle);
+            var toRectangleMousePoint = RotatePointReverse(center, interactPoint, _angle);
             return toRectangleMousePoint;
         }
         public override void RotateKnobTo(PointF point)
@@ -572,6 +566,9 @@ namespace DrawWork
             yCenter = rectangle.Y + rectangle.Height / 2;
             return new PointF(xCenter, yCenter);
         }
+
+        
+
         protected override PointF RotatePoint(PointF center, PointF p1, float angle)
         {
             return base.RotatePoint(center, p1, angle);
