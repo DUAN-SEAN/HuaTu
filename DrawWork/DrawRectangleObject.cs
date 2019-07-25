@@ -406,7 +406,7 @@ namespace DrawWork
         {
             if (Selected)
             {
-                return _imageR.Contains(point);
+                return GetKnobRectangle().Contains(point);
             }
 
             return false;
