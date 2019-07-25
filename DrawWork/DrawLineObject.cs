@@ -117,7 +117,11 @@ namespace DrawWork
 
             return _endPoint;
         }
-
+        //TODO 等待段瑞重写
+        public override PointF GetKnobPoint()
+        {
+            return new PointF((_startPoint.X + _endPoint.X)/2, (_startPoint.Y + _endPoint.Y) / 2 - 20);
+        }
         public override Cursor GetHandleCursor(int handleNumber)
         {
             switch (handleNumber)
