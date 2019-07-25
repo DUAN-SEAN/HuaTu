@@ -61,6 +61,26 @@ namespace DrawWork.Properties {
         }
         
         /// <summary>
+        ///   查找 System.Windows.Forms.ImageListStreamer 类型的本地化资源。
+        /// </summary>
+        public static System.Windows.Forms.ImageListStreamer imageList_ImageStream {
+            get {
+                object obj = ResourceManager.GetObject("imageList.ImageStream", resourceCulture);
+                return ((System.Windows.Forms.ImageListStreamer)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似于 {X=17,Y=17} 的 System.Drawing.Point 类型的本地化资源。
+        /// </summary>
+        public static System.Drawing.Point imageList_TrayLocation {
+            get {
+                object obj = ResourceManager.GetObject("imageList.TrayLocation", resourceCulture);
+                return ((System.Drawing.Point)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
         public static System.Drawing.Bitmap knob {

@@ -1,4 +1,6 @@
-﻿namespace HuaTuDemo.Tools.ToolForm
+﻿using DrawWork.Properties;
+
+namespace HuaTuDemo.Tools.ToolForm
 {
     partial class ToolBox
     {
@@ -73,20 +75,20 @@
             this.radioButton_Pointer.TabStop = true;
             this.radioButton_Pointer.UseVisualStyleBackColor = true;
             this.radioButton_Pointer.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
-            // 
+            //
             // imageList
-            // 
-            //this.imageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList.ImageStream")));
-            //this.imageList.TransparentColor = System.Drawing.Color.Transparent;
-            //this.imageList.Images.SetKeyName(0, "Line32x32.ico");
-            //this.imageList.Images.SetKeyName(1, "Rectangle32x32.ico");
-            //this.imageList.Images.SetKeyName(2, "Pointer32x32.ico");
-            //this.imageList.Images.SetKeyName(3, "Ellipse32x32.ico");
-            //this.imageList.Images.SetKeyName(4, "PanHand.ico");
-            //this.imageList.Images.SetKeyName(5, "Pencil.ico");
-            //this.imageList.Images.SetKeyName(6, "Text23x32.ico");
-            //this.imageList.Images.SetKeyName(7, "Path32x32.ico");
-            //this.imageList.Images.SetKeyName(8, "image.png");
+            //
+            this.imageList.ImageStream = (System.Windows.Forms.ImageListStreamer) (Resources.imageList_ImageStream);
+            this.imageList.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList.Images.SetKeyName(0, "Line32x32.ico");
+            this.imageList.Images.SetKeyName(1, "Rectangle32x32.ico");
+            this.imageList.Images.SetKeyName(2, "Pointer32x32.ico");
+            this.imageList.Images.SetKeyName(3, "Ellipse32x32.ico");
+            this.imageList.Images.SetKeyName(4, "PanHand.ico");
+            this.imageList.Images.SetKeyName(5, "Pencil.ico");
+            this.imageList.Images.SetKeyName(6, "Text23x32.ico");
+            this.imageList.Images.SetKeyName(7, "Path32x32.ico");
+            this.imageList.Images.SetKeyName(8, "image.png");
             // 
             // radioButton_rectangle
             // 
