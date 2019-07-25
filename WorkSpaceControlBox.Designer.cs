@@ -1,4 +1,6 @@
-﻿namespace HuaTuDemo
+﻿using HuaTuDemo.Properties;
+
+namespace HuaTuDemo
 {
     partial class WorkSpaceControlBox
     {
@@ -95,11 +97,11 @@
             // 
             // imageList
             // 
-            //this.imageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("HuaTuDemo.imageList.ImageStream")));
-            //this.imageList.TransparentColor = System.Drawing.Color.Transparent;
-            //this.imageList.Images.SetKeyName(0, "zoom_in32x32.ico");
-            //this.imageList.Images.SetKeyName(1, "zoom_out32x32.ico");
-            //this.imageList.Images.SetKeyName(2, "minimize.png");
+            this.imageList.ImageStream = (System.Windows.Forms.ImageListStreamer) (Resources.imageList_ImageStream);
+            this.imageList.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList.Images.SetKeyName(0, "zoom_in32x32.ico");
+            this.imageList.Images.SetKeyName(1, "zoom_out32x32.ico");
+            this.imageList.Images.SetKeyName(2, "minimize.png");
             // 
             // button_noZoom
             // 
