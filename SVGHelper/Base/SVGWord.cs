@@ -128,7 +128,7 @@ namespace SVGHelper.Base
                                 tmp = reader.Value;
                                 break;
 
-                            case XmlNodeType.Element:
+                            case XmlNodeType.Element://找到一个形状
                             {
                                 SVGUnit ele = AddElement(eleParent, reader.Name, ref eleLast);
 
@@ -151,7 +151,7 @@ namespace SVGHelper.Base
                                     }
 
                                     bool bLoop = reader.MoveToFirstAttribute();
-                                    while (bLoop)
+                                    while (bLoop)//直到读完属性为止
                                     {
                                         ele.SetAttributeValue(reader.Name, reader.Value);
 

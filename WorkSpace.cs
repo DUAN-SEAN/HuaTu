@@ -153,7 +153,7 @@ namespace HuaTuDemo
             XmlTextReader reader = null;
             try
             {
-                reader = new XmlTextReader(fileName);
+                reader = new XmlTextReader(fileName);//从本地读取xml文件
                 drawArea.LoadFromXml(reader);
                 drawArea.FileName = fileName;
                 ResizeDrawArea();
@@ -226,7 +226,7 @@ namespace HuaTuDemo
             try
             {
                 writer = new System.IO.StreamWriter(fileName);
-                drawArea.SaveToXml(writer);//保存到XML
+                drawArea.SaveToXml(writer);//保存DrawArea到XML
                 MessageBox.Show(@"Save Done");
             }
             catch (Exception ex)
