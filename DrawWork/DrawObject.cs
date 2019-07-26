@@ -396,7 +396,8 @@ namespace DrawWork
         /// <returns></returns>
         protected virtual PointF RotatePointReverse(PointF center, PointF p1, float angle)
         {
-            angle = 360f - angle;
+            angle =(-angle % 360 + 360) % 360;
+            
             return RotatePoint(center, p1, angle);
         }
         /// <summary>
@@ -513,7 +514,21 @@ namespace DrawWork
         #endregion
         #endregion
 
+        protected float _angle //换算角度到一个周期
+        {
+            set
+            {
+                angle = value;
 
+
+            }
+            get
+            {
+                angle = (angle % 360 + 360) % 360;
+                return angle;
+            }
+        }
+        protected float angle = 0f;//当前旋转角度
 
 
 

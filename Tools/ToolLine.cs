@@ -25,7 +25,7 @@ namespace HuaTuDemo
 
         public override void OnMouseDown(DrawArea drawArea, MouseEventArgs e)
         {
-            AddNewObject(drawArea, new DrawConnectLine(e.X, e.Y, e.X + 1, e.Y + 1));
+            AddNewObject(drawArea, new DrawLineObject(e.X, e.Y, e.X + 1, e.Y + 1));
             IsComplete = true;
         }
 
@@ -35,7 +35,7 @@ namespace HuaTuDemo
             if (e.Button == MouseButtons.Left)
             {
                 var point = new Point(e.X, e.Y);
-                drawArea.GraphicsList[0].MoveHandleTo(point, 3);
+                drawArea.GraphicsList[0].MoveHandleTo(point, 2);
                 drawArea.Refresh();
             }
         }

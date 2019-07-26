@@ -116,22 +116,7 @@ namespace DrawWork
        
 
         protected bool hasRotation = false;//是否在旋转
-
-        protected float _angle //换算角度到一个周期
-        {
-            set
-            {
-                angle = value;
-
-
-            }
-            get
-            {
-                angle = angle % 360;
-                return angle;
-            }
-        }
-        protected float angle = 0f;//当前旋转角度
+        protected bool hasMove = false;
 
         private PointF fixedCenter = default;//没有旋转前固定旋转点
         #endregion
@@ -229,6 +214,13 @@ namespace DrawWork
                     fixedCenter = GetCenter();
                     hasRotation = false;
                 }
+
+                //if (hasMove)
+                //{
+                //    fixedCenter = GetCenter();
+                //    hasMove = false;
+                //}
+
                 //先设定到中心位置 旋转
                 //PointF center = GetCenter();
                 PointF center = fixedCenter;
@@ -452,7 +444,8 @@ namespace DrawWork
             rectangle.X += deltaX;
             rectangle.Y += deltaY;
 
-
+            fixedCenter.X += deltaX;
+            fixedCenter.Y += deltaY;
         }
 
         public override void MoveHandleTo(PointF point, int handleNumber)
@@ -604,7 +597,7 @@ namespace DrawWork
             //rectangle = RotatePoint()
             //_rectangleR.Location = RotatePoint(_rectangleR.GetCenter(), _rectangleR.Location, angle);
             //_rectangleR.RightBottom = RotatePoint(_rectangleR.GetCenter(), _rectangleR.RightBottom, angle);
-            _angle += angle;
+            _angle -= angle;
 
 
 
