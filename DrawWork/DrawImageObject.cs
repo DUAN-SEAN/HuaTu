@@ -183,7 +183,23 @@ namespace DrawWork
                 }
 
                 if (_image != null)
+                {
+                    if (hasRotation)
+                    {
+                        fixedCenter = GetCenter();
+                        hasRotation = false;
+                    }
+                    PointF center = fixedCenter;
+                    g.TranslateTransform(center.X, center.Y);
+                    g.RotateTransform(-_angle);
+                    g.TranslateTransform(-center.X, -center.Y);
+
                     g.DrawImage(_image, RectangleF);
+
+                    g.ResetTransform();
+
+                }
+                    
                 else
                     base.Draw(g);
             }
