@@ -66,12 +66,18 @@ namespace HuaTuDemo
             for (int i = 0; i < n; i++)
             {
                 DrawObject o = drawArea.GraphicsList.GetSelectedObject(i);
+               
                 int handleNumber = o.HitTest(point);
                 bool hitOnOutline = o.HitOnCircumferance;
 
                 if (handleNumber > 0)
                 {
                     _selectMode = SelectionMode.Size;
+
+                    if (o is DrawConnectLine && handleNumber != 2)
+                    {
+                        ((DrawConnectLine)o).SetFollowObjectNull(handleNumber);
+                    }
 
                     // 在类成员中保留调整大小的对象
                     _resizedObject = o;
@@ -93,6 +99,7 @@ namespace HuaTuDemo
                 }
 
             }
+
 
             // 移动测试（光标在对象上）
             if (_selectMode == SelectionMode.None)
@@ -288,6 +295,20 @@ namespace HuaTuDemo
 
             if (_resizedObject != null)
             {
+                if (_resizedObjectHandle != 2 && _resizedObject is DrawConnectLine)
+                {
+                    var line = (DrawConnectLine) _resizedObject;
+                    for (int i = 0; i < drawArea.GraphicsList.Count; i++)
+                    {
+                        if (drawArea.GraphicsList[i] is DrawConnectLine) continue;
+                        if (drawArea.GraphicsList[i] is DrawLineObject) continue;
+                        if (drawArea.GraphicsList[i].HitTest(line.GetHandle(_resizedObjectHandle)) >= 0)
+                        {
+                            line.SetFollowObject(_resizedObjectHandle, drawArea.GraphicsList[i]);
+                        }
+                    }
+                }
+
                 // 调整大小后
                 _resizedObject.Normalize();
                 _resizedObject = null;
@@ -300,7 +321,7 @@ namespace HuaTuDemo
             if (_rerotateObject != null)
             {
                 _rerotateObject.Normalize();
-                _resizedObject = null;
+                _rerotateObject = null;
                 drawArea.RerotateCommand(drawArea.GraphicsList.GetFirstSelected(),
                     new PointF(_startPoint.X,_startPoint.Y),
                     new PointF(e.X,e.Y));

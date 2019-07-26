@@ -137,7 +137,7 @@ namespace DrawWork
 
         public virtual PointF GetKnobPoint()
         {
-            return new PointF(0, 0);
+            return new PointF(-20,-20 );
         }
         /// <summary>
         /// 以1为基数获取句柄矩形
@@ -219,6 +219,19 @@ namespace DrawWork
             return -1;
         }
 
+        /// <summary>
+        /// 判断该点里哪个句柄近返回句柄
+        /// </summary>
+        /// <param name="point"></param>
+        /// <returns></returns>
+        public virtual int HitAroundTest(PointF point)
+        {
+            if (HitTest(point) >= 0)
+            {
+                return 0;
+            }
+            return -1;
+        }
         /// <summary>
         /// 命中旋钮测试
         /// 命中返回true

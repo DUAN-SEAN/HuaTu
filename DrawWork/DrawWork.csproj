@@ -51,6 +51,7 @@
     <Compile Include="Command\CreateCommand.cs" />
     <Compile Include="Command\CutCommand.cs" />
     <Compile Include="Command\DeleteCommand.cs" />
+    <Compile Include="DrawConnectLine.cs" />
     <Compile Include="DrawEllipseObject.cs" />
     <Compile Include="DrawImageObject.cs" />
     <Compile Include="DrawLineObject.cs" />

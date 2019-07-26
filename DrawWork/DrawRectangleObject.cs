@@ -328,6 +328,8 @@ namespace DrawWork
             
             return new PointF(x, y);
         }
+
+        
         public override PointF GetKnobPoint()
         {
             float x, xCenter, yCenter;
@@ -400,6 +402,26 @@ namespace DrawWork
                 return 0;
 
             return -1;
+        }
+
+        public override int HitAroundTest(PointF point)
+        {
+            float distance = float.MaxValue;
+            int minHandle = -1;
+            for (int i = 2; i <= HandleCount; i += 2)
+            {
+               var pointi = GetHandle(i);
+               var x = point.X - pointi.X;
+                var y = point.Y - pointi.Y;
+                var disi = x * x + y * y;
+                if (distance > disi)
+                {
+                    minHandle = i;
+                    distance = disi;
+                }
+            }
+
+            return minHandle;
         }
 
         public override bool HitKnobTest(PointF point)
