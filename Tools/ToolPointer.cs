@@ -166,7 +166,7 @@ namespace HuaTuDemo
                 _selectMode = SelectionMode.NetSelection;
                 drawArea.DrawNetRectangle = true;
             }
-
+            //保存一次最近操作
             _lastPoint.X = e.X;
             _lastPoint.Y = e.Y;
             _startPoint.X = e.X;

@@ -226,7 +226,7 @@ namespace HuaTuDemo
             try
             {
                 writer = new System.IO.StreamWriter(fileName);
-                drawArea.SaveToXml(writer);
+                drawArea.SaveToXml(writer);//保存到XML
                 MessageBox.Show(@"Save Done");
             }
             catch (Exception ex)
