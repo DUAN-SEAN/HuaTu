@@ -357,14 +357,14 @@ namespace HuaTuDemo
             try
             {
                 const string mSXmlDeclaration = "<?xml version=\"1.0\" standalone=\"no\"?>";
-                const string mSXmlDocType = "<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.0//EN\" \"http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd\">";
+                const string mSXmlDocType = "<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\" \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd \">";
 
                 string sXml = mSXmlDeclaration + "\r\n";
                 sXml += mSXmlDocType + "\r\n";
-                sXml += "<svg width=\"" + _mOriginalSize.Width.ToString(CultureInfo.InvariantCulture) +
-                    "\" height=\"" + _mOriginalSize.Height.ToString(CultureInfo.InvariantCulture) + "\">" + "\r\n";
+                sXml += "<svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" width=\"" + _mOriginalSize.Width.ToString(CultureInfo.InvariantCulture) +
+                "\" height=\"" + _mOriginalSize.Height.ToString(CultureInfo.InvariantCulture) + "\">" + "\r\n";
                 sXml += "<desc>" + Description + "</desc>" + "\r\n";
-                sXml += _graphicsList.GetXmlString(_mScale);
+                sXml += _graphicsList.GetXmlString(_mScale);//将每一个图形都转换为标准格式
                 sXml += "</svg>" + "\r\n";
                 sw.Write(sXml);
                 sw.Close();
