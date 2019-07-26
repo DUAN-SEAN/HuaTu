@@ -182,6 +182,10 @@ namespace DrawWork
             return s;
         }
 
+        public static string GetTransform(float angle, PointF center)
+        {
+            return $" transform=\"rotate({angle}, {center.X} {center.Y})\"";
+        }
         public static string GetRectStringXml(RectangleF rect, SizeF scale, String shapeName)
         {
             string s = "";
@@ -194,6 +198,8 @@ namespace DrawWork
             s += " y = \"" + y.ToString(CultureInfo.InvariantCulture) + "\"";
             s += " width = \"" + w.ToString(CultureInfo.InvariantCulture) + "\"";
             s += " height = \"" + h.ToString(CultureInfo.InvariantCulture) + "\"";
+            //添加旋转
+            
             //Added by Ajay
             s += " ShapeName = \"" + shapeName + "\"";
             return s;
@@ -367,6 +373,7 @@ namespace DrawWork
             s += Tag;
             s += GetStrStyle(scale);
             s += GetRectStringXml(RectangleF, scale, Name);
+            s += GetTransform(-_angle, fixedCenter);//添加变化
             s += " />" + "\r\n";
             return s;
         }
