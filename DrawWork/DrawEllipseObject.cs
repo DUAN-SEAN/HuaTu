@@ -9,7 +9,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace DrawWork
-{
+{   
+    /// <summary>
+    /// 继承自矩形，实际上只是显示效果与矩形不同以外 其他的和矩形一样
+    /// </summary>
     public class DrawEllipseObject : DrawRectangleObject
     {
         #region 字段
@@ -23,7 +26,7 @@ namespace DrawWork
         public DrawEllipseObject()
         {
             SetRectangleF(0, 0, 1, 1);
-            Initialize();
+            Initialize();//设置缩放比例
         }
 
         public DrawEllipseObject(float x, float y, float width, float height)
@@ -57,6 +60,18 @@ namespace DrawWork
 
         public override void Draw(Graphics g)
         {
+            if (hasRotation)
+            {
+                fixedCenter = GetCenter();
+                hasRotation = false;
+            }
+            PointF center = fixedCenter;
+            g.TranslateTransform(center.X, center.Y);
+            g.RotateTransform(-_angle);
+            g.TranslateTransform(-center.X, -center.Y);
+        
+
+
             RectangleF r = GetNormalizedRectangle(RectangleF);
             if (Fill != Color.Empty)
             {
@@ -65,6 +80,7 @@ namespace DrawWork
             }
             var pen = new Pen(Stroke, StrokeWidth);
             g.DrawEllipse(pen, r);
+            g.ResetTransform();
             pen.Dispose();
         }
 
@@ -82,10 +98,16 @@ namespace DrawWork
             s += " cy = \"" + cy.ToString(CultureInfo.InvariantCulture) + "\"";
             s += " rx = \"" + rx.ToString(CultureInfo.InvariantCulture) + "\"";
             s += " ry = \"" + ry.ToString(CultureInfo.InvariantCulture) + "\"";
+            s += GetTransform(_angle, fixedCenter);
             s += " />" + "\r\n";
             return s;
         }
-
+        public static string GetTransform(float angle, PointF center)
+        {
+            return $" transform=\"rotate({-angle}, {center.X} {center.Y})\"";
+        }
         #endregion 函数
+
+
     }
 }

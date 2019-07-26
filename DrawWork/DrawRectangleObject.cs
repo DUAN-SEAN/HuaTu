@@ -118,7 +118,7 @@ namespace DrawWork
         protected bool hasRotation = false;//是否在旋转
         protected bool hasMove = false;
 
-        private PointF fixedCenter = default;//没有旋转前固定旋转点
+        protected PointF fixedCenter = default;//没有旋转前固定旋转点
         #endregion
 
         #region 函数
@@ -184,7 +184,7 @@ namespace DrawWork
 
         public static string GetTransform(float angle, PointF center)
         {
-            return $" transform=\"rotate({angle}, {center.X} {center.Y})\"";
+            return $" transform=\"rotate({-angle}, {center.X} {center.Y})\"";
         }
         public static string GetRectStringXml(RectangleF rect, SizeF scale, String shapeName)
         {
@@ -373,7 +373,7 @@ namespace DrawWork
             s += Tag;
             s += GetStrStyle(scale);
             s += GetRectStringXml(RectangleF, scale, Name);
-            s += GetTransform(-_angle, fixedCenter);//添加变化
+            s += GetTransform(_angle, fixedCenter);//添加变化
             s += " />" + "\r\n";
             return s;
         }
@@ -579,8 +579,11 @@ namespace DrawWork
             rectangle.Height = height;
         }
         #region 段瑞旋转
-
-        private PointF GetCenter()
+        /// <summary>
+        /// 获取当前中心点
+        /// </summary>
+        /// <returns></returns>
+        protected virtual PointF GetCenter()
         {
             float x, xCenter, yCenter;
 
