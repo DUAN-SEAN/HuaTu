@@ -108,7 +108,7 @@ namespace DrawWork
                 DrawObject o = CreateDrawObject(ele);
                 if (o != null)
                     Add(o);
-                SVGUnit child = ele.getChild();
+                 SVGUnit child = ele.getChild();
                 while (child != null)
                 {
                     AddFromSvg(child);

@@ -26,7 +26,7 @@ namespace SVGHelper
             typeRect,
             typeCircle,
             typeEllipse,
-            typeLine,
+            typeLine ,
             typePath,
             typePolygon,
             typeImage,
