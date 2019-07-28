@@ -28,12 +28,14 @@ namespace DrawWork.Command
 
         public void Execute()
         {
-            _itemRerotated.RotateKnobTo(_newPoint);
+            var angle = ((_newPoint.X - _oldPoint.X) + (_newPoint.Y - _oldPoint.Y)) / 2;
+            _itemRerotated.Rotate(angle);
         }
 
         public void UnExecute()
         {
-            _itemRerotated.RotateKnobTo(_oldPoint);
+            var angle = -((_newPoint.X-_oldPoint.X)+ (_newPoint.Y - _oldPoint.Y))/2;
+            _itemRerotated.Rotate(angle);
         }
 
         #endregion

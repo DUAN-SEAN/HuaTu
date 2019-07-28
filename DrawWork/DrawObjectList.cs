@@ -97,10 +97,10 @@ namespace DrawWork
             // insert to the top of z-order
             _graphicsList.Insert(0, obj);
             var create = new CreateCommand(obj, _graphicsList);
-            _undoRedo.AddCommand(create);
+            _undoRedo.AddCommand(create);//添加到回退
         }
 
-        // **************   Read from SVG
+        //将读取的svg根传入 扫描每一个unit
         public void AddFromSvg(SVGUnit ele)
         {
             while (ele != null)

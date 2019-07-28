@@ -2,7 +2,7 @@
 {
     public  interface ICommand
     {
-        void Execute();
-        void UnExecute();
+        void Execute();//提交操作
+        void UnExecute();//取消操作
     }
 }
