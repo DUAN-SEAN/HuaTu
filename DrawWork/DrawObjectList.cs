@@ -387,7 +387,7 @@ namespace DrawWork
 
         public void RerotateCommand(DrawObject obj, PointF old, PointF newP)
         {
-            var cmd = new ReRotateCommand(obj, old, newP);
+            var cmd = new RotateCommand(obj, old, newP);
             _undoRedo.AddCommand(cmd);
         }
 

@@ -46,7 +46,7 @@
   <ItemGroup>
     <Compile Include="Command\BringToFrontCommand.cs" />
     <Compile Include="Command\ICommand.cs" />
-    <Compile Include="Command\ReRotateCommand.cs" />
+    <Compile Include="Command\RotateCommand.cs" />
     <Compile Include="Command\UndoRedo.cs" />
     <Compile Include="Command\CreateCommand.cs" />
     <Compile Include="Command\CutCommand.cs" />

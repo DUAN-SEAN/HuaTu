@@ -7,17 +7,17 @@ using System.Threading.Tasks;
 
 namespace DrawWork.Command
 {
-    public class ReRotateCommand : ICommand
+    public class RotateCommand : ICommand
     {
         private readonly DrawObject _itemRerotated;
         private readonly PointF _oldPoint;
         private readonly PointF _newPoint;
 
-        private ReRotateCommand()
+        private RotateCommand()
         {
         }
 
-        public ReRotateCommand(DrawObject itemResized, PointF old, PointF newP)
+        public RotateCommand(DrawObject itemResized, PointF old, PointF newP)
         {
             _itemRerotated = itemResized;
             _oldPoint = new PointF(old.X, old.Y);
