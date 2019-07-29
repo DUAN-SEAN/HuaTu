@@ -128,7 +128,7 @@ namespace SVGHelper.Base
                                 tmp = reader.Value;
                                 break;
 
-                            case XmlNodeType.Element://找到一个形状
+                            case XmlNodeType.Element://找到一个标签
                             {
                                 SVGUnit ele = AddElement(eleParent, reader.Name, ref eleLast);
 
@@ -451,7 +451,7 @@ namespace SVGHelper.Base
             {
                 eleToReturn = AddText(parent, ref last);
             }
-            else if (sName == "g")
+            else if (sName == "g")//检查元素添加一个组
             {
                 eleToReturn = AddGroup(parent, ref last);
             }

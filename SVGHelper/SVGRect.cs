@@ -138,6 +138,8 @@ namespace SVGHelper
             AddAttr(SVGAttribute._SvgAttribute.attrSpecific_Height, null);
             AddAttr(SVGAttribute._SvgAttribute.attrSpecific_RX, null);
             AddAttr(SVGAttribute._SvgAttribute.attrSpecific_RY, null);
+            //TODO:增加旋转属性
+            
         }
     }
 }
