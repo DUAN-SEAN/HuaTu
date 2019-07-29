@@ -153,7 +153,10 @@ namespace SVGHelper.Base
                                     bool bLoop = reader.MoveToFirstAttribute();
                                     while (bLoop)//直到读完属性为止
                                     {
-                                        ele.SetAttributeValue(reader.Name, reader.Value);
+                                        if (!ele.SetAttributeValue(reader.Name, reader.Value))
+                                        {
+                                            err.Log("Read AttributeValue : " + reader.Value, SVGErr._LogPriority.Warning);
+                                        }
 
                                         bLoop = reader.MoveToNextAttribute();
                                     }
