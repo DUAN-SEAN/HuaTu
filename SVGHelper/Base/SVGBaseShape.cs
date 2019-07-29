@@ -435,6 +435,20 @@ namespace SVGHelper.Base
             }
         }
 
+        [Category("(Specific)")]
+        [Description("For Shape Name For Program Use")]
+        public string Transform
+        {
+            get
+            {
+                return GetAttributeStringValue(SVGAttribute._SvgAttribute.attrSpecific_Transform);
+            }
+
+            set
+            {
+                SetAttributeValue(SVGAttribute._SvgAttribute.attrSpecific_Transform, value);
+            }
+        }
         protected SVGBaseShape(SVGWord doc) : base(doc)
         {
             AddAttr(SVGAttribute._SvgAttribute.attrCore_XmlBase, null);

@@ -131,6 +131,7 @@ namespace DrawWork
                     ParseSize(svg.Y, Dpi.Y),
                     ParseSize(svg.Width, Dpi.X),
                     ParseSize(svg.Height, Dpi.Y));
+                dobj.Rotate(ParseAngle(svg.Transform));
                 dobj.SetStyleFromSvg(svg);
                 dobj.Name = svg.ShapeName;
 

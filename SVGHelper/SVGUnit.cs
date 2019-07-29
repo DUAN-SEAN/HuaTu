@@ -463,7 +463,7 @@ namespace SVGHelper
                 {
                     switch (attr.AttributeDataType)//获取属性的值所处类型，默认为字符串
                     {
-                        case SVGAttribute._SvgAttributeDataType.datatypeString:
+                        case SVGAttribute._SvgAttributeDataType.datatypeString://跳到下一个case执行
 
                         case SVGAttribute._SvgAttributeDataType.datatypeHRef:
                             attr.Value = sValue;

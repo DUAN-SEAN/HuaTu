@@ -603,14 +603,23 @@ namespace DrawWork
         {
             StrokeWidth = RecalcFloat(StrokeWidth, newscale.Width, oldscale.Width);
         }
-
+    
         public void SetStyleFromSvg(SVGBaseShape svg)
         {
             Stroke = svg.Stroke;
             StrokeWidth = ParseSize(svg.StrokeWidth, Dpi.X);
             Fill = svg.Fill != Color.Transparent ? svg.Fill : Color.Empty;
         }
-
+        /// <summary>
+        /// 从"rotate(-45.5, 143.5 141)"中解析出角度
+        /// </summary>
+        /// <param name="transform"></param>
+        public static float ParseAngle(string transform)
+        {
+            var temp = transform.Split(',')[0].Substring(7);
+            var angleResult = float.Parse(temp);
+            return angleResult;
+        }
         public static float ParseSize(string str, float dpi)
         {
             float koef = 1;
