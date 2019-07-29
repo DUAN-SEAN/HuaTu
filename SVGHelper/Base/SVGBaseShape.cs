@@ -471,6 +471,10 @@ namespace SVGHelper.Base
             AddAttr(SVGAttribute._SvgAttribute.attrOpacity_FillOpacity, null);
             AddAttr(SVGAttribute._SvgAttribute.attrOpacity_StrokeOpacity, null);
 
+            //在基本形状上添加属性 transform
+            AddAttr(SVGAttribute._SvgAttribute.attrSpecific_Transform, null);
+
+
         }
         public override void ParseStyle(string sval)
         {

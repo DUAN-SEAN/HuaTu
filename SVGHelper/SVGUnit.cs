@@ -461,9 +461,10 @@ namespace SVGHelper
                 SVGAttribute attr = (SVGAttribute)m_attributes[i];
                 if (attr.Name == sName)
                 {
-                    switch (attr.AttributeDataType)
+                    switch (attr.AttributeDataType)//获取属性的值所处类型，默认为字符串
                     {
                         case SVGAttribute._SvgAttributeDataType.datatypeString:
+
                         case SVGAttribute._SvgAttributeDataType.datatypeHRef:
                             attr.Value = sValue;
                             if (attr.AttributeType == SVGAttribute._SvgAttribute.attrStyle_Style)

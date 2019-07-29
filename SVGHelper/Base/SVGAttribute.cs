@@ -14,7 +14,7 @@ namespace SVGHelper.Base
         /// 支持的SVG属性列表。
         /// </summary>
         public enum _SvgAttribute
-    {
+        {
         attrSvg_XmlNs,
         attrSvg_Version,
         attrCore_Id,
@@ -81,8 +81,9 @@ namespace SVGHelper.Base
         attrXLink_Actuate,
         attrXLink_HRef,
         attrXLink_Target,
-        attrText_Anchor
-    }
+        attrText_Anchor,
+        attrSpecific_Transform
+        }
 
     /// <summary>
     /// List of SVG attribute groups.
@@ -836,6 +837,14 @@ namespace SVGHelper.Base
 
         m_mapAttrInfo.Add(info._type, info);
         // ---
+
+        //2019.7.29 增加基本属性 transform
+        info = new _AttrInfo();
+        info._type = _SvgAttribute.attrSpecific_Transform;
+        info._group = _SvgAttributeGroup.groupElementSpecific;
+        info._name = "transform";
+
+        m_mapAttrInfo.Add(info._type, info);
     }
 
     private void InitStyle()
