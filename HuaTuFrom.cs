@@ -65,8 +65,9 @@ namespace HuaTuDemo
             _infoShapeProperties.ShowCloseButton = false;
 
             //2019.7.30添加时间timer 用于tick
-            timer.Interval = 100;
+            timer.Interval = 35;
             timer.Tick += new EventHandler(Tick);
+            timer.Enabled = true;
         }
         /// <summary>
         /// 该方法在主线程调用，100ms轮询一次

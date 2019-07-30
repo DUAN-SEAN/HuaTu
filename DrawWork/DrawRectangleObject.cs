@@ -633,5 +633,26 @@ namespace DrawWork
 
         #endregion
         #endregion 函数
+
+
+        long interval = 1000;
+        long nextTime = DateTime.Now.Ticks;
+        public override void Update()
+        {
+            var currentTime = DateTime.Now.Ticks;
+            if (currentTime > nextTime)
+            {
+                Random r = new Random();
+                var a = r.Next(0, 255);
+                var b = r.Next(0, 255);
+                var c = r.Next(0, 255);
+                Fill = Color.FromArgb(a, b, c);
+
+
+                nextTime = DateTime.Now.Ticks + interval*10000;
+            }
+
+           
+        }
     }
 }

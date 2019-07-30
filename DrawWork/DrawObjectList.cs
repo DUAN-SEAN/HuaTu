@@ -470,7 +470,9 @@ namespace DrawWork
                 AddFromSvg(child);
             return o;
         }
-
+        /// <summary>
+        /// 驱动器
+        /// </summary>
         public void Tick()
         {
             int n = _graphicsList.Count;
