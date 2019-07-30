@@ -362,7 +362,14 @@ namespace HuaTuDemo
             if (ToolDone != null)
                 ToolDone(sender, e);
         }
-
+        /// <summary>
+        /// 由main的timer调用 100ms一次
+        /// </summary>
+        public void Tick()
+        {
+            //刷新一次
+            drawArea.Refresh();
+        }
         #endregion Methods
     }
 }

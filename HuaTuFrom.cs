@@ -63,6 +63,19 @@ namespace HuaTuDemo
             _shapeProperties.PropertyChanged += ShapePropertiesPropertyChanged;
             _infoShapeProperties = _docker.Add(_shapeProperties, DockAllowed.All, new Guid("a6402b80-2ebd-4fd3-8930-024a6201d004"));
             _infoShapeProperties.ShowCloseButton = false;
+
+            //2019.7.30添加时间timer 用于tick
+            timer.Interval = 100;
+            timer.Tick += new EventHandler(Tick);
+        }
+        /// <summary>
+        /// 该方法在主线程调用，100ms轮询一次
+        /// </summary>
+        /// <param name="o"></param>
+        /// <param name="e"></param>
+        public void Tick(object o,EventArgs e)
+        {
+            _svgMainFiles.GetCurrentWorkForm().svgDrawForm.Tick();
         }
         public void OnZoomChanged(object sender, EventArgs e)
         {
@@ -250,5 +263,6 @@ namespace HuaTuDemo
         {
 
         }
+
     }
 }

@@ -130,7 +130,7 @@
   <data name="toolStripButton_close.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAAFiUAABYlAUlSJPAAAAYeSURBVFhH7ZY7bFtVHMaT0EoMiAlEVaGKiYmFhYWBIhZY
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAYeSURBVFhH7ZY7bFtVHMaT0EoMiAlEVaGKiYmFhYWBIhZY
         QF3ZKCzQLjwkBjZUxMICGxIDSxFt87TjZ+wkrvN0Hn7FcRw7L8d5NI4TJ00T27n3fHz/+3CcNCl9wIDE
         kT7d5Pr4fr//61w3/WdXVQPKVaoCHOqAdfvfWxUazu8qjG4oeJd1uPLUkqnuBR2+RR2RNYWlHYXaPwkk
         xsktmhZ0uEUrluz/BUYgCNA9r8OZ0+GhZjbVs2dm7YGCn2Yeyr9KrVHrOry8ekS8Z8CcAuGY5d45HVv7
@@ -159,4 +159,7 @@
         WmVZojwx/TIdjFrMRJ3MRICZSiwoFB/35/f/y1hNTX8BBHPKowjJx7cAAAAASUVORK5CYII=
 </value>
   </data>
+  <metadata name="timer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>530, 17</value>
+  </metadata>
 </root>

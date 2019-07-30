@@ -30,6 +30,7 @@ namespace HuaTuDemo
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HuaTuFrom));
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -67,6 +68,7 @@ namespace HuaTuDemo
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.panel1 = new System.Windows.Forms.Panel();
             this._docker = new HuaTu.Controls.Public.Dockable.DockableContainer();
+            this.timer = new System.Windows.Forms.Timer(this.components);
             this.MaiMenuStrip.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -75,10 +77,9 @@ namespace HuaTuDemo
             // statusStrip1
             // 
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(28, 28);
-            this.statusStrip1.Location = new System.Drawing.Point(0, 581);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 380);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Padding = new System.Windows.Forms.Padding(2, 0, 21, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(819, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(546, 22);
             this.statusStrip1.TabIndex = 2;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -97,8 +98,7 @@ namespace HuaTuDemo
             this.helpToolStripMenuItem});
             this.MaiMenuStrip.Location = new System.Drawing.Point(0, 0);
             this.MaiMenuStrip.Name = "MaiMenuStrip";
-            this.MaiMenuStrip.Padding = new System.Windows.Forms.Padding(9, 3, 0, 3);
-            this.MaiMenuStrip.Size = new System.Drawing.Size(819, 34);
+            this.MaiMenuStrip.Size = new System.Drawing.Size(546, 25);
             this.MaiMenuStrip.TabIndex = 4;
             this.MaiMenuStrip.Text = "menuStrip1";
             // 
@@ -112,7 +112,7 @@ namespace HuaTuDemo
             this.toolStripSeparator1,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem1.Name = "fileToolStripMenuItem1";
-            this.fileToolStripMenuItem1.Size = new System.Drawing.Size(62, 28);
+            this.fileToolStripMenuItem1.Size = new System.Drawing.Size(44, 21);
             this.fileToolStripMenuItem1.Text = "&文件";
             this.fileToolStripMenuItem1.Click += new System.EventHandler(this.FileToolStripMenuItem1_Click);
             // 
@@ -121,7 +121,7 @@ namespace HuaTuDemo
             this.newToolStripMenuItem.Image = global::HuaTuDemo.Properties.Resources.new_page;
             this.newToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.White;
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(274, 38);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
             this.newToolStripMenuItem.Text = "&新建";
             this.newToolStripMenuItem.Click += new System.EventHandler(this.NewToolStripMenuItemNewClick);
             // 
@@ -130,14 +130,14 @@ namespace HuaTuDemo
             this.openToolStripMenuItem.Image = global::HuaTuDemo.Properties.Resources.open;
             this.openToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.White;
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(274, 38);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
             this.openToolStripMenuItem.Text = "&打开";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.OpenToolStripMenuItemClick);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(274, 38);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
             this.saveToolStripMenuItem.Text = "&保存";
             // 
             // saveAsToolStripMenuItem
@@ -145,21 +145,21 @@ namespace HuaTuDemo
             this.saveAsToolStripMenuItem.Image = global::HuaTuDemo.Properties.Resources.save_as;
             this.saveAsToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.White;
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(274, 38);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
             this.saveAsToolStripMenuItem.Text = "&另存为";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.SaveToolStripMenuItemClick);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(271, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(109, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Image = global::HuaTuDemo.Properties.Resources.exit;
             this.exitToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.White;
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(274, 38);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
             this.exitToolStripMenuItem.Text = "&退出";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItemClick);
             // 
@@ -181,96 +181,96 @@ namespace HuaTuDemo
             this.copyToolStripMenuItem,
             this.pasteToolStripMenuItem});
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(62, 28);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
             this.editToolStripMenuItem.Text = "&编辑";
             // 
             // undoToolStripMenuItem
             // 
             this.undoToolStripMenuItem.Name = "undoToolStripMenuItem";
-            this.undoToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.undoToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.undoToolStripMenuItem.Text = "后退一步";
             this.undoToolStripMenuItem.Click += new System.EventHandler(this.UndoToolStripMenuItemClick);
             // 
             // redoToolStripMenuItem
             // 
             this.redoToolStripMenuItem.Name = "redoToolStripMenuItem";
-            this.redoToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.redoToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.redoToolStripMenuItem.Text = "向前一步";
             this.redoToolStripMenuItem.Click += new System.EventHandler(this.RedoToolStripMenuItemClick);
             // 
             // toolStripSeparator6
             // 
             this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(267, 6);
+            this.toolStripSeparator6.Size = new System.Drawing.Size(121, 6);
             // 
             // tsSelectAll
             // 
             this.tsSelectAll.Name = "tsSelectAll";
-            this.tsSelectAll.Size = new System.Drawing.Size(270, 34);
+            this.tsSelectAll.Size = new System.Drawing.Size(124, 22);
             this.tsSelectAll.Text = "全选";
             this.tsSelectAll.Click += new System.EventHandler(this.TsSelectAllClick);
             // 
             // unSelectAllToolStripMenuItem
             // 
             this.unSelectAllToolStripMenuItem.Name = "unSelectAllToolStripMenuItem";
-            this.unSelectAllToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.unSelectAllToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.unSelectAllToolStripMenuItem.Text = "取消全选";
             this.unSelectAllToolStripMenuItem.Click += new System.EventHandler(this.UnSelectAllToolStripMenuItemClick);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(267, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(121, 6);
             // 
             // bringToFrontToolStripMenuItem
             // 
             this.bringToFrontToolStripMenuItem.Name = "bringToFrontToolStripMenuItem";
-            this.bringToFrontToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.bringToFrontToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.bringToFrontToolStripMenuItem.Text = "置顶";
             this.bringToFrontToolStripMenuItem.Click += new System.EventHandler(this.BringToFrontToolStripMenuItemClick);
             // 
             // sendBackToolStripMenuItem
             // 
             this.sendBackToolStripMenuItem.Name = "sendBackToolStripMenuItem";
-            this.sendBackToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.sendBackToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.sendBackToolStripMenuItem.Text = "置后";
             this.sendBackToolStripMenuItem.Click += new System.EventHandler(this.SendBackToolStripMenuItemClick);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(267, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(121, 6);
             // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.deleteToolStripMenuItem.Text = "删除";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.DeleteToolStripMenuItemClick);
             // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(267, 6);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(121, 6);
             // 
             // cutToolStripMenuItem
             // 
             this.cutToolStripMenuItem.Name = "cutToolStripMenuItem";
-            this.cutToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.cutToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.cutToolStripMenuItem.Text = "剪切";
             this.cutToolStripMenuItem.Click += new System.EventHandler(this.CutToolStripMenuItemClick);
             // 
             // copyToolStripMenuItem
             // 
             this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
-            this.copyToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.copyToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.copyToolStripMenuItem.Text = "复制";
             this.copyToolStripMenuItem.Click += new System.EventHandler(this.CopyToolStripMenuItemClick);
             // 
             // pasteToolStripMenuItem
             // 
             this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
-            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.pasteToolStripMenuItem.Text = "粘贴";
             this.pasteToolStripMenuItem.Click += new System.EventHandler(this.PasteToolStripMenuItemClick);
             // 
@@ -279,13 +279,13 @@ namespace HuaTuDemo
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(62, 28);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
             this.helpToolStripMenuItem.Text = "&帮助";
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.aboutToolStripMenuItem.Text = "&关于";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.AboutToolStripMenuItemClick);
             // 
@@ -299,10 +299,10 @@ namespace HuaTuDemo
             this.toolStripButton_close,
             this.toolStripButton_exit,
             this.toolStripSeparator2});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 34);
+            this.toolStrip1.Location = new System.Drawing.Point(0, 25);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Padding = new System.Windows.Forms.Padding(0, 0, 3, 0);
-            this.toolStrip1.Size = new System.Drawing.Size(819, 37);
+            this.toolStrip1.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
+            this.toolStrip1.Size = new System.Drawing.Size(546, 35);
             this.toolStrip1.TabIndex = 5;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -312,7 +312,7 @@ namespace HuaTuDemo
             this.toolStripButton_new.Image = global::HuaTuDemo.Properties.Resources.new_page;
             this.toolStripButton_new.ImageTransparentColor = System.Drawing.Color.White;
             this.toolStripButton_new.Name = "toolStripButton_new";
-            this.toolStripButton_new.Size = new System.Drawing.Size(34, 32);
+            this.toolStripButton_new.Size = new System.Drawing.Size(32, 32);
             this.toolStripButton_new.Text = "新建SVG文件";
             this.toolStripButton_new.Click += new System.EventHandler(this.NewToolStripMenuItemNewClick);
             // 
@@ -322,7 +322,7 @@ namespace HuaTuDemo
             this.toolStripButton_open.Image = global::HuaTuDemo.Properties.Resources.open;
             this.toolStripButton_open.ImageTransparentColor = System.Drawing.Color.White;
             this.toolStripButton_open.Name = "toolStripButton_open";
-            this.toolStripButton_open.Size = new System.Drawing.Size(34, 32);
+            this.toolStripButton_open.Size = new System.Drawing.Size(32, 32);
             this.toolStripButton_open.Text = "打开SVG文件";
             this.toolStripButton_open.Click += new System.EventHandler(this.OpenToolStripMenuItemClick);
             // 
@@ -332,7 +332,7 @@ namespace HuaTuDemo
             this.toolStripButton_saveAs.Image = global::HuaTuDemo.Properties.Resources.save_as;
             this.toolStripButton_saveAs.ImageTransparentColor = System.Drawing.Color.White;
             this.toolStripButton_saveAs.Name = "toolStripButton_saveAs";
-            this.toolStripButton_saveAs.Size = new System.Drawing.Size(34, 32);
+            this.toolStripButton_saveAs.Size = new System.Drawing.Size(32, 32);
             this.toolStripButton_saveAs.Text = "另存为";
             this.toolStripButton_saveAs.Click += new System.EventHandler(this.SaveToolStripMenuItemClick);
             // 
@@ -342,7 +342,7 @@ namespace HuaTuDemo
             this.toolStripButton_close.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton_close.Image")));
             this.toolStripButton_close.ImageTransparentColor = System.Drawing.Color.White;
             this.toolStripButton_close.Name = "toolStripButton_close";
-            this.toolStripButton_close.Size = new System.Drawing.Size(34, 32);
+            this.toolStripButton_close.Size = new System.Drawing.Size(32, 32);
             this.toolStripButton_close.Text = "关闭当前文件";
             this.toolStripButton_close.Click += new System.EventHandler(this.ToolStripButtonCloseClick);
             // 
@@ -352,23 +352,22 @@ namespace HuaTuDemo
             this.toolStripButton_exit.Image = global::HuaTuDemo.Properties.Resources.exit;
             this.toolStripButton_exit.ImageTransparentColor = System.Drawing.Color.White;
             this.toolStripButton_exit.Name = "toolStripButton_exit";
-            this.toolStripButton_exit.Size = new System.Drawing.Size(34, 32);
+            this.toolStripButton_exit.Size = new System.Drawing.Size(32, 32);
             this.toolStripButton_exit.Text = "退出";
             this.toolStripButton_exit.Click += new System.EventHandler(this.ExitToolStripMenuItemClick);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 37);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 35);
             // 
             // panel1
             // 
             this.panel1.Controls.Add(this._docker);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 71);
-            this.panel1.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.panel1.Location = new System.Drawing.Point(0, 60);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(819, 510);
+            this.panel1.Size = new System.Drawing.Size(546, 320);
             this.panel1.TabIndex = 6;
             // 
             // _docker
@@ -377,9 +376,8 @@ namespace HuaTuDemo
             this._docker.CanMoveByMouseFilledForms = true;
             this._docker.Dock = System.Windows.Forms.DockStyle.Fill;
             this._docker.Location = new System.Drawing.Point(0, 0);
-            this._docker.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this._docker.Name = "_docker";
-            this._docker.Size = new System.Drawing.Size(819, 510);
+            this._docker.Size = new System.Drawing.Size(546, 320);
             this._docker.TabIndex = 8;
             this._docker.TitleBarGradientColor1 = System.Drawing.SystemColors.Control;
             this._docker.TitleBarGradientColor2 = System.Drawing.Color.White;
@@ -389,15 +387,14 @@ namespace HuaTuDemo
             // 
             // HuaTuFrom
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(819, 603);
+            this.ClientSize = new System.Drawing.Size(546, 402);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.MaiMenuStrip);
             this.MainMenuStrip = this.MaiMenuStrip;
-            this.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.Name = "HuaTuFrom";
             this.Text = "SVG HuaTuDemo α";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
@@ -450,6 +447,7 @@ namespace HuaTuDemo
         private System.Windows.Forms.ToolStripMenuItem copyToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pasteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
+        private System.Windows.Forms.Timer timer;
     }
 }
 
