@@ -471,6 +471,15 @@ namespace DrawWork
             return o;
         }
 
+        public void Tick()
+        {
+            int n = _graphicsList.Count;
+            for (int i = n - 1; i >= 0; i--)
+            {
+                ((DrawObject)_graphicsList[i]).Update();
+            }
+        }
+
         #endregion Methods
     }
 }

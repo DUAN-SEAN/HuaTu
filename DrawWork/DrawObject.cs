@@ -15,10 +15,14 @@ using System.Xml;
 
 namespace DrawWork
 {
+    public interface IUpdateSystem
+    {
+        void Update();
+    }
     /// <summary>
 	/// 可绘画物体基类
 	/// </summary>
-	public abstract class DrawObject : ICloneable
+	public abstract class DrawObject : ICloneable, IUpdateSystem
     {
         public static PointF Dpi;
         public static int ObjectId;
@@ -683,6 +687,7 @@ namespace DrawWork
             return res;
         }
 
+
         #endregion
 
         #region ICloneable Members
@@ -690,6 +695,15 @@ namespace DrawWork
         public virtual object Clone()
         {
             return MemberwiseClone();
+        }
+
+
+        #endregion
+
+        #region IUpdateSystem
+        public virtual void Update()
+        {
+            
         }
 
         #endregion

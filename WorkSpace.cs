@@ -367,6 +367,8 @@ namespace HuaTuDemo
         /// </summary>
         public void Tick()
         {
+            drawArea.GraphicsList.Tick();
+
             //刷新一次
             drawArea.Refresh();
         }
