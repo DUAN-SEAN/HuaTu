@@ -43,7 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Animation\SVGAnimation.cs" />
+    <Compile Include="Animation\SVGAnimate.cs" />
     <Compile Include="Base\SVGAttribute.cs" />
     <Compile Include="Base\SVGBaseShape.cs" />
     <Compile Include="Base\SVGDesc.cs" />

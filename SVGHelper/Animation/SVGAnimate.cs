@@ -8,7 +8,7 @@ using SVGHelper.Base;
 
 namespace SVGHelper
 {
-    public class SVGAnimation:SVGUnit
+    public class SVGAnimate:SVGUnit
     {
 
         #region 属性
@@ -228,32 +228,42 @@ namespace SVGHelper
         #endregion
 
 
-        public SVGAnimation(SVGWord doc) : base(doc)
+        public SVGAnimate(SVGWord doc) : base(doc)
         {
-            AddAttr(SVGAttribute._SvgAttribute.attrAnimTiming_Begin,"");
-            AddAttr(SVGAttribute._SvgAttribute.attrAnimTiming_Dur,"");
-            AddAttr(SVGAttribute._SvgAttribute.attrAnimTiming_End,"");
-            AddAttr(SVGAttribute._SvgAttribute.attrAnimTiming_Restart,"always");
-            AddAttr(SVGAttribute._SvgAttribute.attrAnimTiming_RepeatDur, "indefinite");
-            AddAttr(SVGAttribute._SvgAttribute.attrAnimTiming_RepeatCount,"indefinite");
-            AddAttr(SVGAttribute._SvgAttribute.attrAnimTiming_Fill, "remove");
-            AddAttr(SVGAttribute._SvgAttribute.attrAnim_AttributeName,"");
-            AddAttr(SVGAttribute._SvgAttribute.attrAnim_AttributeType,"");
-            AddAttr(SVGAttribute._SvgAttribute.attrAnim_Additive,"replace");
-            AddAttr(SVGAttribute._SvgAttribute.attrAnim_Accumulate,"none");
-            AddAttr(SVGAttribute._SvgAttribute.attrAnim_TargetElement,"");
-            AddAttr(SVGAttribute._SvgAttribute.attrAnim_Type,"");
-            AddAttr(SVGAttribute._SvgAttribute.attrAnim_Show,"");
-            AddAttr(SVGAttribute._SvgAttribute.attrAnim_Actuate,"auto");
-            AddAttr(SVGAttribute._SvgAttribute.attrAnim_Href,"");
-            AddAttr(SVGAttribute._SvgAttribute.attrAnim_CalcMode,"linear");
-            AddAttr(SVGAttribute._SvgAttribute.attrAnim_Values,"");
-            AddAttr(SVGAttribute._SvgAttribute.attrAnim_KeySplines,"");
-            AddAttr(SVGAttribute._SvgAttribute.attrAnim_KeyTimes,"");
-            AddAttr(SVGAttribute._SvgAttribute.attrAnim_From,"");
-            AddAttr(SVGAttribute._SvgAttribute.attrAnim_To,"");
-            AddAttr(SVGAttribute._SvgAttribute.attrAnim_By,"");
 
+            Init();
+            
+
+        }
+
+        private void Init()
+        {
+            m_sElementName = "animate";
+            m_ElementType = SVGUnitType.typeAnimate;
+
+            AddAttr(SVGAttribute._SvgAttribute.attrAnimTiming_Begin, "");
+            AddAttr(SVGAttribute._SvgAttribute.attrAnimTiming_Dur, "");
+            AddAttr(SVGAttribute._SvgAttribute.attrAnimTiming_End, "");
+            AddAttr(SVGAttribute._SvgAttribute.attrAnimTiming_Restart, "always");
+            AddAttr(SVGAttribute._SvgAttribute.attrAnimTiming_RepeatDur, "indefinite");
+            AddAttr(SVGAttribute._SvgAttribute.attrAnimTiming_RepeatCount, "indefinite");
+            AddAttr(SVGAttribute._SvgAttribute.attrAnimTiming_Fill, "remove");
+            AddAttr(SVGAttribute._SvgAttribute.attrAnim_AttributeName, "");
+            AddAttr(SVGAttribute._SvgAttribute.attrAnim_AttributeType, "");
+            AddAttr(SVGAttribute._SvgAttribute.attrAnim_Additive, "replace");
+            AddAttr(SVGAttribute._SvgAttribute.attrAnim_Accumulate, "none");
+            AddAttr(SVGAttribute._SvgAttribute.attrAnim_TargetElement, "");
+            AddAttr(SVGAttribute._SvgAttribute.attrAnim_Type, "");
+            AddAttr(SVGAttribute._SvgAttribute.attrAnim_Show, "");
+            AddAttr(SVGAttribute._SvgAttribute.attrAnim_Actuate, "auto");
+            AddAttr(SVGAttribute._SvgAttribute.attrAnim_Href, "");
+            AddAttr(SVGAttribute._SvgAttribute.attrAnim_CalcMode, "linear");
+            AddAttr(SVGAttribute._SvgAttribute.attrAnim_Values, "");
+            AddAttr(SVGAttribute._SvgAttribute.attrAnim_KeySplines, "");
+            AddAttr(SVGAttribute._SvgAttribute.attrAnim_KeyTimes, "");
+            AddAttr(SVGAttribute._SvgAttribute.attrAnim_From, "");
+            AddAttr(SVGAttribute._SvgAttribute.attrAnim_To, "");
+            AddAttr(SVGAttribute._SvgAttribute.attrAnim_By, "");
 
         }
     }
