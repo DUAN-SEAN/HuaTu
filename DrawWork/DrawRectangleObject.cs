@@ -20,7 +20,7 @@ namespace DrawWork
 
         private const string Tag = "rect";
 
-        private RectangleF rectangle;
+        protected RectangleF rectangle;
 
         #endregion 字段
 

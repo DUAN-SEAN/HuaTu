@@ -74,9 +74,22 @@ namespace HuaTuDemo
                 {
                     _selectMode = SelectionMode.Size;
 
+                    #region LineConnect
                     if (o is DrawConnectLine && handleNumber != 2)
                     {
                         ((DrawConnectLine)o).SetFollowObjectNull(handleNumber);
+                    }
+                    if (o is WireConnectLineDrawObject && handleNumber != 2)
+                    {
+                        ((WireConnectLineDrawObject)o).SetFollowObjectNull(handleNumber);
+                    }
+
+                    #endregion
+
+                    if ( o is SingleDisConnectorDrawObject && handleNumber == 9)
+                    {
+                        float state = ((SingleDisConnectorDrawObject)o).Switch;
+                        ((SingleDisConnectorDrawObject)o).Switch = state == 0 ? 1 : 0;
                     }
 
                     // 在类成员中保留调整大小的对象
@@ -295,9 +308,24 @@ namespace HuaTuDemo
 
             if (_resizedObject != null)
             {
+                if(_resizedObject is DeviceDrawObject)
+                {
+                    var device = (DeviceDrawObject)_resizedObject;
+                    for (int i = 0; i < drawArea.GraphicsList.Count; i++)
+                    {
+                        if (!(drawArea.GraphicsList[i] is DeviceDrawObject)) continue;
+                        int hithandle = drawArea.GraphicsList[i].HitTest(device.GetHandle(_resizedObjectHandle));
+                        if ( hithandle>= 0)
+                        {
+                            device.SetConnect(hithandle, (DeviceDrawObject)drawArea.GraphicsList[i]);
+                        }
+                    }
+                }
+
+                #region LineConnect
                 if (_resizedObjectHandle != 2 && _resizedObject is DrawConnectLine)
                 {
-                    var line = (DrawConnectLine) _resizedObject;
+                    var line = (DrawConnectLine)_resizedObject;
                     for (int i = 0; i < drawArea.GraphicsList.Count; i++)
                     {
                         if (drawArea.GraphicsList[i] is DrawConnectLine) continue;
@@ -308,6 +336,24 @@ namespace HuaTuDemo
                         }
                     }
                 }
+                if (_resizedObjectHandle != 2 && _resizedObject is WireConnectLineDrawObject)
+                {
+                    var line = (WireConnectLineDrawObject)_resizedObject;
+                    for (int i = 0; i < drawArea.GraphicsList.Count; i++)
+                    {
+                        if (drawArea.GraphicsList[i] is WireConnectLineDrawObject) continue;
+                        if (drawArea.GraphicsList[i] is WireConnectLineDrawObject) continue;
+                        if (drawArea.GraphicsList[i].HitTest(line.GetHandle(_resizedObjectHandle)) >= 0)
+                        {
+                            line.SetFollowObject(_resizedObjectHandle, drawArea.GraphicsList[i]);
+                        }
+                    }
+                }
+
+                #endregion
+
+
+
 
                 // 调整大小后
                 _resizedObject.Normalize();
