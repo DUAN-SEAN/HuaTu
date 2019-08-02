@@ -13,6 +13,8 @@ using System.Xml;
 
 namespace DrawWork
 {
+
+    //电线设备  
     public class WireConnectLineDrawObject : DeviceDrawObject
     {
         #region 字段

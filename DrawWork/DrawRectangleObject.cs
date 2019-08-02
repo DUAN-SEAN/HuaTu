@@ -173,23 +173,23 @@ namespace DrawWork
             return GetNormalizedRectangle(r.X, r.Y, r.X + r.Width, r.Y + r.Height);
         }
 
-        public static string GetRectangleXmlStr(Color stroke, bool isFill, Color fill, float strokewidth, RectangleF rect, SizeF scale, String shapeName,float angle,PointF center)
-        {
-            string s = "<";
-            s += Tag;
-            s += GetStringStyle(stroke, fill, strokewidth, scale);//GetStrStyle(scale);
-            s += GetRectStringXml(rect, scale, shapeName);
-            s += GetTransformXML(angle, center);
-            s += " />" + "\r\n";
-            return s;
-        }
+        //public static string GetRectangleXmlStr(Color stroke, bool isFill, Color fill, float strokewidth, RectangleF rect, SizeF scale, String shapeName,float angle,PointF center)
+        //{
+        //    string s = "<";
+        //    s += Tag;
+        //    s += GetStringStyle(stroke, fill, strokewidth, scale);//GetStrStyle(scale);
+        //    s += GetRectStringXml(rect, scale, shapeName);
+        //    s += GetTransformXML(angle, center);
+        //    s += " />" + "\r\n";
+        //    return s;
+        //}
         /// <summary>
         /// 获取旋转角度
         /// </summary>
         /// <param name="angle"></param>
         /// <param name="center"></param>
         /// <returns></returns>
-        public static string GetTransformXML(float angle, PointF center)
+        public virtual string GetTransformXML(float angle, PointF center)
         {
             return $" transform=\"rotate({-angle}, {center.X} {center.Y})\"";
         }

@@ -3,15 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DrawWork.Animation;
 
 namespace DrawWork
 {
-    public class DeviceDrawObject : DrawRectangleObject
+    //设备抽象类
+    public abstract class DeviceDrawObject : DrawRectangleObject
     {
         #region 字段
+
+        protected string _deviceID;//设备Id
+
         protected int _devicestate;
 
         protected Dictionary<int, List<DeviceDrawObject>> handledevice;
+
+        /// <summary>
+        /// 简单图形的id和动画列表的映射
+        /// </summary>
+        protected Dictionary<string, List<AnimationBase>> _animationDic;
 
         #endregion 字段
 
@@ -20,6 +30,7 @@ namespace DrawWork
         public DeviceDrawObject()
         {
             handledevice = new Dictionary<int, List<DeviceDrawObject>>();
+            _animationDic = new Dictionary<string, List<AnimationBase>>();
         }
         
 
@@ -55,6 +66,31 @@ namespace DrawWork
             }
         }
 
+        //获取设备id
+        public virtual string GetDeviceId()
+        {
+            return "id=\""+_deviceID+"+\"";
+        }
+        /// <summary>
+        /// 获取图元下所有简单图形的动画状态
+        /// </summary>
+        /// <returns></returns>
+        protected virtual string GetAllSimpleXML()
+        {
+            return "";
+        }
+
+
+
+        protected virtual void SetAnimation(string id, AnimationBase animationBase)
+        {
+            List<AnimationBase> list = null;
+            if (!_animationDic.TryGetValue(id, out list))
+            {
+                list = new List<AnimationBase>();
+            }
+
+        }
         #endregion 虚函数
 
         #region 属性

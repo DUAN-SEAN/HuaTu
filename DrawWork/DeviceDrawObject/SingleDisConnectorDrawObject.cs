@@ -134,6 +134,37 @@ namespace DrawWork
 
         #endregion 函数
 
+        /// <summary>
+        /// 获取该图元的svg图
+        /// </summary>
+        /// <param name="scale"></param>
+        /// <returns></returns>
+        public override string GetXmlStr(SizeF scale)
+        {
+            //用group包裹
+            //  <rect x="1" y="1" width="1198" height="398"
+            //		style="fill:none; stroke:blue"/>
 
+            string s = "<g ";
+            s += GetDeviceId();//获取设备id
+            s += GetTransformXML(_angle,fixedCenter);//获取旋转
+            s += " >" + "\r\n";
+
+            s += GetAllSimpleXML();//获取所有基础图形的参数以及动画
+
+
+
+
+            s += "</g>";
+
+            
+
+            return s;
+        }
+        //获取设备的旋转
+        public override string GetTransformXML(float angle, PointF center)
+        {
+            return $" transform=\"rotate({-angle}, {center.X} {center.Y})\"";
+        }
     }
 }
