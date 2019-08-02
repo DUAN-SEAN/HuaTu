@@ -179,7 +179,7 @@ namespace DrawWork
             s += Tag;
             s += GetStringStyle(stroke, fill, strokewidth, scale);//GetStrStyle(scale);
             s += GetRectStringXml(rect, scale, shapeName);
-            s += GetTransform(angle, center);
+            s += GetTransformXML(angle, center);
             s += " />" + "\r\n";
             return s;
         }
@@ -189,7 +189,7 @@ namespace DrawWork
         /// <param name="angle"></param>
         /// <param name="center"></param>
         /// <returns></returns>
-        public static string GetTransform(float angle, PointF center)
+        public static string GetTransformXML(float angle, PointF center)
         {
             return $" transform=\"rotate({-angle}, {center.X} {center.Y})\"";
         }
@@ -380,7 +380,7 @@ namespace DrawWork
             s += Tag;
             s += GetStrStyle(scale);
             s += GetRectStringXml(RectangleF, scale, Name);
-            s += GetTransform(_angle, fixedCenter);//添加变化
+            s += GetTransformXML(_angle, fixedCenter);//添加变化
             s += " />" + "\r\n";
             return s;
         }
