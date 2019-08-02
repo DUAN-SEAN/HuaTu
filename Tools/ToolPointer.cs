@@ -317,7 +317,8 @@ namespace HuaTuDemo
                         int hithandle = drawArea.GraphicsList[i].HitTest(device.GetHandle(_resizedObjectHandle));
                         if ( hithandle>= 0)
                         {
-                            device.SetConnect(hithandle, (DeviceDrawObject)drawArea.GraphicsList[i]);
+                            device.SetConnect(hithandle, (DeviceDrawObject) drawArea.GraphicsList[i]);
+                            ((DeviceDrawObject) drawArea.GraphicsList[i]).SetConnect(hithandle, device);
                         }
                     }
                 }
