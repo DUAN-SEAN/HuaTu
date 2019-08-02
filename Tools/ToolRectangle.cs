@@ -16,7 +16,9 @@ namespace HuaTuDemo
 
         public override void OnMouseDown(DrawArea drawArea, MouseEventArgs e)
         {
-            AddNewObject(drawArea, new DrawRectangleObject(e.X, e.Y, 1, 1));
+            //AddNewObject(drawArea, new DrawRectangleObject(e.X, e.Y, 1, 1));
+            AddNewObject(drawArea, new SingleDisConnectorDrawObject(e.X, e.Y, e.X + 1, e.Y + 1,1));
+
         }
 
         public override void OnMouseMove(DrawArea drawArea, MouseEventArgs e)
