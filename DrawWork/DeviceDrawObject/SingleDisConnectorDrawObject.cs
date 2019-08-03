@@ -11,7 +11,7 @@ namespace DrawWork
     {
         #region 字段
         private const string Tag = "DisConnector:刀闸@0";
-
+      
         private DeviceDrawObject device1;
         #endregion 字段
 
