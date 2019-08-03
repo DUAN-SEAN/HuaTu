@@ -30,7 +30,12 @@ namespace SVGHelper
             typePath,
             typePolygon,
             typeImage,
-            typePolyline
+            typePolyline,
+            typeAnimate,
+            typeAnimateColor,
+            typeAnimateMotion,
+            typeSet,
+            typePort
         };
 
 

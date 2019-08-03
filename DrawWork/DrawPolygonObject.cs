@@ -163,7 +163,7 @@ namespace DrawWork
             return _handleCursor;
         }
 
-        public override string GetXmlStr(SizeF scale)
+        public override string GetXmlStr(SizeF scale,bool noAnimation = true)
         {
             //  <polyline style="fill:none; stroke:blue; stroke-width:10"
             //points="50,375 150,375
@@ -180,7 +180,8 @@ namespace DrawWork
                 s += " ";
             }
             s += "\"";
-            s += " />" + "\r\n";
+            s += noAnimation ? " />" : " >";
+            s += "\r\n";
             return s;
         }
 

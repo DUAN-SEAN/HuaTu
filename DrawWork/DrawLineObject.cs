@@ -134,7 +134,7 @@ namespace DrawWork
             }
         }
 
-        public override string GetXmlStr(SizeF scale)
+        public override string GetXmlStr(SizeF scale,bool noAnimation= true)
         {
             string s = "<";
             s += Tag;
@@ -148,7 +148,8 @@ namespace DrawWork
             s += " y1 = \"" + y1.ToString(CultureInfo.InvariantCulture) + "\"";
             s += " x2 = \"" + x2.ToString(CultureInfo.InvariantCulture) + "\"";
             s += " y2 = \"" + y2.ToString(CultureInfo.InvariantCulture) + "\"";
-            s += " />" + "\r\n";
+            s += noAnimation ? " />" : " >";
+            s += "\r\n";
             return s;
         }
 

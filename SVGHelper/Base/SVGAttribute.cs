@@ -82,7 +82,41 @@ namespace SVGHelper.Base
         attrXLink_HRef,
         attrXLink_Target,
         attrText_Anchor,
-        attrSpecific_Transform
+
+        attrSpecific_Transform,//新增表示transform
+
+        //animation
+        attrAnimTiming_Begin,
+        attrAnimTiming_Dur,
+        attrAnimTiming_End,
+        attrAnimTiming_Restart,
+        attrAnimTiming_RepeatCount,
+        attrAnimTiming_RepeatDur,
+        attrAnimTiming_Fill,
+
+        attrAnim_AttributeName,
+        attrAnim_AttributeType,
+        attrAnim_Additive,
+        attrAnim_Accumulate,
+        attrAnim_TargetElement,
+        attrAnim_Type,
+        attrAnim_Show,
+        attrAnim_Actuate,
+        attrAnim_Href,
+
+        attrAnim_CalcMode,
+        attrAnim_Values,
+        attrAnim_KeyTimes,
+        attrAnim_KeySplines,
+        attrAnim_From,
+        attrAnim_To,
+        attrAnim_By,
+
+        attrAnimMotion_Path,
+        attrAnimMotion_Origin,
+
+
+
         }
 
     /// <summary>
@@ -99,7 +133,9 @@ namespace SVGHelper.Base
         groupGraphics,
         groupOpacity,
         groupFont,
-        groupXLink
+        groupXLink,
+
+        groupAnim
     }
 
     /// <summary>
@@ -563,7 +599,197 @@ namespace SVGHelper.Base
         InitOpacity();
         InitFont();
         InitXLink();
+
+        InitAnimation();
     }
+
+    private void InitAnimation()
+    {
+        _AttrInfo info;
+        //Timing attribute 
+        info = new _AttrInfo();
+        info._type = _SvgAttribute.attrAnimTiming_Begin;
+        info._group = _SvgAttributeGroup.groupAnim;
+        info._name = "begin";
+
+        m_mapAttrInfo.Add(info._type,info);
+
+        info = new _AttrInfo();
+        info._type = _SvgAttribute.attrAnimTiming_Dur;
+        info._group = _SvgAttributeGroup.groupAnim;
+        info._name = "dur";
+
+        m_mapAttrInfo.Add(info._type, info);
+
+        info = new _AttrInfo();
+        info._type = _SvgAttribute.attrAnimTiming_End;
+        info._group = _SvgAttributeGroup.groupAnim;
+        info._name = "end";
+
+        m_mapAttrInfo.Add(info._type, info);
+
+        info = new _AttrInfo();
+        info._type = _SvgAttribute.attrAnimTiming_Restart;
+        info._group = _SvgAttributeGroup.groupAnim;
+        info._name = "restart";
+
+        m_mapAttrInfo.Add(info._type, info);
+
+        info = new _AttrInfo();
+        info._type = _SvgAttribute.attrAnimTiming_RepeatDur;
+        info._group = _SvgAttributeGroup.groupAnim;
+        info._name = "repeatDur";
+
+        m_mapAttrInfo.Add(info._type, info);
+
+        info = new _AttrInfo();
+        info._type = _SvgAttribute.attrAnimTiming_RepeatCount;
+        info._group = _SvgAttributeGroup.groupAnim;
+        info._name = "repeatCount";
+
+        m_mapAttrInfo.Add(info._type, info);
+
+        info = new _AttrInfo();
+        info._type = _SvgAttribute.attrAnimTiming_Fill;
+        info._group = _SvgAttributeGroup.groupAnim;
+        info._name = "fill";
+
+        m_mapAttrInfo.Add(info._type, info);
+
+        info = new _AttrInfo();
+        info._type = _SvgAttribute.attrAnim_AttributeName;
+        info._group = _SvgAttributeGroup.groupAnim;
+        info._name = "attributeName";
+
+        m_mapAttrInfo.Add(info._type, info);
+
+
+        info = new _AttrInfo();
+        info._type = _SvgAttribute.attrAnim_AttributeType;
+        info._group = _SvgAttributeGroup.groupAnim;
+        info._name = "attributeType";
+
+        m_mapAttrInfo.Add(info._type, info);
+
+        info = new _AttrInfo();
+        info._type = _SvgAttribute.attrAnim_Additive;
+        info._group = _SvgAttributeGroup.groupAnim;
+        info._name = "additive";
+
+        m_mapAttrInfo.Add(info._type, info);
+
+        info = new _AttrInfo();
+        info._type = _SvgAttribute.attrAnim_Accumulate;
+        info._group = _SvgAttributeGroup.groupAnim;
+        info._name = "accumulate";
+
+        m_mapAttrInfo.Add(info._type, info);
+
+        info = new _AttrInfo();
+        info._type = _SvgAttribute.attrAnim_TargetElement;
+        info._group = _SvgAttributeGroup.groupAnim;
+        info._name = "targetElement";
+
+        m_mapAttrInfo.Add(info._type, info);
+
+        info = new _AttrInfo();
+        info._type = _SvgAttribute.attrAnim_Type;
+        info._group = _SvgAttributeGroup.groupAnim;
+        info._name = "type";
+
+        m_mapAttrInfo.Add(info._type, info);
+
+        info = new _AttrInfo();
+        info._type = _SvgAttribute.attrAnim_Show;
+        info._group = _SvgAttributeGroup.groupAnim;
+        info._name = "show";
+
+        m_mapAttrInfo.Add(info._type, info);
+
+        info = new _AttrInfo();
+        info._type = _SvgAttribute.attrAnim_Actuate;
+        info._group = _SvgAttributeGroup.groupAnim;
+        info._name = "actuate";
+
+        m_mapAttrInfo.Add(info._type, info);
+
+        info = new _AttrInfo();
+        info._type = _SvgAttribute.attrAnim_Href;
+        info._group = _SvgAttributeGroup.groupAnim;
+        info._name = "href";
+
+        m_mapAttrInfo.Add(info._type, info);
+
+
+        info = new _AttrInfo();
+        info._type = _SvgAttribute.attrAnim_CalcMode;
+        info._group = _SvgAttributeGroup.groupAnim;
+        info._name = "calcMode";
+
+        m_mapAttrInfo.Add(info._type, info);
+
+        info = new _AttrInfo();
+        info._type = _SvgAttribute.attrAnim_Values;
+        info._group = _SvgAttributeGroup.groupAnim;
+        info._name = "values";
+
+        m_mapAttrInfo.Add(info._type, info);
+
+
+        info = new _AttrInfo();
+        info._type = _SvgAttribute.attrAnim_KeyTimes;
+        info._group = _SvgAttributeGroup.groupAnim;
+        info._name = "keyTimes";
+
+        m_mapAttrInfo.Add(info._type, info);
+
+        info = new _AttrInfo();
+        info._type = _SvgAttribute.attrAnim_KeySplines;
+        info._group = _SvgAttributeGroup.groupAnim;
+        info._name = "keySplines";
+
+        m_mapAttrInfo.Add(info._type, info);
+
+
+        info = new _AttrInfo();
+        info._type = _SvgAttribute.attrAnim_From;
+        info._group = _SvgAttributeGroup.groupAnim;
+        info._name = "from";
+
+        m_mapAttrInfo.Add(info._type, info);
+
+
+        info = new _AttrInfo();
+        info._type = _SvgAttribute.attrAnim_To;
+        info._group = _SvgAttributeGroup.groupAnim;
+        info._name = "to";
+
+        m_mapAttrInfo.Add(info._type, info);
+
+
+        info = new _AttrInfo();
+        info._type = _SvgAttribute.attrAnim_By;
+        info._group = _SvgAttributeGroup.groupAnim;
+        info._name = "by";
+
+        m_mapAttrInfo.Add(info._type, info);
+
+
+        info = new _AttrInfo();
+        info._type = _SvgAttribute.attrAnimMotion_Path;
+        info._group = _SvgAttributeGroup.groupAnim;
+        info._name = "path";
+
+        m_mapAttrInfo.Add(info._type, info);
+
+
+        info = new _AttrInfo();
+        info._type = _SvgAttribute.attrAnimMotion_Origin;
+        info._group = _SvgAttributeGroup.groupAnim;
+        info._name = "origin";
+
+        m_mapAttrInfo.Add(info._type, info);
+        }
 
     private void InitSvg()
     {

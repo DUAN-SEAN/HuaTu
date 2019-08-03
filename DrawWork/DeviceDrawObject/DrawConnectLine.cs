@@ -13,6 +13,8 @@ using System.Xml;
 
 namespace DrawWork
 {
+
+    //电线设备  
     public class WireConnectLineDrawObject : DeviceDrawObject
     {
         #region 字段
@@ -261,7 +263,7 @@ namespace DrawWork
             }
         }
 
-        public override string GetXmlStr(SizeF scale)
+        public override string GetXmlStr(SizeF scale,bool noAnimation = true)
         {
             string s = "<";
             s += Tag;
@@ -278,7 +280,8 @@ namespace DrawWork
             s += " y2 = \"" + y2.ToString(CultureInfo.InvariantCulture) + "\"";
             s += " x2 = \"" + x3.ToString(CultureInfo.InvariantCulture) + "\"";
             s += " y2 = \"" + y3.ToString(CultureInfo.InvariantCulture) + "\"";
-            s += " />" + "\r\n";
+            s += noAnimation ? " />" : " >";
+            s += "\r\n";
             return s;
         }
 

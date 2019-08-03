@@ -99,7 +99,7 @@ namespace DrawWork
             }
         }
 
-        public static string GetXmlText(RectangleF rect, Color color, Font font, string txt, SizeF scale, StringFormat anchor)
+        public static string GetXmlText(RectangleF rect, Color color, Font font, string txt, SizeF scale, StringFormat anchor,bool noAnimation = true)
         {
             //</text>
             Console.WriteLine(font);
@@ -144,6 +144,7 @@ namespace DrawWork
             s += " >";
             s += txt;
             s += "</" + Tag + ">";
+            s += noAnimation ? " />" : " >";
             s += "\r\n";
             return s;
         }
@@ -163,9 +164,9 @@ namespace DrawWork
             }
         }
 
-        public override string GetXmlStr(SizeF scale)
+        public override string GetXmlStr(SizeF scale, bool noAnimation = true)
         {
-            return GetXmlText(RectangleF, Stroke, Font, Text, scale, TextAnchor);
+            return GetXmlText(RectangleF, Stroke, Font, Text, scale, TextAnchor,noAnimation);
         }
 
         public override void Resize(SizeF newscale, SizeF oldscale)

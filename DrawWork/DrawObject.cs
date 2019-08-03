@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
+using DrawWork.Animation;
 
 namespace DrawWork
 {
@@ -30,6 +31,8 @@ namespace DrawWork
 
         #region 字段
         public RectangleF _imageR = new RectangleF(9, 9, 20, 20);
+
+        public List<AnimationBase> AnimationBases;
         #endregion 字段
 
         #region 属性
@@ -564,7 +567,7 @@ namespace DrawWork
             return sColor;
         }
 
-        public virtual string GetXmlStr(SizeF scale)
+        public virtual string GetXmlStr(SizeF scale, bool noAnimation = true)
         {
             return "";
         }

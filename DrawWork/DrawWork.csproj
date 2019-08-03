@@ -44,7 +44,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Animation\AnimationBase.cs" />
     <Compile Include="Animation\AnimationFactory.cs" />
+    <Compile Include="Animation\Attributes.cs" />
     <Compile Include="Command\BringToFrontCommand.cs" />
     <Compile Include="Command\ICommand.cs" />
     <Compile Include="Command\RotateCommand.cs" />

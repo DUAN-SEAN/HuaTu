@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -490,6 +491,10 @@ namespace SVGHelper.Base
             {
                 eleToReturn = AddPolyline(parent, ref last);
             }
+            else if (sName == "animate")
+            {
+                eleToReturn = AddAnimate(parent, ref last);
+            }
             else
             {
                 if (parent != null)
@@ -661,6 +666,17 @@ namespace SVGHelper.Base
 
             return poly;
         }
+
+        public SVGAnimate AddAnimate(SVGUnit parent, ref SVGUnit last)
+        {
+            SVGAnimate svgAnimate = new SVGAnimate(this);
+
+            AddElement(parent, svgAnimate, ref last);
+
+            return svgAnimate;
+        }
+
+
 
         /// <summary>
         /// 它创建一个新的SVG折线元素。

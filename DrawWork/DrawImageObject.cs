@@ -239,7 +239,7 @@ namespace DrawWork
             }
         }
 
-        public override string GetXmlStr(SizeF scale)
+        public override string GetXmlStr(SizeF scale,bool noAnimation = true)
         {
             string s = "<";
             s += Tag;
