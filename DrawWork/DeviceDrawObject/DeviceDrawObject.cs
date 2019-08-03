@@ -106,7 +106,7 @@ namespace DrawWork
 
             }
            
-            return "";
+            return s;
         }
         /// <summary>
         /// 序列化，同时将图元下的图形和动画都序列化成svg

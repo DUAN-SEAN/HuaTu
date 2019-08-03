@@ -457,10 +457,7 @@ namespace DrawWork
                 case SVGUnit.SVGUnitType.typeDesc:
                     Description = ((SVGDesc)svge).Value;
                     break;
-                case SVGUnit.SVGUnitType.typeAnimate:
-                    Animation.Animation a = new Animation.Animation((SVGAnimate)svge);
-                    
-                    break;
+              
                     
                 default:
                     break;
