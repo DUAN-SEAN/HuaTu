@@ -32,7 +32,7 @@ namespace DrawWork
         #region 字段
         public RectangleF _imageR = new RectangleF(9, 9, 20, 20);
 
-        public List<AnimationBase> AnimationBases;
+        public List<Animation.Animation> AnimationBases = new List<Animation.Animation>();
         #endregion 字段
 
         #region 属性

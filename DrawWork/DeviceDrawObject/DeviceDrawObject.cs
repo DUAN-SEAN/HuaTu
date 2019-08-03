@@ -29,6 +29,7 @@ namespace DrawWork
         public DeviceDrawObject()
         {
             handledevice = new Dictionary<int, List<DeviceDrawObject>>();
+            drawObjects = new List<DrawObject>();
         }
         
 
@@ -86,7 +87,7 @@ namespace DrawWork
             foreach (var doj in drawObjects)
             {
                 //其次通过id(string)查找有无动画绑定
-                List<Animation.AnimationBase> list = doj.AnimationBases;
+                List<Animation.Animation> list = doj.AnimationBases;
                 if (list == null || list.Count == 0)
                 {
                     s += doj.GetXmlStr(scale,true);
@@ -144,7 +145,7 @@ namespace DrawWork
         /// </summary>
         /// <param name="id"></param>
         /// <param name="animationBase"></param>
-        protected void SetAnimation(string id, AnimationBase animationBase)
+        protected void SetAnimation(string id, Animation.Animation animationBase)
         {
            
 
@@ -154,7 +155,7 @@ namespace DrawWork
                 if (id == doj.Id.ToString())
                 {
                     if(doj.AnimationBases==null)
-                        doj.AnimationBases = new List<AnimationBase>();
+                        doj.AnimationBases = new List<Animation.Animation>();
 
                     doj.AnimationBases.Add(animationBase);
                 }

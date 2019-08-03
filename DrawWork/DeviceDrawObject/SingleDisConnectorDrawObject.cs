@@ -32,7 +32,6 @@ namespace DrawWork
         #region 构造器
         public SingleDisConnectorDrawObject()
         {
-            drawObjects = new List<DrawObject>();
 
             SetRectangleF(0, 0, 1, 1);
             Switch = 1;
@@ -70,7 +69,6 @@ namespace DrawWork
         public SingleDisConnectorDrawObject(float x, float y, float width, float height,int switchstate)
         {
 
-            drawObjects = new List<DrawObject>();
             RectangleF = new RectangleF(x, y, width, height);
             Switch = switchstate;
             RectangleF r = GetNormalizedRectangle(RectangleF);
