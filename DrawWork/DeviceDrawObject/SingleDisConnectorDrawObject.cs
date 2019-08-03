@@ -13,20 +13,76 @@ namespace DrawWork
         private const string Tag = "DisConnector:刀闸@0";
       
         private DeviceDrawObject device1;
+
+        //第一根竖线
+        PointF top;
+        PointF topmid;
+
+        //中间横线
+        PointF topleft;
+        PointF topright;
+
+        //最后一根竖线
+        PointF bottom;
+        PointF bottommid;
+
+        PointF Leftpoint;
         #endregion 字段
 
         #region 构造器
         public SingleDisConnectorDrawObject()
         {
+            drawObjects = new List<DrawObject>();
+
             SetRectangleF(0, 0, 1, 1);
             Switch = 1;
+            RectangleF r = GetNormalizedRectangle(RectangleF);
+
+            float 横线 = r.Height * 0.2f;
+            //第一根竖线
+            top = new PointF(r.X + r.Width / 2, r.Y);
+            topmid = new PointF(r.X + r.Width / 2, r.Y + 横线);
+
+            //中间横线
+            topleft = new PointF(r.X + r.Width / 2 - 横线 / 2, r.Y + 横线);
+            topright = new PointF(r.X + r.Width / 2 + 横线 / 2, r.Y + 横线);
+
+
+            //最后一根竖线
+            bottom = new PointF(r.X + r.Width / 2, r.Y + r.Height);
+            bottommid = new PointF(r.X + r.Width / 2, r.Y + r.Height - 横线);
+
+            Leftpoint = new PointF(r.X, r.Y + 横线);
             Initialize();//设置缩放比例
         }
 
         public SingleDisConnectorDrawObject(float x, float y, float width, float height,int switchstate)
         {
+
+            drawObjects = new List<DrawObject>();
             RectangleF = new RectangleF(x, y, width, height);
             Switch = switchstate;
+            RectangleF r = GetNormalizedRectangle(RectangleF);
+
+            float 横线 = r.Height * 0.2f;
+            //第一根竖线
+            top = new PointF(r.X + r.Width / 2, r.Y);
+            topmid = new PointF(r.X + r.Width / 2, r.Y + 横线);
+
+            //中间横线
+            topleft = new PointF(r.X + r.Width / 2 - 横线 / 2, r.Y + 横线);
+            topright = new PointF(r.X + r.Width / 2 + 横线 / 2, r.Y + 横线);
+
+
+            //最后一根竖线
+            bottom = new PointF(r.X + r.Width / 2, r.Y + r.Height);
+            bottommid = new PointF(r.X + r.Width / 2, r.Y + r.Height - 横线);
+
+            Leftpoint = new PointF(r.X, r.Y + 横线);
+
+            drawObjects.Add(new DrawLineObject(top.X,top.Y,topmid.X,topmid.Y));
+            drawObjects.Add(new DrawLineObject(bottom.X, bottom.Y, bottommid.X, bottommid.Y));
+
             Initialize();
         }
         #endregion 构造器
@@ -72,22 +128,23 @@ namespace DrawWork
             var pen = new Pen(Stroke, StrokeWidth);
             float 横线 = r.Height * 0.2f;
             //第一根竖线
-            PointF top = new PointF(r.X + r.Width / 2, r.Y);
-            PointF topmid = new PointF(r.X + r.Width / 2, r.Y + 横线);
-            g.DrawLine(pen, top, topmid);
+            top = new PointF(r.X + r.Width / 2, r.Y);
+            topmid = new PointF(r.X + r.Width / 2, r.Y + 横线);
+            drawObjects[0] = new DrawLineObject(top.X, top.Y, topmid.X, topmid.Y);
+            
 
             //中间横线
-            PointF topleft = new PointF(r.X + r.Width / 2 - 横线 / 2, r.Y + 横线);
-            PointF topright = new PointF(r.X + r.Width / 2 + 横线 / 2, r.Y + 横线);
+            topleft = new PointF(r.X + r.Width / 2 - 横线 / 2, r.Y + 横线);
+            topright = new PointF(r.X + r.Width / 2 + 横线 / 2, r.Y + 横线);
             g.DrawLine(pen, topleft, topright);
 
 
             //最后一根竖线
-            PointF bottom = new PointF(r.X + r.Width / 2, r.Y + r.Height);
-            PointF bottommid = new PointF(r.X + r.Width / 2, r.Y + r.Height - 横线);
-            g.DrawLine(pen, bottom, bottommid);
+            bottom = new PointF(r.X + r.Width / 2, r.Y + r.Height);
+            bottommid = new PointF(r.X + r.Width / 2, r.Y + r.Height - 横线);
+            drawObjects[1] = new DrawLineObject(bottom.X, bottom.Y, bottommid.X, bottommid.Y);
 
-            PointF Leftpoint = new PointF(r.X, r.Y + 横线);
+            Leftpoint = new PointF(r.X, r.Y + 横线);
             //PointF RightPoint = new PointF(r.X + r.Width, r.Y + 横线);
             if (Switch == 0)
             {
@@ -98,7 +155,10 @@ namespace DrawWork
                 g.DrawLine(pen, bottommid, Leftpoint);
             }
 
-
+            foreach (var VARIABLE in drawObjects)
+            {
+                VARIABLE.Draw(g);
+            }
 
 
             g.ResetTransform();

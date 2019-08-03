@@ -196,6 +196,7 @@ namespace DrawWork
             Invalidate();
         }
 
+        
         public override void MoveHandleTo(PointF point, int handleNumber)
         {
             if (handleNumber == 1)
