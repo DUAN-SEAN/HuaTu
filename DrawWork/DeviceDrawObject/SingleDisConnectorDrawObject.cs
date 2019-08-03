@@ -164,14 +164,14 @@ namespace DrawWork
 
 
 
-            var anim = new Animation.Animation();
-            anim.AnimationAttr.AttributeName = "x";
-            anim.TimingAttr.RepeatCount = 5;
-            anim.TimingAttr.Dur = 20.ToString();
-            anim.From = 0.ToString();
-            anim.To = 50.ToString();
+            //var anim = new Animation.Animation();
+            //anim.AnimationAttr.AttributeName = "x1";
+            //anim.TimingAttr.RepeatCount = 5;
+            //anim.TimingAttr.Dur = 20.ToString();
+            //anim.From = 0.ToString();
+            //anim.To = 50.ToString();
 
-            SetAnimation(drawObjects[2].Id.ToString(),anim);
+            //SetAnimation(drawObjects[2].Id.ToString(),anim);
 
 
 

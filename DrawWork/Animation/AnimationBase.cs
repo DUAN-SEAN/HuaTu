@@ -17,10 +17,16 @@ namespace DrawWork.Animation
         AnimationColor
 
     }
+
+    public interface ICheckValue
+    {
+        bool CheckValue(object o);
+
+    }
     /// <summary>
     /// 所有动画的基类，简单图形上的动画信息
     /// </summary>
-    public abstract class AnimationBase
+    public abstract class AnimationBase:ICheckValue
     {
         public AnimationAttribute AnimationAttr
         {
@@ -56,6 +62,16 @@ namespace DrawWork.Animation
         public virtual string GetXmlStr()
         {
             return _timeTimingAttribute.GetXMLStr()+_animationAttribute.GetXMLStr();
+        }
+
+        public bool CheckValue(object o)
+        {
+            if (o != null && o.ToString() != "")
+            {
+                return true;
+            }
+
+            return false;
         }
     }
     //动画基础 控制颜色和一般的动画
@@ -102,8 +118,8 @@ namespace DrawWork.Animation
             set => KeySplines = value;
         }
 
-        protected string _calcMode;//discrete|linear|paced|spline
-        protected string _values;//值列表
+        protected string _calcMode = "linear";//discrete|linear|paced|spline
+        protected string _values ;//值列表
         protected string _from;//从某个值开始
         protected string _to;//加减到某个值
         protected string _by;//加减某个值
@@ -139,10 +155,32 @@ namespace DrawWork.Animation
 
         public override string GetXmlStr()
         {
-            return base.GetXmlStr()+ " calcMode=\"" + CalcMode + "\" " + " values=\"" + Values + "\" " +
-                   " from=\"" + From + "\" " + " to=\"" + To + "\" " + " by=\"" + By + "\" " +
-                   " keyTimes=\"" + KeyTimes + "\" "+ " keySplines=\"" + KeySplines + "\" ";
+            string s = base.GetXmlStr();
+
+            if (CheckValue(CalcMode))
+                s += " calcMode=\"" + CalcMode + "\" ";
+            if (CheckValue(Values))
+                s += " values=\"" + Values + "\" ";
+            if (CheckValue(From))
+                s += " from=\"" + From + "\" ";
+            if (CheckValue(To))
+                s += " to=\"" + To + "\" ";
+            if (CheckValue(By))
+                s += " by=\"" + By + "\" ";
+            if (CheckValue(KeyTimes))
+                s += " keyTimes=\"" + KeyTimes + "\" ";
+            if (CheckValue(KeySplines))
+                s += " keySplines=\"" + KeySplines + "\" ";
+
+            return s;
+
+
+
+
+
         }
+
+       
     }
     //动画路径
     public class AnimationPath : Animation
