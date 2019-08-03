@@ -139,7 +139,7 @@ namespace DrawWork
         /// </summary>
         /// <param name="scale"></param>
         /// <returns></returns>
-        public override string GetXmlStr(SizeF scale)
+        public override string GetXmlStr(SizeF scale,bool noAnimation)
         {
             //用group包裹
             //  <rect x="1" y="1" width="1198" height="398"
@@ -150,7 +150,7 @@ namespace DrawWork
             s += GetTransformXML(_angle,fixedCenter);//获取旋转
             s += " >" + "\r\n";
 
-            s += GetAllSimpleXML();//获取所有基础图形的参数以及动画
+            s += GetAllSimpleXML(scale);//获取所有基础图形的参数以及动画
 
 
 
