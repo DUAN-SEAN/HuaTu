@@ -371,7 +371,7 @@ namespace DrawWork
             }
         }
 
-        public override string GetXmlStr(SizeF scale)
+        public override string GetXmlStr(SizeF scale,bool noAnimation = true)
         {
             //  <rect x="1" y="1" width="1198" height="398"
             //		style="fill:none; stroke:blue"/>
@@ -381,7 +381,8 @@ namespace DrawWork
             s += GetStrStyle(scale);
             s += GetRectStringXml(RectangleF, scale, Name);
             s += GetTransformXML(_angle, fixedCenter);//添加变化
-            s += " />" + "\r\n";
+            s += noAnimation ? " />" : " >";
+            s += "\r\n";
             return s;
         }
 

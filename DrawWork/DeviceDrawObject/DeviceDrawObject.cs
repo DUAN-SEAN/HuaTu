@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,16 +13,14 @@ namespace DrawWork
     {
         #region 字段
 
+        protected List<DrawObject> drawObjects;//组成设备的最小图形，每个设备图元都是固定的
+
         protected string _deviceID;//设备Id
 
         protected int _devicestate;
 
         protected Dictionary<int, List<DeviceDrawObject>> handledevice;
 
-        /// <summary>
-        /// 简单图形的id和动画列表的映射
-        /// </summary>
-        protected Dictionary<string, List<AnimationBase>> _animationDic;
 
         #endregion 字段
 
@@ -30,7 +29,6 @@ namespace DrawWork
         public DeviceDrawObject()
         {
             handledevice = new Dictionary<int, List<DeviceDrawObject>>();
-            _animationDic = new Dictionary<string, List<AnimationBase>>();
         }
         
 
@@ -64,6 +62,11 @@ namespace DrawWork
                     VARIABLE2.DeviceState = DeviceState;
                 }
             }
+            //由于不在list中 所以由图元驱动图形的update
+            foreach (var doj in drawObjects)
+            {
+                doj.Update();
+            }
         }
 
         //获取设备id
@@ -75,25 +78,83 @@ namespace DrawWork
         /// 获取图元下所有简单图形的动画状态
         /// </summary>
         /// <returns></returns>
-        protected virtual string GetAllSimpleXML()
+        protected virtual string GetAllSimpleXML(SizeF scale)
         {
 
             //获取所有基本图形的type 和 id 例如 rect|line  id="1"
-            svg
-            string id = default;
-            //其次通过id(string)查找有无动画绑定
-            _animationDic
+            string s = "";
+            foreach (var doj in drawObjects)
+            {
+                //其次通过id(string)查找有无动画绑定
+                List<Animation.AnimationBase> list = doj.AnimationBases;
+                if (list == null || list.Count == 0)
+                {
+                    s += doj.GetXmlStr(scale,true);
+                }
+                else
+                {
+                    s += doj.GetXmlStr(scale, false);
+                    foreach (var animation in AnimationBases)
+                    {
+                        s += animation.GetXmlStr();
+                    }
+
+
+                    s += " />";
+                }
+
+
+            }
+           
             return "";
         }
-
-
-
-        protected virtual void SetAnimation(string id, AnimationBase animationBase)
+        /// <summary>
+        /// 序列化，同时将图元下的图形和动画都序列化成svg
+        /// </summary>
+        /// <param name="scale"></param>
+        /// <param name="noAnimation"></param>
+        /// <returns></returns>
+        public override string GetXmlStr(SizeF scale,bool noAnimation = true)
         {
-            List<AnimationBase> list = null;
-            if (!_animationDic.TryGetValue(id, out list))
+            //用group包裹
+            //  <rect x="1" y="1" width="1198" height="398"
+            //		style="fill:none; stroke:blue"/>
+
+            string s = "<g ";
+            s += GetDeviceId();//获取设备id
+            s += GetTransformXML(_angle, fixedCenter);//获取旋转
+            s += " >" + "\r\n";
+
+            s += GetAllSimpleXML(scale);//获取所有基础图形的参数以及动画
+
+
+
+
+            s += "</g>";
+
+
+
+            return s;
+        }
+        /// <summary>
+        /// 给doj设置动画
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="animationBase"></param>
+        protected void SetAnimation(string id, AnimationBase animationBase)
+        {
+           
+
+
+            foreach (var doj in drawObjects)
             {
-                list = new List<AnimationBase>();
+                if (id == doj.Id.ToString())
+                {
+                    if(doj.AnimationBases==null)
+                        doj.AnimationBases = new List<AnimationBase>();
+
+                    doj.AnimationBases.Add(animationBase);
+                }
             }
 
         }

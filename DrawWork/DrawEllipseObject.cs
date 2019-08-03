@@ -84,7 +84,7 @@ namespace DrawWork
             pen.Dispose();
         }
 
-        public override string GetXmlStr(SizeF scale)
+        public override string GetXmlStr(SizeF scale,bool noAnimation = true)
         {
             string s = "<";
             s += Tag;
@@ -99,7 +99,8 @@ namespace DrawWork
             s += " rx = \"" + rx.ToString(CultureInfo.InvariantCulture) + "\"";
             s += " ry = \"" + ry.ToString(CultureInfo.InvariantCulture) + "\"";
             s += GetTransform(_angle, fixedCenter);
-            s += " />" + "\r\n";
+            s += noAnimation ? " />" : " >";
+            s += "\r\n";
             return s;
         }
         public static string GetTransform(float angle, PointF center)

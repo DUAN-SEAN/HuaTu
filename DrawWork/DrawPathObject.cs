@@ -307,7 +307,7 @@ namespace DrawWork
             return Cursors.SizeAll;
         }
 
-        public override string GetXmlStr(SizeF scale)
+        public override string GetXmlStr(SizeF scale,bool noanimation = true)
         {
             char prevCommand = new char();
             char curCommand;
