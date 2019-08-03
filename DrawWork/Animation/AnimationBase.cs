@@ -135,7 +135,7 @@ namespace DrawWork.Animation
 
 
         }
-
+        public Animation() { }
 
         public override string GetXmlStr()
         {

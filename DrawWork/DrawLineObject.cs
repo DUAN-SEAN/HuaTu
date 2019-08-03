@@ -153,6 +153,11 @@ namespace DrawWork
             return s;
         }
 
+        public override string GetXmlEnd()
+        {
+            return "</line>"+base.GetXmlEnd();
+        }
+
         /// <summary>
         /// Hit test.
         /// Return value: -1 - no hit

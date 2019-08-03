@@ -82,7 +82,7 @@ namespace DrawWork.Animation
         /// <returns></returns>
         public string GetXMLStr()
         {
-            return " begin=\"" + Begin + "\" " + " dur=\"" + Dur + "\" " +
+            return " begin=\"" + Begin + "\" " + " dur=\"" + Dur + "s\" " +
                    " end=\"" + End + "\" " + " restart=\"" + Restart + "\" " +
                    " repeatCount=\"" + RepeatCount + "\" " + " repeatDur=\"" + RepeatDur + "\" " +
                    " fill=\"" + Fill + "\" ";

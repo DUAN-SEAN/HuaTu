@@ -211,7 +211,10 @@ namespace DrawWork
             s += " ShapeName = \"" + shapeName + "\"";
             return s;
         }
-
+        public override string GetXmlEnd()
+        {
+            return "<\\rect>" + base.GetXmlEnd();
+        }
         /// <summary>
         /// Draw rectangle
         /// </summary>

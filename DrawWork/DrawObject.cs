@@ -377,6 +377,14 @@ namespace DrawWork
         public virtual void LoadFromXml(XmlTextReader reader)
         {
         }
+        /// <summary>
+        /// 获取xml的结尾  例如</line>
+        /// </summary>
+        /// <returns></returns>
+        public  virtual  string GetXmlEnd()
+        {
+            return "\r\n";
+        }
         #region 段瑞 旋转
         /// <summary>
         /// 一个点顺时针绕着另一个点旋转angle度

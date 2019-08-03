@@ -94,6 +94,8 @@ namespace DrawWork
             drawObjects.Add(new DrawLineObject(top.X,top.Y,topmid.X,topmid.Y));
             drawObjects.Add(new DrawLineObject(topleft.X, topleft.Y, topright.X, topright.Y));
             drawObjects.Add(new DrawLineObject(bottom.X, bottom.Y, bottommid.X, bottommid.Y));
+            var animation = new Animation.Animation();
+
             if (Switch == 0)
             {
                 drawObjects.Add(new DrawLineObject(bottommid.X, bottommid.Y, topmid.X, topmid.Y));
@@ -161,6 +163,23 @@ namespace DrawWork
             bottom = new PointF(r.X + r.Width / 2, r.Y + r.Height);
             bottommid = new PointF(r.X + r.Width / 2, r.Y + r.Height - 横线);
             drawObjects[2] = new DrawLineObject(bottom.X, bottom.Y, bottommid.X, bottommid.Y);
+
+
+
+            var anim = new Animation.Animation();
+            anim.AnimationAttr.AttributeName = "x";
+            anim.TimingAttr.RepeatCount = 5;
+            anim.TimingAttr.Dur = 20.ToString();
+            anim.From = 0.ToString();
+            anim.To = 50.ToString();
+
+            SetAnimation(drawObjects[2].Id.ToString(),anim);
+
+
+
+            //drawObjects[2].AnimationBases.Add(anim);
+
+
 
             Leftpoint = new PointF(r.X, r.Y + 横线);
             //PointF RightPoint = new PointF(r.X + r.Width, r.Y + 横线);
