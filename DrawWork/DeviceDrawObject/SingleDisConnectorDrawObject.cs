@@ -53,6 +53,17 @@ namespace DrawWork
             bottommid = new PointF(r.X + r.Width / 2, r.Y + r.Height - 横线);
 
             Leftpoint = new PointF(r.X, r.Y + 横线);
+            drawObjects.Add(new DrawLineObject(top.X, top.Y, topmid.X, topmid.Y));
+            drawObjects.Add(new DrawLineObject(bottom.X, bottom.Y, bottommid.X, bottommid.Y));
+            if (Switch == 0)
+            {
+                drawObjects.Add(new DrawLineObject(bottommid.X, bottommid.Y, topmid.X, topmid.Y));
+            }
+            else
+            {
+                drawObjects.Add(new DrawLineObject(bottommid.X, bottommid.Y, Leftpoint.X, Leftpoint.Y));
+            }
+
             Initialize();//设置缩放比例
         }
 
@@ -81,8 +92,16 @@ namespace DrawWork
             Leftpoint = new PointF(r.X, r.Y + 横线);
 
             drawObjects.Add(new DrawLineObject(top.X,top.Y,topmid.X,topmid.Y));
+            drawObjects.Add(new DrawLineObject(topleft.X, topleft.Y, topright.X, topright.Y));
             drawObjects.Add(new DrawLineObject(bottom.X, bottom.Y, bottommid.X, bottommid.Y));
-
+            if (Switch == 0)
+            {
+                drawObjects.Add(new DrawLineObject(bottommid.X, bottommid.Y, topmid.X, topmid.Y));
+            }
+            else
+            {
+                drawObjects.Add(new DrawLineObject(bottommid.X, bottommid.Y, Leftpoint.X, Leftpoint.Y));
+            }
             Initialize();
         }
         #endregion 构造器
@@ -136,23 +155,22 @@ namespace DrawWork
             //中间横线
             topleft = new PointF(r.X + r.Width / 2 - 横线 / 2, r.Y + 横线);
             topright = new PointF(r.X + r.Width / 2 + 横线 / 2, r.Y + 横线);
-            g.DrawLine(pen, topleft, topright);
-
+            drawObjects[1] = new DrawLineObject(topleft.X, topleft.Y, topright.X, topright.Y);
 
             //最后一根竖线
             bottom = new PointF(r.X + r.Width / 2, r.Y + r.Height);
             bottommid = new PointF(r.X + r.Width / 2, r.Y + r.Height - 横线);
-            drawObjects[1] = new DrawLineObject(bottom.X, bottom.Y, bottommid.X, bottommid.Y);
+            drawObjects[2] = new DrawLineObject(bottom.X, bottom.Y, bottommid.X, bottommid.Y);
 
             Leftpoint = new PointF(r.X, r.Y + 横线);
             //PointF RightPoint = new PointF(r.X + r.Width, r.Y + 横线);
             if (Switch == 0)
             {
-                g.DrawLine(pen, bottommid, topmid);
+                drawObjects[3] = new DrawLineObject(bottommid.X, bottommid.Y, topmid.X, topmid.Y);
             }
             else
             {
-                g.DrawLine(pen, bottommid, Leftpoint);
+                drawObjects[3] = new DrawLineObject(bottommid.X, bottommid.Y, Leftpoint.X, Leftpoint.Y);
             }
 
             foreach (var VARIABLE in drawObjects)
