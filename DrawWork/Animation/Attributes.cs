@@ -13,7 +13,7 @@ namespace DrawWork.Animation
     }
 
 
-    public class TimingAttribute:IXMLSupprot
+    public class TimingAttribute:IXMLSupprot,ICheckValue
     {
 
         #region 属性
@@ -82,19 +82,54 @@ namespace DrawWork.Animation
         /// <returns></returns>
         public string GetXMLStr()
         {
-            return " begin=\"" + Begin + "\" " + " dur=\"" + Dur + "s\" " +
-                   " end=\"" + End + "\" " + " restart=\"" + Restart + "\" " +
-                   " repeatCount=\"" + RepeatCount + "\" " + " repeatDur=\"" + RepeatDur + "\" " +
-                   " fill=\"" + Fill + "\" ";
-        }
+            string s = "";
+            if (CheckValue(Begin))
+            {
+                s += " begin=\"" + Begin + "s\" ";
+            }
+            if (CheckValue(Dur))
+            {
+                s += " dur=\"" + Dur+ "s\" ";
+            }
+            if (CheckValue(End))
+            {
+                s += " end=\"" + End + "s\" ";
+            }
+            if (CheckValue(Restart))
+            {
+                s += " restart=\"" + Restart + "\" ";
+            }
+            if (CheckValue(RepeatCount))
+            {
+                s += " repeatCount=\"" + RepeatCount + "\" ";
+            }
+            if (CheckValue(RepeatDur))
+            {
+                s += " repeatDur=\"" + RepeatDur + "\" ";
+            }
+            if (CheckValue(Fill))
+            {
+                s+= " fill=\"" + Fill + "\" ";
+            }
 
+            return s;
+        }
+        public bool CheckValue(object o)
+        {
+            if (o != null && o.ToString() != "")
+            {
+                return true;
+            }
+
+            return false;
+        }
 
         #endregion
     }
     /// <summary>
     /// animation 属性
     /// </summary>
-    public class AnimationAttribute
+    public class AnimationAttribute:ICheckValue
     {
         #region 属性
 
@@ -186,13 +221,60 @@ namespace DrawWork.Animation
         /// <returns></returns>
         public string GetXMLStr()
         {
-            return " attributeName=\"" + AttributeName + "\" " + " attributeType=\"" + AttributeType + "\" " +
-                   " additive=\"" + Additive + "\" " + " accumulate=\"" + Accumulate + "\" " +
-                   " targetElement=\"" + TargetElement + "\" " + " type=\"" + Type + "\" " +
-                   " show=\"" + Show + "\" " + " actuate=\"" + Actuate + "\" " + " href=\"" + Href + "\" ";
+            string s = "";
+            if (CheckValue(AttributeName))
+            {
+                s += " attributeName=\"" + AttributeName + "\" ";
+            }//如果false 就是个错误
+
+            if (CheckValue(AttributeType))
+            {
+                s += " attributeType=\"" + AttributeType + "\" ";
+            }
+            if (CheckValue(Additive))
+            {
+                s += " additive=\"" + Additive + "\" ";
+            }
+            if (CheckValue(Accumulate))
+            {
+                s += " accumulate=\"" + Accumulate + "\" ";
+            }
+            if (CheckValue(TargetElement))
+            {
+                s += " targetElement=\"" + TargetElement + "\" ";
+            }
+            if (CheckValue(Type))
+            {
+                s += " type=\"" + Type + "\" ";
+            }
+
+            if (CheckValue(Show))
+            {
+                s += " show=\"" + Show + "\" ";
+
+            }
+
+            if (CheckValue(Actuate))
+            {
+                s += " actuate=\"" + Actuate + "\" ";
+            }
+
+            if (CheckValue(Href))
+            {
+                s += " href=\"" + Href + "\" ";
+            }
+            return s;
 
         }
+        public bool CheckValue(object o)
+        {
+            if (o != null && o.ToString() != "")
+            {
+                return true;
+            }
 
+            return false;
+        }
         #endregion
 
     }
