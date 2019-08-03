@@ -225,6 +225,96 @@ namespace SVGHelper
             }
         }
 
+        public string CalcMode
+        {
+            get
+            {
+                return GetAttributeStringValue(SVGAttribute._SvgAttribute.attrAnim_CalcMode);
+            }
+
+            set
+            {
+                SetAttributeValue(SVGAttribute._SvgAttribute.attrAnim_CalcMode, value);
+            }
+        }
+
+        public string Values
+        {
+            get
+            {
+                return GetAttributeStringValue(SVGAttribute._SvgAttribute.attrAnim_Values);
+            }
+
+            set
+            {
+                SetAttributeValue(SVGAttribute._SvgAttribute.attrAnim_Values, value);
+            }
+        }
+
+        public string From
+        {
+            get
+            {
+                return GetAttributeStringValue(SVGAttribute._SvgAttribute.attrAnim_From);
+            }
+
+            set
+            {
+                SetAttributeValue(SVGAttribute._SvgAttribute.attrAnim_From, value);
+            }
+        }
+        public string To
+        {
+            get
+            {
+                return GetAttributeStringValue(SVGAttribute._SvgAttribute.attrAnim_To);
+            }
+
+            set
+            {
+                SetAttributeValue(SVGAttribute._SvgAttribute.attrAnim_To, value);
+            }
+        }
+        public string By
+        {
+            get
+            {
+                return GetAttributeStringValue(SVGAttribute._SvgAttribute.attrAnim_By);
+            }
+
+            set
+            {
+                SetAttributeValue(SVGAttribute._SvgAttribute.attrAnim_By, value);
+            }
+        }
+
+        public string KeyTimes
+        {
+            get
+            {
+                return GetAttributeStringValue(SVGAttribute._SvgAttribute.attrAnim_KeyTimes);
+            }
+
+            set
+            {
+                SetAttributeValue(SVGAttribute._SvgAttribute.attrAnim_KeyTimes, value);
+            }
+        }
+
+        public string KeySplines
+        {
+            get
+            {
+                return GetAttributeStringValue(SVGAttribute._SvgAttribute.attrAnim_KeySplines);
+            }
+
+            set
+            {
+                SetAttributeValue(SVGAttribute._SvgAttribute.attrAnim_KeySplines, value);
+            }
+        }
+
+
         #endregion
 
 

@@ -19,9 +19,9 @@ namespace DrawWork.Animation
         #region 属性
 
 
-        public int Begin { set; get; }
-        public int Dur { set; get; }
-        public int End { set; get; }
+        public string Begin { set; get; }
+        public string Dur { set; get; }
+        public string End { set; get; }
         public string Restart
         {
             set

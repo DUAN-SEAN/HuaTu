@@ -77,6 +77,12 @@ namespace DrawWork
         /// <returns></returns>
         protected virtual string GetAllSimpleXML()
         {
+
+            //获取所有基本图形的type 和 id 例如 rect|line  id="1"
+            svg
+            string id = default;
+            //其次通过id(string)查找有无动画绑定
+            _animationDic
             return "";
         }
 

@@ -101,6 +101,7 @@ namespace DrawWork
         }
 
         //将读取的svg根传入 扫描每一个unit
+        //现在图元按照设备进行分组，读取的时候按照分组为单位读取
         public void AddFromSvg(SVGUnit ele)
         {
             while (ele != null)
@@ -456,6 +457,11 @@ namespace DrawWork
                 case SVGUnit.SVGUnitType.typeDesc:
                     Description = ((SVGDesc)svge).Value;
                     break;
+                case SVGUnit.SVGUnitType.typeAnimate:
+                    Animation.Animation a = new Animation.Animation((SVGAnimate)svge);
+                    
+                    break;
+                    
                 default:
                     break;
             }
