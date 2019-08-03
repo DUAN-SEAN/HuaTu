@@ -6,7 +6,14 @@ using System.Threading.Tasks;
 
 namespace DrawWork
 {
-   public class PortDrawObject
-    {
-    }
+   public class PortDrawObject:DrawCircleObject
+   {
+       public DeviceDrawObject OwnerDevice;//所属设备
+
+       public DeviceDrawObject ConnectDevice;//连接的设备
+
+       
+
+
+   }
 }

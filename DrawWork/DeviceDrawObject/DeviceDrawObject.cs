@@ -15,6 +15,9 @@ namespace DrawWork
 
         protected List<DrawObject> drawObjects;//组成设备的最小图形，每个设备图元都是固定的
 
+
+
+
         protected string _deviceID;//设备Id
 
         protected int _devicestate;

@@ -16,6 +16,16 @@ using DrawWork.Animation;
 
 namespace DrawWork
 {
+    /// <summary>
+    /// 设备类型
+    /// </summary>
+    public enum DeviceType
+    {
+        SingleDisConnector,
+        Port
+    }
+
+
     public interface IUpdateSystem
     {
         void Update();
@@ -28,6 +38,7 @@ namespace DrawWork
         public static PointF Dpi;
         public static int ObjectId;
 
+        public DeviceType _type;//设备类型
 
         #region 字段
         public RectangleF _imageR = new RectangleF(9, 9, 20, 20);

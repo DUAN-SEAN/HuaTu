@@ -58,6 +58,7 @@
     <Compile Include="DeviceDrawObject\DrawConnectLine.cs" />
     <Compile Include="DeviceDrawObject\PortDrawObject.cs" />
     <Compile Include="DeviceDrawObject\SingleDisConnectorDrawObject.cs" />
+    <Compile Include="DrawCircleObject.cs" />
     <Compile Include="DrawConnectLine.cs" />
     <Compile Include="DrawEllipseObject.cs" />
     <Compile Include="DrawImageObject.cs" />
