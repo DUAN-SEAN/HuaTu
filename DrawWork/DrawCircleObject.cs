@@ -14,11 +14,13 @@ namespace DrawWork
 
         public float CX
         {
+            set { }
             get { return fixedCenter.X; }
         }
 
         public float CY
         {
+            set { }
             get { return fixedCenter.Y; }
         }
 

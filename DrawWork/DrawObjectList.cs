@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SVGHelper.Device;
 
 namespace DrawWork
 {
@@ -119,6 +120,28 @@ namespace DrawWork
             }
         }
 
+        //将读取的svg根传入 扫描每一个unit
+        //现在图元按照设备进行分组，读取的时候按照分组为单位读取
+        public void AddFromSvg2(SVGUnit ele)
+        {
+            while (ele != null)
+            {
+
+
+
+
+                DrawObject o = CreateDrawObject(ele);
+                if (o != null)
+                    Add(o);
+                SVGUnit child = ele.getChild();
+                while (child != null)
+                {
+                    AddFromSvg(child);
+                    child = child.getNext();
+                }
+                ele = ele.getNext();
+            }
+        }
         public bool AreItemsInMemory()
         {
             return (_inMemoryList.Count > 0);
@@ -457,12 +480,89 @@ namespace DrawWork
                 case SVGUnit.SVGUnitType.typeDesc:
                     Description = ((SVGDesc)svge).Value;
                     break;
-              
-                    
+                case SVGUnit.SVGUnitType.device:
+                    o = CreateDevice((SVGDevice)svge);
+                    break;
+                case SVGUnit.SVGUnitType.devicePort:
+                    o = CreateDevicePort((SVGDevicePort) svge);
+
+                    break;
                 default:
                     break;
             }
+            //获取此是否含有动画
+            CreateAnimation(o,svge);
             return o;
+        }
+
+        private DrawObject CreateDevicePort(SVGDevicePort svge)
+        {
+            PortDrawObject pdo = new PortDrawObject();
+            SVGUnit child = svge.getChild();
+            while (child != null)
+            {
+                var o = CreateDrawObject(child) as DrawCircleObject;
+
+                pdo.Rect = o.Rect;
+                
+
+                child = child.getNext();
+            }
+
+            return pdo;
+
+        }
+
+        private void CreateAnimation(DrawObject drawObject, SVGUnit svge)
+        {
+            SVGUnit animUnit = svge.getChild();
+            switch (animUnit.getElementType())
+            {
+                case SVGUnit.SVGUnitType.typeAnimate:
+                    var anim = new Animation.Animation((SVGAnimate)animUnit);
+                    if(drawObject.AnimationBases==null) drawObject.AnimationBases = new List<Animation.Animation>();
+                    drawObject.AnimationBases.Add(anim);
+                    break;
+                case SVGUnit.SVGUnitType.typeAnimateColor:break;
+                case SVGUnit.SVGUnitType.typeAnimateMotion:break;
+                    
+                default:break;
+                    
+            }
+        }
+
+        /// <summary>
+        /// 创建一个设备驱动
+        /// </summary>
+        /// <param name="svge"></param>
+        /// <returns></returns>
+        private DrawObject CreateDevice(SVGDevice svg)
+        {
+            DeviceDrawObject ddo = null;
+
+
+
+            switch (svg.DeviceType)
+            {
+                case DeviceDrawType.WireConnectLineDrawObject:
+                    ddo = new WireConnectLineDrawObject();
+                    break;
+                case DeviceDrawType.SingleDisConnectorDrawObject:
+                    ddo =new SingleDisConnectorDrawObject();
+
+
+                    break;
+                default:
+                    return null;
+
+            }
+            SVGUnit child = svg.getChild();
+            while (child != null)
+            {
+                ddo.drawObjects.Add(CreateDrawObject(child));
+            }
+            return ddo;
+
         }
 
         DrawObject CreateGroup(SVGGroup svg)
