@@ -312,7 +312,7 @@ namespace DrawWork
 
             }
 
-            if (_endObject != null)
+            if (_endObject != null && _endobjecthandle == 0)
             {
                 _endobjecthandle = _endObject.HitAroundTest(_endPoint);
                 _endPoint = _endObject.GetHandle(_endobjecthandle);
@@ -342,6 +342,25 @@ namespace DrawWork
                 _endobjecthandle = _endObject.HitAroundTest(_endPoint);
             }
             
+        }
+
+        public void SetFollowObject(int handleNumber, DrawObject drawObject,int handles)
+        {
+            if (handleNumber == 1)
+            {
+                _startObject = drawObject;
+                _startobjecthandle = handles;
+            }
+            else if (handleNumber == 2)
+            {
+
+            }
+            else
+            {
+                _endObject = drawObject;
+                _endobjecthandle = handles;
+            }
+
         }
 
         public void SetFollowObjectNull(int handleNumber)

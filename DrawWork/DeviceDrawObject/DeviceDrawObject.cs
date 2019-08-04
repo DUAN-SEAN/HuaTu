@@ -15,7 +15,10 @@ namespace DrawWork
 
         protected List<DrawObject> drawObjects;//组成设备的最小图形，每个设备图元都是固定的
 
-
+        /// <summary>
+        /// 端口集合
+        /// </summary>
+        protected List<PortDrawObject> portDrawObjects;
 
 
         protected string _deviceID;//设备Id
@@ -33,6 +36,7 @@ namespace DrawWork
         {
             handledevice = new Dictionary<int, List<DeviceDrawObject>>();
             drawObjects = new List<DrawObject>();
+            portDrawObjects = new List<PortDrawObject>();
         }
         
 
@@ -177,6 +181,9 @@ namespace DrawWork
             set { _devicestate = value; }
             get { return _devicestate; }
         }
+
+
+        public List<PortDrawObject> PortDrawObjects => portDrawObjects;
 
         #endregion 属性
     }

@@ -337,16 +337,70 @@ namespace HuaTuDemo
                         }
                     }
                 }
-                if (_resizedObjectHandle != 2 && _resizedObject is WireConnectLineDrawObject)
+                if (_resizedObjectHandle != 2 && _resizedObject is WireConnectLineDrawObject line1)
                 {
-                    var line = (WireConnectLineDrawObject)_resizedObject;
                     for (int i = 0; i < drawArea.GraphicsList.Count; i++)
                     {
                         if (drawArea.GraphicsList[i] is WireConnectLineDrawObject) continue;
                         if (drawArea.GraphicsList[i] is WireConnectLineDrawObject) continue;
-                        if (drawArea.GraphicsList[i].HitTest(line.GetHandle(_resizedObjectHandle)) >= 0)
+                        int hit = drawArea.GraphicsList[i].HitTest(line1.GetHandle(_resizedObjectHandle));
+                        if (hit >= 0)
                         {
-                            line.SetFollowObject(_resizedObjectHandle, drawArea.GraphicsList[i]);
+                            if (hit == 0)
+                            {
+                                float mins = 99999;
+                                int hits = 0;
+                                for (int j = 0; j < drawArea.GraphicsList[i].HandleCount; j++)
+                                {
+                                    var point = drawArea.GraphicsList[i].GetHandle(j);
+                                    var dis = (point.X - e.X) * (point.X - e.X) + (point.Y - e.Y) * (point.Y - e.Y);
+                                    if ( dis < mins)
+                                    {
+                                        mins = dis;
+                                        hits = j;
+                                    }
+                                }
+
+                                hit = hits;
+                            }
+                            if (drawArea.GraphicsList[i] is DeviceDrawObject 
+                                && !(drawArea.GraphicsList[i] is WireConnectLineDrawObject))
+                            {
+                                PortDrawObject port = null;
+
+                                foreach (var portDrawObject in ((DeviceDrawObject)drawArea.GraphicsList[i]).PortDrawObjects)
+                                {
+                                    if(portDrawObject.OwnerDevice != drawArea.GraphicsList[i]) break;
+                                    if (portDrawObject.OwnerDeviceHandle != hit) continue;
+                                    port = portDrawObject;
+                                    break;
+
+                                }
+
+                                if (port == null)
+                                {
+                                    port = new PortDrawObject(e.X, e.Y)
+                                    {
+                                        ConnectDevice = _resizedObject,
+                                        //OwnerDeviceHandle = hit,
+                                        OwnerDevice = drawArea.GraphicsList[i]
+                                    };
+                                    port.OwnerDeviceHandle = hit;
+                                    ((DeviceDrawObject)drawArea.GraphicsList[i]).PortDrawObjects.Add(port);
+                                    drawArea.GraphicsList.Add(port);
+
+                                }
+
+
+                                line1.SetFollowObject(_resizedObjectHandle, port, 9);
+                                break;
+                            }
+                            else
+                            {
+                                line1.SetFollowObject(_resizedObjectHandle, drawArea.GraphicsList[i]);
+                                break;
+                            }
+
                         }
                     }
                 }
