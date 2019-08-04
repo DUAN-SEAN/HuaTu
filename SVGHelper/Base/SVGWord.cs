@@ -495,6 +495,10 @@ namespace SVGHelper.Base
             {
                 eleToReturn = AddAnimate(parent, ref last);
             }
+            else if (sName == "devicePort")
+            {
+                eleToReturn = AddDevicePort(parent, ref last);
+            }
             else
             {
                 if (parent != null)
@@ -504,6 +508,15 @@ namespace SVGHelper.Base
             }
 
             return eleToReturn;
+        }
+
+        private SVGUnit AddDevicePort(SVGUnit parent, ref SVGUnit last)
+        {
+            SVGDevicePort port = new SVGDevicePort(this);
+
+            AddElement(parent, port, ref last);
+
+            return port;
         }
 
         /// <summary>
