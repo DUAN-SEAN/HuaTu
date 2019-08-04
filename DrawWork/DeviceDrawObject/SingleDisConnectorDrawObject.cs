@@ -32,7 +32,7 @@ namespace DrawWork
         #region 构造器
         public SingleDisConnectorDrawObject()
         {
-
+            deviceType = DeviceDrawType.SingleDisConnectorDrawObject;
             SetRectangleF(0, 0, 1, 1);
             Switch = 1;
             RectangleF r = GetNormalizedRectangle(RectangleF);
@@ -68,7 +68,7 @@ namespace DrawWork
 
         public SingleDisConnectorDrawObject(float x, float y, float width, float height,int switchstate)
         {
-
+            deviceType = DeviceDrawType.SingleDisConnectorDrawObject;
             RectangleF = new RectangleF(x, y, width, height);
             Switch = switchstate;
             RectangleF r = GetNormalizedRectangle(RectangleF);

@@ -115,6 +115,9 @@ namespace SVGHelper.Base
         attrAnimMotion_Path,
         attrAnimMotion_Origin,
 
+        //device
+        attrDevice_Type,
+
 
         //device port
 
@@ -629,7 +632,15 @@ namespace SVGHelper.Base
         info._name = "connectId";
 
         m_mapAttrInfo.Add(info._type, info);
-    }
+
+
+        info = new _AttrInfo();
+        info._type = _SvgAttribute.attrDevice_Type;
+        info._group = _SvgAttributeGroup.groupDevice;
+        info._name = "deviceType";
+
+        m_mapAttrInfo.Add(info._type, info);
+        }
 
     private void InitAnimation()
     {

@@ -101,6 +101,7 @@ namespace DrawWork
             s += GetTransform(_angle, fixedCenter);
             s += noAnimation ? " />" : " >";
             s += "\r\n";
+          
             return s;
         }
         public static string GetTransform(float angle, PointF center)

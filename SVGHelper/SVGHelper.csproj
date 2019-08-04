@@ -52,6 +52,7 @@
     <Compile Include="Base\SVGRoot.cs" />
     <Compile Include="Base\SVGUnSupported.cs" />
     <Compile Include="Base\SVGWord.cs" />
+    <Compile Include="Device\SVGDevice.cs" />
     <Compile Include="Device\SVGDevicePort.cs" />
     <Compile Include="SVGCircle.cs" />
     <Compile Include="SVGEllipse.cs" />

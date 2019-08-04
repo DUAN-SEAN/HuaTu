@@ -8,18 +8,29 @@ using DrawWork.Animation;
 
 namespace DrawWork
 {
+    public static class DeviceDrawType
+    {
+        public const string SingleDisConnectorDrawObject = "刀闸01";
+
+        public const string WireConnectLineDrawObject = "电线01";
+
+    }
+
+
     //设备抽象类
     public abstract class DeviceDrawObject : DrawRectangleObject
     {
+        private const string Tag = "device";
         #region 字段
 
-        protected List<DrawObject> drawObjects;//组成设备的最小图形，每个设备图元都是固定的
+        public List<DrawObject> drawObjects;//组成设备的最小图形，每个设备图元都是固定的
+
+        public string deviceType;//设备类型
 
         /// <summary>
         /// 端口集合
         /// </summary>
         protected List<PortDrawObject> portDrawObjects;
-
 
         protected string _deviceID;//设备Id
 
@@ -102,16 +113,7 @@ namespace DrawWork
                 else
                 {
                     s += doj.GetXmlStr(scale, false);
-                    foreach (var animation in list)
-                    {
-                        s += "<animate ";
-                        s += animation.GetXmlStr();
-                        s += " />";
-                        s += "\r\n";
-                    }
-
-
-                    s += doj.GetXmlEnd();
+                    s += doj.GetAnimationXML();
                 }
 
 
@@ -131,9 +133,10 @@ namespace DrawWork
             //  <rect x="1" y="1" width="1198" height="398"
             //		style="fill:none; stroke:blue"/>
 
-            string s = "<g ";
+            string s = "<device ";
             s += GetDeviceId();//获取设备id
             s += GetTransformXML(_angle, fixedCenter);//获取旋转
+            s += GetDeviceType();
             s += " >" + "\r\n";
 
             s += GetAllSimpleXML(scale);//获取所有基础图形的参数以及动画
@@ -141,12 +144,18 @@ namespace DrawWork
 
 
 
-            s += "</g>";
+            s += "</device>";
 
 
 
             return s;
         }
+
+        private string GetDeviceType()
+        {
+            return " deviceType=\"" + deviceType + "\" ";
+        }
+
         /// <summary>
         /// 给doj设置动画
         /// </summary>

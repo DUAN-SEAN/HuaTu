@@ -41,7 +41,7 @@ namespace DrawWork.Animation
         }
 
 
-        protected AnimationType _animationType;//动画类型
+        public AnimationType _animationType;//动画类型
         protected TimingAttribute _timeTimingAttribute;//时间属性
         protected AnimationAttribute _animationAttribute;//动画属性
 

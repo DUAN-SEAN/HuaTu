@@ -71,6 +71,25 @@ namespace DrawWork
                 case 9:
                     return GetCenter();
 
+       public override string GetXmlStr(SizeF scale, bool noAnimation = true)
+       {
+            string s = "";
+            s += "<devicePort";
+            if (OwnerDevice != null)
+                s += " onwerId=\"" + OwnerDevice.Id+ "\"";
+            if (ConnectDevice != null)
+                s += " connectId=\"" + ConnectDevice.Id + "\"";
+
+            s += " >" + "\r\n";
+            //添加圆形图案
+            
+            if(base.AnimationBases==null||base.AnimationBases.Count==0)
+                s += base.GetXmlStr(scale, true);
+            else
+            {
+                s += base.GetXmlStr(scale, false);
+                s += GetAnimationXML();
+            }
             }
             return base.GetHandle(handleNumber);
         }
@@ -82,6 +101,10 @@ namespace DrawWork
         }
 
 
+            s += "</devicePort>";
+            return s;
+       }
+   }
         protected override PointF GetCenter()
         {
             var point = _ownerDeviceDrawObject.GetHandle(_ownerDeviceHandle);
