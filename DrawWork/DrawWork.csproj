@@ -56,7 +56,6 @@
     <Compile Include="Command\DeleteCommand.cs" />
     <Compile Include="DeviceDrawObject\DeviceDrawObject.cs" />
     <Compile Include="DeviceDrawObject\WireConnectLineDrawObject.cs" />
-    <Compile Include="DeviceDrawObject\DrawConnectLine.cs" />
     <Compile Include="DeviceDrawObject\PortDrawObject.cs" />
     <Compile Include="DeviceDrawObject\SingleDisConnectorDrawObject.cs" />
     <Compile Include="DrawCircleObject.cs" />

@@ -388,6 +388,37 @@ namespace DrawWork
         public virtual void LoadFromXml(XmlTextReader reader)
         {
         }
+
+        public string GetAnimationXML()
+        {
+            string s = "";
+            if (AnimationBases == null || AnimationBases.Count == 0)
+                return s;
+            foreach (var animation in AnimationBases)
+            {
+                //TODO:暂时先不处理其他类型的动画 
+                //switch (animation._animationType)
+                //{
+                //    case AnimationType.None:
+                //        break;
+                //    case AnimationType.Animation:
+                //        break;
+                //    case AnimationType.AnimationColor:
+                //        break;
+                //    default:
+                //        throw new ArgumentOutOfRangeException();
+                //}
+                s += "<animate ";
+                s += animation.GetXmlStr();
+                s += " />";
+                s += "\r\n";
+            }
+
+
+            s += GetXmlEnd();
+            return s;
+        }
+
         /// <summary>
         /// 获取xml的结尾  例如</line>
         /// </summary>

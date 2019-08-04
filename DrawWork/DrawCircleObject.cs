@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,6 +10,8 @@ namespace DrawWork
 {
     public class DrawCircleObject:DrawRectangleObject
     {
+        private const string Tag = "circle";
+
         public float CX
         {
             get { return fixedCenter.X; }
@@ -66,6 +69,30 @@ namespace DrawWork
                 r.Height = r.Width;
             }
             
+        }
+
+        public override string GetXmlStr(SizeF scale, bool noAnimation = true)
+        {
+            string s = "<";
+            s += Tag;
+            s += GetStrStyle(scale);
+            s += " cx = \"" + CX + "\"";
+            s += " cy = \"" + CY + "\"";
+            s += " r = \"" + R + "\"";
+            s += GetTransformXML(_angle, fixedCenter);
+
+
+           
+           
+
+            s += noAnimation ? " />" : " >";
+            s += "\r\n";
+            return s;
+        }
+
+        public override string GetXmlEnd()
+        {
+            return "</circle>" + base.GetXmlEnd();
         }
     }
 }

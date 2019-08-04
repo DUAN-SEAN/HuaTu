@@ -98,16 +98,7 @@ namespace DrawWork
                 else
                 {
                     s += doj.GetXmlStr(scale, false);
-                    foreach (var animation in list)
-                    {
-                        s += "<animate ";
-                        s += animation.GetXmlStr();
-                        s += " />";
-                        s += "\r\n";
-                    }
-
-
-                    s += doj.GetXmlEnd();
+                    s += doj.GetAnimationXML();
                 }
 
 
