@@ -21,7 +21,7 @@ namespace DrawWork
         #region 字段
 
         private const string Tag = "WireConnectLine";
-
+        
         private PointF _endPoint;
         private PointF _middlePoint;
         private PointF _startPoint;
@@ -40,6 +40,7 @@ namespace DrawWork
 
         public WireConnectLineDrawObject()
         {
+            deviceType = DeviceDrawType.WireConnectLineDrawObject;
             animation已播放时间 = new Dictionary<string, float>();
             _startPoint.X = 0;
             _startPoint.Y = 0;
@@ -64,6 +65,9 @@ namespace DrawWork
 
         public WireConnectLineDrawObject(float x1, float y1, float x2, float y2)
         {
+            deviceType = DeviceDrawType.WireConnectLineDrawObject;
+
+
             animation已播放时间 = new Dictionary<string, float>();
 
             _startPoint.X = x1;
