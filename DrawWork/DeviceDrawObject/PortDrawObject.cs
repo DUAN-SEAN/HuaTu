@@ -64,12 +64,16 @@ namespace DrawWork
        
        #endregion
 
-        public override PointF GetHandle(int handleNumber)
-        {
-            switch (handleNumber)
-            {
-                case 9:
-                    return GetCenter();
+       public override PointF GetHandle(int handleNumber)
+       {
+           switch (handleNumber)
+           {
+               case 9:
+                   return GetCenter();
+                  
+           }
+           return base.GetHandle(handleNumber);
+        }
 
        public override string GetXmlStr(SizeF scale, bool noAnimation = true)
        {
@@ -90,25 +94,20 @@ namespace DrawWork
                 s += base.GetXmlStr(scale, false);
                 s += GetAnimationXML();
             }
-            }
-            return base.GetHandle(handleNumber);
-        }
-
-        public override void Update()
-        {
-            rectangle.X = _ownerDeviceDrawObject.GetHandle(_ownerDeviceHandle).X - rectangle.Width / 2;
-            rectangle.Y = _ownerDeviceDrawObject.GetHandle(_ownerDeviceHandle).Y - rectangle.Height / 2;
-        }
-
-
+            
             s += "</devicePort>";
             return s;
        }
-   }
-        protected override PointF GetCenter()
-        {
-            var point = _ownerDeviceDrawObject.GetHandle(_ownerDeviceHandle);
-            return new PointF(point.X , point.Y);
-        }
+       protected override PointF GetCenter()
+       {
+           var point = _ownerDeviceDrawObject.GetHandle(_ownerDeviceHandle);
+           return new PointF(point.X, point.Y);
+       }
+       public override void Update()
+       {
+           rectangle.X = _ownerDeviceDrawObject.GetHandle(_ownerDeviceHandle).X - rectangle.Width / 2;
+           rectangle.Y = _ownerDeviceDrawObject.GetHandle(_ownerDeviceHandle).Y - rectangle.Height / 2;
+       }
     }
+   
 }

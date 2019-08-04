@@ -497,13 +497,14 @@ namespace DrawWork
 
         private DrawObject CreateDevicePort(SVGDevicePort svge)
         {
-            PortDrawObject pdo = new PortDrawObject();
+            PortDrawObject pdo = null;
             SVGUnit child = svge.getChild();
             while (child != null)
             {
                 var o = CreateDrawObject(child) as DrawCircleObject;
 
-                pdo.Rect = o.Rect;
+                pdo = new PortDrawObject(o.Rectangle.X,o.Rectangle.Y,o.Rectangle.Width,o.Rectangle.Height);
+                
                 
 
                 child = child.getNext();

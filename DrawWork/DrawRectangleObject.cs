@@ -20,6 +20,11 @@ namespace DrawWork
 
         private const string Tag = "rect";
 
+        public RectangleF Rectangle
+        {
+            get => rectangle;
+        }
+
         protected RectangleF rectangle;
 
         #endregion 字段

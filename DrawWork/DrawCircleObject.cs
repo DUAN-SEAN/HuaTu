@@ -31,7 +31,7 @@ namespace DrawWork
 
         public override void Draw(Graphics g)
         {
-
+            
              if (hasRotation)
             {
                 fixedCenter = GetCenter();
