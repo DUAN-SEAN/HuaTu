@@ -35,7 +35,7 @@ namespace SVGHelper
             typeAnimateColor,
             typeAnimateMotion,
             typeSet,
-            typePort
+            devicePort
         };
 
 

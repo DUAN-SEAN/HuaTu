@@ -116,6 +116,11 @@ namespace SVGHelper.Base
         attrAnimMotion_Origin,
 
 
+        //device port
+
+        attrDevicePort_OnwerId,
+        attrDevicePort_ConnectId
+
 
         }
 
@@ -135,7 +140,8 @@ namespace SVGHelper.Base
         groupFont,
         groupXLink,
 
-        groupAnim
+        groupAnim,
+        groupDevice
     }
 
     /// <summary>
@@ -601,6 +607,28 @@ namespace SVGHelper.Base
         InitXLink();
 
         InitAnimation();
+        InitDevice();
+    }
+
+    private void InitDevice()
+    {
+        _AttrInfo info;
+        //Timing attribute 
+        info = new _AttrInfo();
+        info._type = _SvgAttribute.attrDevicePort_OnwerId;
+        info._group = _SvgAttributeGroup.groupDevice;
+        info._name = "onwerId";
+
+        m_mapAttrInfo.Add(info._type, info);
+
+
+        //Timing attribute 
+        info = new _AttrInfo();
+        info._type = _SvgAttribute.attrDevicePort_ConnectId;
+        info._group = _SvgAttributeGroup.groupDevice;
+        info._name = "connectId";
+
+        m_mapAttrInfo.Add(info._type, info);
     }
 
     private void InitAnimation()
