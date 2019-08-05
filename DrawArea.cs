@@ -363,7 +363,11 @@ namespace HuaTuDemo
             _graphicsList.Resize(new SizeF(1, 1), _mScale);
             _mScale = new SizeF(1, 1);
         }
-
+        /// <summary>
+        /// 保存到svg中
+        /// </summary>
+        /// <param name="sw"></param>
+        /// <returns></returns>
         public bool SaveToXml(StreamWriter sw)
         {
             try
@@ -373,7 +377,7 @@ namespace HuaTuDemo
 
                 string sXml = mSXmlDeclaration + "\r\n";
                 sXml += mSXmlDocType + "\r\n";
-                sXml += "<svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" width=\"" + _mOriginalSize.Width.ToString(CultureInfo.InvariantCulture) +
+                sXml += "<svg xmlns=\"http://www.w3.org/2000/svg\"  xmlns:xlink=\"http://www.w3.org/1999/xlink\"  xmlns:cge=\"http://www.cim.com\" version=\"1.1\" width=\"" + _mOriginalSize.Width.ToString(CultureInfo.InvariantCulture) +
                 "\" height=\"" + _mOriginalSize.Height.ToString(CultureInfo.InvariantCulture) + "\">" + "\r\n";
                 sXml += "<desc>" + Description + "</desc>" + "\r\n";
                 sXml += _graphicsList.GetXmlString(_mScale);//将每一个图形都转换为标准格式
