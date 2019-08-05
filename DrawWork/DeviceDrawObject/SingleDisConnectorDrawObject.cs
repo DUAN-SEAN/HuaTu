@@ -52,15 +52,15 @@ namespace DrawWork
             bottommid = new PointF(r.X + r.Width / 2, r.Y + r.Height - 横线);
 
             Leftpoint = new PointF(r.X, r.Y + 横线);
-            drawObjects.Add(new DrawLineObject(top.X, top.Y, topmid.X, topmid.Y));
-            drawObjects.Add(new DrawLineObject(bottom.X, bottom.Y, bottommid.X, bottommid.Y));
+            DrawObjects.Add(new DrawLineObject(top.X, top.Y, topmid.X, topmid.Y));
+            DrawObjects.Add(new DrawLineObject(bottom.X, bottom.Y, bottommid.X, bottommid.Y));
             if (Switch == 0)
             {
-                drawObjects.Add(new DrawLineObject(bottommid.X, bottommid.Y, topmid.X, topmid.Y));
+                DrawObjects.Add(new DrawLineObject(bottommid.X, bottommid.Y, topmid.X, topmid.Y));
             }
             else
             {
-                drawObjects.Add(new DrawLineObject(bottommid.X, bottommid.Y, Leftpoint.X, Leftpoint.Y));
+                DrawObjects.Add(new DrawLineObject(bottommid.X, bottommid.Y, Leftpoint.X, Leftpoint.Y));
             }
 
             Initialize();//设置缩放比例
@@ -89,18 +89,18 @@ namespace DrawWork
 
             Leftpoint = new PointF(r.X, r.Y + 横线);
 
-            drawObjects.Add(new DrawLineObject(top.X,top.Y,topmid.X,topmid.Y));
-            drawObjects.Add(new DrawLineObject(topleft.X, topleft.Y, topright.X, topright.Y));
-            drawObjects.Add(new DrawLineObject(bottom.X, bottom.Y, bottommid.X, bottommid.Y));
+            DrawObjects.Add(new DrawLineObject(top.X,top.Y,topmid.X,topmid.Y));
+            DrawObjects.Add(new DrawLineObject(topleft.X, topleft.Y, topright.X, topright.Y));
+            DrawObjects.Add(new DrawLineObject(bottom.X, bottom.Y, bottommid.X, bottommid.Y));
             var animation = new Animation.Animation();
 
             if (Switch == 0)
             {
-                drawObjects.Add(new DrawLineObject(bottommid.X, bottommid.Y, topmid.X, topmid.Y));
+                DrawObjects.Add(new DrawLineObject(bottommid.X, bottommid.Y, topmid.X, topmid.Y));
             }
             else
             {
-                drawObjects.Add(new DrawLineObject(bottommid.X, bottommid.Y, Leftpoint.X, Leftpoint.Y));
+                DrawObjects.Add(new DrawLineObject(bottommid.X, bottommid.Y, Leftpoint.X, Leftpoint.Y));
             }
             Initialize();
         }
@@ -149,18 +149,18 @@ namespace DrawWork
             //第一根竖线
             top = new PointF(r.X + r.Width / 2, r.Y);
             topmid = new PointF(r.X + r.Width / 2, r.Y + 横线);
-            drawObjects[0] = new DrawLineObject(top.X, top.Y, topmid.X, topmid.Y);
+            DrawObjects[0] = new DrawLineObject(top.X, top.Y, topmid.X, topmid.Y);
             
 
             //中间横线
             topleft = new PointF(r.X + r.Width / 2 - 横线 / 2, r.Y + 横线);
             topright = new PointF(r.X + r.Width / 2 + 横线 / 2, r.Y + 横线);
-            drawObjects[1] = new DrawLineObject(topleft.X, topleft.Y, topright.X, topright.Y);
+            DrawObjects[1] = new DrawLineObject(topleft.X, topleft.Y, topright.X, topright.Y);
 
             //最后一根竖线
             bottom = new PointF(r.X + r.Width / 2, r.Y + r.Height);
             bottommid = new PointF(r.X + r.Width / 2, r.Y + r.Height - 横线);
-            drawObjects[2] = new DrawLineObject(bottom.X, bottom.Y, bottommid.X, bottommid.Y);
+            DrawObjects[2] = new DrawLineObject(bottom.X, bottom.Y, bottommid.X, bottommid.Y);
 
 
 
@@ -171,11 +171,11 @@ namespace DrawWork
             //anim.From = 0.ToString();
             //anim.To = 50.ToString();
 
-            //SetAnimation(drawObjects[2].Id.ToString(),anim);
+            //SetAnimation(DrawObjects[2].Id.ToString(),anim);
 
 
 
-            //drawObjects[2].AnimationBases.Add(anim);
+            //DrawObjects[2].AnimationBases.Add(anim);
 
 
 
@@ -183,14 +183,14 @@ namespace DrawWork
             //PointF RightPoint = new PointF(r.X + r.Width, r.Y + 横线);
             if (Switch == 0)
             {
-                drawObjects[3] = new DrawLineObject(bottommid.X, bottommid.Y, topmid.X, topmid.Y);
+                DrawObjects[3] = new DrawLineObject(bottommid.X, bottommid.Y, topmid.X, topmid.Y);
             }
             else
             {
-                drawObjects[3] = new DrawLineObject(bottommid.X, bottommid.Y, Leftpoint.X, Leftpoint.Y);
+                DrawObjects[3] = new DrawLineObject(bottommid.X, bottommid.Y, Leftpoint.X, Leftpoint.Y);
             }
 
-            foreach (var VARIABLE in drawObjects)
+            foreach (var VARIABLE in DrawObjects)
             {
                 VARIABLE.Draw(g);
             }

@@ -9,7 +9,7 @@ namespace DrawWork
 {
    public class PortDrawObject:DrawCircleObject
    {
-
+       public string deviceType = DeviceDrawType.DevicePort;//设备类型
 
        private DeviceDrawObject _ownerDeviceDrawObject;
 
@@ -74,16 +74,20 @@ namespace DrawWork
            }
            return base.GetHandle(handleNumber);
         }
-
-       public override string GetXmlStr(SizeF scale, bool noAnimation = true)
+       private string GetDeviceType()
+       {
+           return " deviceType=\"" + deviceType + "\" ";
+       }
+        public override string GetXmlStr(SizeF scale, bool noAnimation = true)
        {
             string s = "";
-            s += "<devicePort";
+            s += "<g ";
             if (OwnerDevice != null)
                 s += " onwerId=\"" + OwnerDevice.Id+ "\"";
             if (ConnectDevice != null)
                 s += " connectId=\"" + ConnectDevice.Id + "\"";
 
+            s += GetDeviceType();
             s += " >" + "\r\n";
             //添加圆形图案
             
@@ -95,7 +99,7 @@ namespace DrawWork
                 s += GetAnimationXML();
             }
             
-            s += "</devicePort>";
+            s += "</g>";
             return s;
        }
        protected override PointF GetCenter()

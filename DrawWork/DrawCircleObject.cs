@@ -15,13 +15,21 @@ namespace DrawWork
         public float CX
         {
             set { }
-            get { return fixedCenter.X; }
+            get
+            {
+                fixedCenter = GetCenter();
+                return fixedCenter.X;
+            }
         }
 
         public float CY
         {
             set { }
-            get { return fixedCenter.Y; }
+            get
+            {
+                fixedCenter = GetCenter();
+                return fixedCenter.Y;
+            }
         }
 
         public float R
