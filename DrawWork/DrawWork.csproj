@@ -72,6 +72,7 @@
     <Compile Include="DrawPolygonObject.cs" />
     <Compile Include="DrawRectangleObject.cs" />
     <Compile Include="DrawTextObject.cs" />
+    <Compile Include="NewDeviceDrawObject\DeviceDrawObjectBase.cs" />
     <Compile Include="PathCommands.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Command\SendToBackCommand.cs" />
@@ -101,5 +102,6 @@
   <ItemGroup>
     <None Include="Resources\knob.jpg" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

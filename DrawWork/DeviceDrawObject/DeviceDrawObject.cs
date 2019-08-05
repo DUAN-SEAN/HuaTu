@@ -109,6 +109,8 @@ namespace DrawWork
             string s = "";
             foreach (var doj in DrawObjects)
             {
+                if (doj == this) continue;
+
                 s += "    ";
                 //其次通过id(string)查找有无动画绑定
                 List<Animation.Animation> list = doj.AnimationBases;
