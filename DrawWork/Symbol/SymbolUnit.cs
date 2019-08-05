@@ -49,6 +49,27 @@ namespace DrawWork.Symbol
         /// 设备id与设备实体的映射
         /// </summary>
         public static Dictionary<string, SymbolUnit> _Dic;
+
+        public float X
+        {
+            get => x;
+        }
+        public float Y
+        {
+            get => y;
+        }
+        public float W
+        {
+            get => width;
+        }
+        public float H
+        {
+            get => height;
+        }
+        public string SymbolId
+        {
+            get => _symbolId;
+        }
         /// <summary>
         /// 设备类型id
         /// </summary>
@@ -70,7 +91,7 @@ namespace DrawWork.Symbol
         /// </summary>
         private float height;
 
-        private List<SVGUnit> _symbolChildSvgs;
+        public List<SVGUnit> _symbolChildSvgs;
 
 
         public SymbolUnit()
