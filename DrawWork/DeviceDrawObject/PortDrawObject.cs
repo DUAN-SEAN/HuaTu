@@ -83,9 +83,9 @@ namespace DrawWork
             string s = "";
             s += "<g ";
             if (OwnerDevice != null)
-                s += " onwerId=\"" + OwnerDevice.Id+ "\"";
+                s += " onwerId=\"" + OwnerDevice.DeviceId+ "\"";
             if (ConnectDevice != null)
-                s += " connectId=\"" + ConnectDevice.Id + "\"";
+                s += " connectId=\"" + ConnectDevice.DeviceId + "\"";
 
             s += GetDeviceType();
             s += " >" + "\r\n";

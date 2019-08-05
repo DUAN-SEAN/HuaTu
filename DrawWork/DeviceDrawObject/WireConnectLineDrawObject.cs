@@ -58,7 +58,7 @@ namespace DrawWork
                 Stroke = Color.Red
 
             });
-            drawObjects.Add(new DrawRectangleObject(_endPoint.X, _endPoint.Y, 10, 10)
+            DrawObjects.Add(new DrawRectangleObject(_endPoint.X, _endPoint.Y, 10, 10)
             {
             });
             SetWireAnimation();
@@ -87,7 +87,7 @@ namespace DrawWork
                 Stroke = Color.Red
             });
 
-            drawObjects.Add(new DrawRectangleObject(_endPoint.X, _endPoint.Y, 10, 10)
+            DrawObjects.Add(new DrawRectangleObject(_endPoint.X, _endPoint.Y, 10, 10)
             {
 
             });
@@ -242,13 +242,13 @@ namespace DrawWork
                 if(_devicestate == 0) return;
                 for (int i = 0; i < DrawObjects.Count; i++)
                 {
-                    var VARIABLE = drawObjects[i];
+                    var VARIABLE = DrawObjects[i];
                     
 
 
-                    for (int j = 0; j < drawObjects[i].AnimationBases.Count; j++)
+                    for (int j = 0; j < DrawObjects[i].AnimationBases.Count; j++)
                     {
-                        var variableAnimationBase = drawObjects[i].AnimationBases[j];
+                        var variableAnimationBase = DrawObjects[i].AnimationBases[j];
                     
                     
                         if (!animation已播放时间.TryGetValue(variableAnimationBase.AnimationAttr.AttributeName,
@@ -271,55 +271,55 @@ namespace DrawWork
                         switch (variableAnimationBase.AnimationAttr.AttributeName)
                         {
                             case "x1":
-                                if (drawObjects[i] is DrawLineObject)
+                                if (DrawObjects[i] is DrawLineObject)
                                 {
                                     float x1 = (_to - _from) * time / dur + _to;
-                                    drawObjects[i] = new DrawLineObject(x1, VARIABLE.GetHandle(1).Y,
+                                    DrawObjects[i] = new DrawLineObject(x1, VARIABLE.GetHandle(1).Y,
                                         VARIABLE.GetHandle(0).X, VARIABLE.GetHandle(0).Y);
                                 }
                                 break;
                             case "x2":
-                                if (drawObjects[i] is DrawLineObject)
+                                if (DrawObjects[i] is DrawLineObject)
                                 {
                                     float x2 = (_to - _from) * time / dur + _to;
-                                    drawObjects[i] = new DrawLineObject(VARIABLE.GetHandle(1).X, VARIABLE.GetHandle(1).Y,
+                                    DrawObjects[i] = new DrawLineObject(VARIABLE.GetHandle(1).X, VARIABLE.GetHandle(1).Y,
                                         x2, VARIABLE.GetHandle(0).Y);
                                 }
 
                                 break;
                             case "y1":
-                                if (drawObjects[i] is DrawLineObject)
+                                if (DrawObjects[i] is DrawLineObject)
                                 {
                                     float y1 = (_to - _from) * time / dur + _to;
-                                    drawObjects[i] = new DrawLineObject(VARIABLE.GetHandle(1).X, y1,
+                                    DrawObjects[i] = new DrawLineObject(VARIABLE.GetHandle(1).X, y1,
                                         VARIABLE.GetHandle(0).X, VARIABLE.GetHandle(0).Y);
                                 }
 
                                 break;
                             case "y2":
-                                if (drawObjects[i] is DrawLineObject)
+                                if (DrawObjects[i] is DrawLineObject)
                                 {
                                     float y2 = (_to - _from) * time / dur + _from;
-                                    drawObjects[i] = new DrawLineObject(drawObjects[i].GetHandle(1).X, drawObjects[i].GetHandle(1).Y,
-                                        drawObjects[i].GetHandle(0).X, y2);
+                                    DrawObjects[i] = new DrawLineObject(DrawObjects[i].GetHandle(1).X, DrawObjects[i].GetHandle(1).Y,
+                                        DrawObjects[i].GetHandle(0).X, y2);
                                 }
 
                                 break;
                             case "pointX":
-                                if (drawObjects[i] is DrawRectangleObject)
+                                if (DrawObjects[i] is DrawRectangleObject)
                                 {
-                                    var rect = (DrawRectangleObject)drawObjects[i];
+                                    var rect = (DrawRectangleObject)DrawObjects[i];
                                     float x = (_to - _from) * time / dur + _from;
 
-                                    drawObjects[i] = new DrawRectangleObject(x, rect.Rectangle.Y, rect.Rectangle.Width,
+                                    DrawObjects[i] = new DrawRectangleObject(x, rect.Rectangle.Y, rect.Rectangle.Width,
                                         rect.Rect.Height);
                                 }
                                 break;
                             case "pointY":
-                                if (drawObjects[i] is DrawRectangleObject)
+                                if (DrawObjects[i] is DrawRectangleObject)
                                 {
                                     float y2 = (_to - _from) * time / dur + _to;
-                                    drawObjects[i] = new DrawLineObject(VARIABLE.GetHandle(1).X, VARIABLE.GetHandle(1).Y,
+                                    DrawObjects[i] = new DrawLineObject(VARIABLE.GetHandle(1).X, VARIABLE.GetHandle(1).Y,
                                         VARIABLE.GetHandle(0).X, y2);
                                 }
 
@@ -493,41 +493,41 @@ namespace DrawWork
         /// </summary>
         protected void SetWireAnimation()
         {
-            drawObjects[0].AnimationBases.Clear();
+            DrawObjects[0].AnimationBases.Clear();
             var linex1 = new Animation.Animation();
             linex1.AnimationAttr.AttributeName = "x1";
             linex1.TimingAttr.Dur = 20.ToString();
             linex1.From = _startPoint.X.ToString();
             linex1.To = _middlePoint.X.ToString();
-            SetAnimation(drawObjects[0].Id.ToString(), linex1);
+            SetAnimation(DrawObjects[0].Id.ToString(), linex1);
             
             var linex2 = new Animation.Animation();
             linex2.AnimationAttr.AttributeName = "x2";
             linex2.TimingAttr.Dur = 20.ToString();
             linex2.From = ((_middlePoint.X - _startPoint.X) / 4 + _startPoint.X).ToString();
             linex2.To = _middlePoint.X.ToString();
-            SetAnimation(drawObjects[0].Id.ToString(), linex2);
+            SetAnimation(DrawObjects[0].Id.ToString(), linex2);
 
             var liney1 = new Animation.Animation();
             liney1.AnimationAttr.AttributeName = "y1";
             liney1.TimingAttr.Dur = 20.ToString();
             liney1.From = _startPoint.Y.ToString();
             liney1.To = _middlePoint.Y.ToString();
-            SetAnimation(drawObjects[0].Id.ToString(), liney1);
+            SetAnimation(DrawObjects[0].Id.ToString(), liney1);
 
             var pointx = new Animation.Animation();
             pointx.AnimationAttr.AttributeName = "pointX";
             pointx.TimingAttr.Dur = 20.ToString();
             pointx.From = _middlePoint.X.ToString();
             pointx.To = _endPoint.Y.ToString();
-            SetAnimation(drawObjects[1].Id.ToString(), pointx);
+            SetAnimation(DrawObjects[1].Id.ToString(), pointx);
 
             var liney2 = new Animation.Animation();
             liney2.AnimationAttr.AttributeName = "y2";
             liney2.TimingAttr.Dur = 20.ToString();
             liney2.From = ((_middlePoint.Y - _startPoint.Y) / 4 + _startPoint.Y).ToString();
             liney2.To = _middlePoint.Y.ToString();
-            SetAnimation(drawObjects[0].Id.ToString(), liney2);
+            SetAnimation(DrawObjects[0].Id.ToString(), liney2);
 
             var color = new Animation.Animation()
             {

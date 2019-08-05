@@ -197,7 +197,10 @@ namespace DrawWork
             set { _devicestate = value; }
             get { return _devicestate; }
         }
-
+        public string DeviceId
+        {
+            get => _deviceID;
+        }
 
         public List<PortDrawObject> PortDrawObjects => portDrawObjects;
 
