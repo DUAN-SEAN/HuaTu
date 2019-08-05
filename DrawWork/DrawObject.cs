@@ -396,6 +396,7 @@ namespace DrawWork
                 return s;
             foreach (var animation in AnimationBases)
             {
+                s += "    ";
                 //TODO:暂时先不处理其他类型的动画 
                 //switch (animation._animationType)
                 //{

@@ -14,6 +14,9 @@ namespace DrawWork
 
         public const string WireConnectLineDrawObject = "电线01";
 
+
+        public const string DevicePort = "端口01";
+
     }
 
 
@@ -23,7 +26,7 @@ namespace DrawWork
         private const string Tag = "device";
         #region 字段
 
-        public List<DrawObject> drawObjects;//组成设备的最小图形，每个设备图元都是固定的
+        public List<DrawObject> DrawObjects;//组成设备的最小图形，每个设备图元都是固定的
 
         public string deviceType;//设备类型
 
@@ -46,7 +49,7 @@ namespace DrawWork
         public DeviceDrawObject()
         {
             handledevice = new Dictionary<int, List<DeviceDrawObject>>();
-            drawObjects = new List<DrawObject>();
+            DrawObjects = new List<DrawObject>();
             portDrawObjects = new List<PortDrawObject>();
         }
         
@@ -82,7 +85,7 @@ namespace DrawWork
                 }
             }
             //由于不在list中 所以由图元驱动图形的update
-            foreach (var doj in drawObjects)
+            foreach (var doj in DrawObjects)
             {
                 doj.Update();
             }
@@ -91,7 +94,7 @@ namespace DrawWork
         //获取设备id
         public virtual string GetDeviceId()
         {
-            return "id=\""+_deviceID+"+\"";
+            return "id=\""+_deviceID+"\"";
         }
         /// <summary>
         /// 获取图元下所有简单图形的动画状态
@@ -102,8 +105,9 @@ namespace DrawWork
 
             //获取所有基本图形的type 和 id 例如 rect|line  id="1"
             string s = "";
-            foreach (var doj in drawObjects)
+            foreach (var doj in DrawObjects)
             {
+                s += "    ";
                 //其次通过id(string)查找有无动画绑定
                 List<Animation.Animation> list = doj.AnimationBases;
                 if (list == null || list.Count == 0)
@@ -133,7 +137,7 @@ namespace DrawWork
             //  <rect x="1" y="1" width="1198" height="398"
             //		style="fill:none; stroke:blue"/>
 
-            string s = "<device ";
+            string s = "<g ";
             s += GetDeviceId();//获取设备id
             s += GetTransformXML(_angle, fixedCenter);//获取旋转
             s += GetDeviceType();
@@ -144,7 +148,8 @@ namespace DrawWork
 
 
 
-            s += "</device>";
+            s += "</g>";
+            s += "\r\n";
 
 
 
@@ -166,7 +171,7 @@ namespace DrawWork
            
 
 
-            foreach (var doj in drawObjects)
+            foreach (var doj in DrawObjects)
             {
                 if (id == doj.Id.ToString())
                 {

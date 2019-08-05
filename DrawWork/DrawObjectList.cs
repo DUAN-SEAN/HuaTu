@@ -560,7 +560,7 @@ namespace DrawWork
             SVGUnit child = svg.getChild();
             while (child != null)
             {
-                ddo.drawObjects.Add(CreateDrawObject(child));
+                ddo.DrawObjects.Add(CreateDrawObject(child));
             }
             return ddo;
 
