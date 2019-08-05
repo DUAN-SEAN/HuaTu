@@ -25,18 +25,25 @@ namespace DrawWork
         /// </summary>
         public List<Object> models;
 
+        /// <summary>
+        /// 设备实体Id
+        /// </summary>
+        public string _EntityId;
         public DeviceDrawObjectBase()
         {
             SetRectangleF(0, 0, 1, 1);
             Initialize();
         }
 
-        public DeviceDrawObjectBase(float x, float y, float width, float height)
+        public DeviceDrawObjectBase(float x, float y, float width, float height,string entityId,List<DrawObject> drawobjs,List<DeviceDrawObjectBase> deviceDrawObjectBases)
         {
             rectangle.X = x;
             rectangle.Y = y;
             rectangle.Width = width;
             rectangle.Height = height;
+            _EntityId = entityId;
+            drawObjects = drawobjs;
+            this.deviceDrawObjectBases = deviceDrawObjectBases;
             Initialize();
         }
         /// <summary>
@@ -81,6 +88,21 @@ namespace DrawWork
 
             
 
+
+        }
+
+        /// <summary>
+        /// 获取设备实体的xm
+        /// 1 获取内部引用的symbolUnit，检测是否与定义的相同，如果不相同则生成新的unit 以及新的设备类型
+        /// 2 获取内部元数据，定义metaData
+        /// </summary>
+        /// <param name="scale"></param>
+        /// <param name="noAnimation"></param>
+        /// <returns></returns>
+        public override string GetXmlStr(SizeF scale, bool noAnimation = true)
+        {
+            string s = "";
+            return s;
 
         }
     }
