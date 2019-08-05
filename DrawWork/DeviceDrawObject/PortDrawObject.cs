@@ -11,11 +11,11 @@ namespace DrawWork
    {
        public string deviceType = DeviceDrawType.DevicePort;//设备类型
 
-       private DrawObject _ownerDeviceDrawObject;
+       private DeviceDrawObject _ownerDeviceDrawObject;
 
        private int _ownerDeviceHandle;
 
-       private DrawObject _connectDeviceDrawObject;
+       private DeviceDrawObject _connectDeviceDrawObject;
 
 
        public PortDrawObject(float x,float y)
@@ -44,7 +44,7 @@ namespace DrawWork
 
        #region 设备设置
 
-       public DrawObject OwnerDevice
+       public DeviceDrawObject OwnerDevice
        {
            set => _ownerDeviceDrawObject = value;
            get => _ownerDeviceDrawObject;
@@ -56,7 +56,7 @@ namespace DrawWork
            get => _ownerDeviceHandle;
        }
 
-       public DrawObject ConnectDevice
+       public DeviceDrawObject ConnectDevice
        {
            set => _connectDeviceDrawObject = value;
            get => _connectDeviceDrawObject;

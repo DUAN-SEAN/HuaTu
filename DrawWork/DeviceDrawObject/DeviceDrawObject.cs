@@ -51,6 +51,8 @@ namespace DrawWork
             handledevice = new Dictionary<int, List<DeviceDrawObject>>();
             DrawObjects = new List<DrawObject>();
             portDrawObjects = new List<PortDrawObject>();
+
+            _deviceID = DateTime.Now.Ticks.ToString();
         }
         
 

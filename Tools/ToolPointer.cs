@@ -381,9 +381,9 @@ namespace HuaTuDemo
                                 {
                                     port = new PortDrawObject(e.X, e.Y)
                                     {
-                                        ConnectDevice = _resizedObject,
+                                        ConnectDevice = _resizedObject as DeviceDrawObject,
                                         //OwnerDeviceHandle = hit,
-                                        OwnerDevice = drawArea.GraphicsList[i]
+                                        OwnerDevice = drawArea.GraphicsList[i] as DeviceDrawObject
                                     };
                                     port.OwnerDeviceHandle = hit;
                                     ((DeviceDrawObject)drawArea.GraphicsList[i]).PortDrawObjects.Add(port);
