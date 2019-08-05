@@ -122,8 +122,12 @@ namespace SVGHelper.Base
         //device port
 
         attrDevicePort_OnwerId,
-        attrDevicePort_ConnectId
+        attrDevicePort_ConnectId,
 
+        attrSymbol_viewBox,
+
+        //use
+        attrSysmbol_terminal_index
 
         }
 
@@ -144,7 +148,10 @@ namespace SVGHelper.Base
         groupXLink,
 
         groupAnim,
-        groupDevice
+        groupDevice,
+
+        groupSymbol,
+        use
     }
 
     /// <summary>
@@ -638,6 +645,20 @@ namespace SVGHelper.Base
         info._type = _SvgAttribute.attrDevice_Type;
         info._group = _SvgAttributeGroup.groupDevice;
         info._name = "deviceType";
+
+        m_mapAttrInfo.Add(info._type, info);
+
+        info = new _AttrInfo();
+        info._type = _SvgAttribute.attrSymbol_viewBox;
+        info._group = _SvgAttributeGroup.groupSymbol;
+        info._name = "viewBox";
+
+        m_mapAttrInfo.Add(info._type, info);
+
+        info = new _AttrInfo();
+        info._type = _SvgAttribute.attrSysmbol_terminal_index;
+        info._group = _SvgAttributeGroup.use;
+        info._name = "terminal-index";
 
         m_mapAttrInfo.Add(info._type, info);
         }

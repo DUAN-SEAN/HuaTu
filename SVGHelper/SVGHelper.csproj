@@ -54,6 +54,9 @@
     <Compile Include="Base\SVGWord.cs" />
     <Compile Include="Device\SVGDevice.cs" />
     <Compile Include="Device\SVGDevicePort.cs" />
+    <Compile Include="Fix\SVGDef.cs" />
+    <Compile Include="Fix\SVGSymbol.cs" />
+    <Compile Include="Fix\SVGUse.cs" />
     <Compile Include="SVGCircle.cs" />
     <Compile Include="SVGEllipse.cs" />
     <Compile Include="SVGImage.cs" />

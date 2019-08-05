@@ -54,6 +54,7 @@
     <Compile Include="Command\CreateCommand.cs" />
     <Compile Include="Command\CutCommand.cs" />
     <Compile Include="Command\DeleteCommand.cs" />
+    <Compile Include="DeviceBase.cs" />
     <Compile Include="DeviceDrawObject\DeviceDrawObject.cs" />
     <Compile Include="DeviceDrawObject\WireConnectLineDrawObject.cs" />
     <Compile Include="DeviceDrawObject\PortDrawObject.cs" />
@@ -81,6 +82,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Symbol\SVGDrawFactory.cs" />
+    <Compile Include="Symbol\SVGFactory.cs" />
+    <Compile Include="Symbol\SymbolUnit.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SVGHelper\SVGHelper.csproj">

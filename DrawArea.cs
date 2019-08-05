@@ -15,6 +15,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
+using DrawWork.Symbol;
 
 namespace HuaTuDemo
 {
@@ -330,7 +331,18 @@ namespace HuaTuDemo
             SVGUnit ele = root.getChild();
             _mScale = new SizeF(1, 1);
             if (ele != null)
-                _graphicsList.AddFromSvg(ele);
+            {
+
+                //1 收集symbol获取svg上的设备
+                //2 从svg元数据中收集symbol之间的关系
+                //3 将所有use的设备实体生成
+                //4 绘制list集合将图素绘制出来
+                SVGFactory.CreateProjectFromXML(ele);
+
+
+                //_graphicsList.AddFromSvg(ele);
+            }
+
 
             Description = _graphicsList.Description;
             return true;
