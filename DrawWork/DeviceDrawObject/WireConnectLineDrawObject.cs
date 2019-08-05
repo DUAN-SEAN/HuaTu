@@ -62,7 +62,7 @@ namespace DrawWork
             {
             });
 
-            drawObjects.Add(this);
+            DrawObjects.Add(this);
             SetWireAnimation();
 
             Initialize();
@@ -93,6 +93,7 @@ namespace DrawWork
             {
 
             });
+            DrawObjects.Add(new DrawCircleObject());
 
             SetWireAnimation();
 
@@ -320,7 +321,7 @@ namespace DrawWork
                             case "pointY":
                                 if (DrawObjects[i] is DrawRectangleObject)
                                 {
-                                    float y2 = (_to - _from) * time / dur + _to;
+                                    float y2 = (_to - _from) * time / dur + _from;
                                     DrawObjects[i] = new DrawLineObject(VARIABLE.GetHandle(1).X, VARIABLE.GetHandle(1).Y,
                                         VARIABLE.GetHandle(0).X, y2);
                                 }
@@ -336,6 +337,7 @@ namespace DrawWork
 
                 foreach (var drawObject in DrawObjects)
                 {
+                    if(drawObject == this) continue;
                     drawObject.Draw(g);
                 }
 
@@ -495,27 +497,30 @@ namespace DrawWork
         /// </summary>
         protected void SetWireAnimation()
         {
-            DrawObjects[0].AnimationBases.Clear();
-            var linex1 = new Animation.Animation();
-            linex1.AnimationAttr.AttributeName = "x1";
-            linex1.TimingAttr.Dur = 20.ToString();
-            linex1.From = _startPoint.X.ToString();
-            linex1.To = _middlePoint.X.ToString();
-            SetAnimation(DrawObjects[0].Id.ToString(), linex1);
+            foreach (var VARIABLE in DrawObjects)
+            {
+                VARIABLE.AnimationBases.Clear();
+            }
+            //var linex1 = new Animation.Animation();
+            //linex1.AnimationAttr.AttributeName = "x1";
+            //linex1.TimingAttr.Dur = 20.ToString();
+            //linex1.From = _startPoint.X.ToString();
+            //linex1.To = _middlePoint.X.ToString();
+            //SetAnimation(DrawObjects[0].Id.ToString(), linex1);
             
-            var linex2 = new Animation.Animation();
-            linex2.AnimationAttr.AttributeName = "x2";
-            linex2.TimingAttr.Dur = 20.ToString();
-            linex2.From = ((_middlePoint.X - _startPoint.X) / 4 + _startPoint.X).ToString();
-            linex2.To = _middlePoint.X.ToString();
-            SetAnimation(DrawObjects[0].Id.ToString(), linex2);
+            //var linex2 = new Animation.Animation();
+            //linex2.AnimationAttr.AttributeName = "x2";
+            //linex2.TimingAttr.Dur = 20.ToString();
+            //linex2.From = ((_middlePoint.X - _startPoint.X) / 4 + _startPoint.X).ToString();
+            //linex2.To = _middlePoint.X.ToString();
+            //SetAnimation(DrawObjects[0].Id.ToString(), linex2);
 
-            var liney1 = new Animation.Animation();
-            liney1.AnimationAttr.AttributeName = "y1";
-            liney1.TimingAttr.Dur = 20.ToString();
-            liney1.From = _startPoint.Y.ToString();
-            liney1.To = _middlePoint.Y.ToString();
-            SetAnimation(DrawObjects[0].Id.ToString(), liney1);
+            //var liney1 = new Animation.Animation();
+            //liney1.AnimationAttr.AttributeName = "y1";
+            //liney1.TimingAttr.Dur = 20.ToString();
+            //liney1.From = _startPoint.Y.ToString();
+            //liney1.To = _middlePoint.Y.ToString();
+            //SetAnimation(DrawObjects[0].Id.ToString(), liney1);
 
             var pointx = new Animation.Animation();
             pointx.AnimationAttr.AttributeName = "pointX";
@@ -524,12 +529,18 @@ namespace DrawWork
             pointx.To = _endPoint.Y.ToString();
             SetAnimation(DrawObjects[1].Id.ToString(), pointx);
 
-            var liney2 = new Animation.Animation();
-            liney2.AnimationAttr.AttributeName = "y2";
-            liney2.TimingAttr.Dur = 20.ToString();
-            liney2.From = ((_middlePoint.Y - _startPoint.Y) / 4 + _startPoint.Y).ToString();
-            liney2.To = _middlePoint.Y.ToString();
-            SetAnimation(DrawObjects[0].Id.ToString(), liney2);
+            var pointy = new Animation.Animation();
+            pointy.AnimationAttr.AttributeName = "pointY";
+            pointy.TimingAttr.Dur = 20.ToString();
+            pointy.From = _middlePoint.Y.ToString();
+            pointy.To = _endPoint.Y.ToString();
+            SetAnimation(DrawObjects[1].Id.ToString(), pointy);
+            //var liney2 = new Animation.Animation();
+            //liney2.AnimationAttr.AttributeName = "y2";
+            //liney2.TimingAttr.Dur = 20.ToString();
+            //liney2.From = ((_middlePoint.Y - _startPoint.Y) / 4 + _startPoint.Y).ToString();
+            //liney2.To = _middlePoint.Y.ToString();
+            //SetAnimation(DrawObjects[0].Id.ToString(), liney2);
 
             var color = new Animation.Animation()
             {
@@ -538,7 +549,7 @@ namespace DrawWork
             color.From = Color.Red.ToString();
             color.TimingAttr.Dur = 5.ToString();
             color.AnimationAttr.AttributeName = "color";
-            SetAnimation(drawObjects[2].Id.ToString(), color);
+            SetAnimation(DrawObjects[2].Id.ToString(), color);
 
         }
 
