@@ -61,6 +61,8 @@ namespace DrawWork
             DrawObjects.Add(new DrawRectangleObject(_endPoint.X, _endPoint.Y, 10, 10)
             {
             });
+
+            drawObjects.Add(this);
             SetWireAnimation();
 
             Initialize();
@@ -536,7 +538,7 @@ namespace DrawWork
             color.From = Color.Red.ToString();
             color.TimingAttr.Dur = 5.ToString();
             color.AnimationAttr.AttributeName = "color";
-            AnimationBases.Add(color);
+            SetAnimation(drawObjects[2].Id.ToString(), color);
 
         }
 
