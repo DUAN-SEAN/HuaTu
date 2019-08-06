@@ -69,29 +69,38 @@ namespace DrawWork
 
         public override void Update()
         {
-            for (int i = 0; i < drawObjects.Count; i++)
+            if (drawObjects != null)
             {
-                drawObjects[i].Update();
+                for (int i = 0; i < drawObjects.Count; i++)
+                {
+                    drawObjects[i].Update();
+                }
             }
 
-            for (int i = 0; i < deviceDrawObjectBases.Count; i++)
+
+            if (deviceDrawObjectBases != null)
             {
-                deviceDrawObjectBases[i].Update();
+
+                for (int i = 0; i < deviceDrawObjectBases.Count; i++)
+                {
+                    deviceDrawObjectBases[i].Update();
+                }
             }
 
         }
 
         public override void Draw(Graphics g)
         {
-            for (int i = 0; i < drawObjects.Count; i++)
-            {
-                drawObjects[i].Draw(g);
-            }
-
-            for (int i = 0; i < deviceDrawObjectBases.Count; i++)
-            {
-                deviceDrawObjectBases[i].Draw(g);
-            }
+            if(drawObjects!=null)
+                for (int i = 0; i < drawObjects.Count; i++)
+                {
+                    drawObjects[i].Draw(g);
+                }
+            if(deviceDrawObjectBases!=null)
+                for (int i = 0; i < deviceDrawObjectBases.Count; i++)
+                {
+                    deviceDrawObjectBases[i].Draw(g);
+                }
 
             
 

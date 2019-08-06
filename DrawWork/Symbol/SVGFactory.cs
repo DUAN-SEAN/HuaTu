@@ -73,6 +73,61 @@ namespace DrawWork.Symbol
             SymbolUnit.Create(svg);
         }
 
+        /// <summary>
+        /// 手动
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="w"></param>
+        /// <param name="h"></param>
+        /// <param name="id"></param>
+        /// <param name="entityId"></param>
+        /// <returns></returns>
+        public static DeviceDrawObjectBase CreateDeviceDrawObjectBase(float x, float y, float w, float h, string id,string entityId)
+        {
+
+            //获取每一个实例化的设备
+            DeviceDrawObjectBase vBase = null;
+            List<DeviceDrawObjectBase> deviceDrawObjectBases = null;
+            List<DrawObject> drawObjects = new List<DrawObject>();
+        
+
+            var symbol = id;//设备定义引用 指明使用的哪一种设备类型
+            SymbolUnit._Dic.TryGetValue(symbol, out SymbolUnit value);
+            if (value != null)
+            {
+                foreach (var unit in value._symbolChildSvgs)
+                {
+                    if (unit.getElementType() == SVGUnit.SVGUnitType.use)
+                    {
+
+                        var symbolChild = SymbolUnit._Dic[unit.Id];
+                        var entityLInk = CreateDeviceDrawObjectBase(unit as SVGUse, entityId);
+                        if (deviceDrawObjectBases == null) deviceDrawObjectBases = new List<DeviceDrawObjectBase>();
+                            deviceDrawObjectBases.Add(entityLInk);
+                    }
+                    else
+                    {
+                        var o = SVGDrawFactory.CreateDrawObject(unit);
+                        if (o != null)
+                        {
+                            drawObjects.Add(o);
+                        }
+                    }
+                }
+                vBase = new DeviceDrawObjectBase(x, y, w, h, entityId, drawObjects, deviceDrawObjectBases, value.SymbolId);
+
+            }
+
+
+
+            
+
+            return vBase;
+
+        }
+
+
         public static DeviceDrawObjectBase CreateDeviceDrawObjectBase(SVGUse use,string entityId)
         {
             //获取每一个实例化的设备

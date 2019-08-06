@@ -40,6 +40,8 @@ namespace HuaTuDemo.Tools.ToolForm
         }
         public void LoadModel(List<SymbolUnit> list)
         {
+            this.flowLayoutPanel1.Controls.Clear();
+
             foreach (var unit in list)
             {
                 AddRadioButton(unit.SymbolId);
