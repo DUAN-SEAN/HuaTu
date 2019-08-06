@@ -48,7 +48,7 @@ namespace DrawWork.Symbol
         /// <summary>
         /// 设备id与设备实体的映射
         /// </summary>
-        public static Dictionary<string, SymbolUnit> _Dic;
+        public static Dictionary<string, SymbolUnit> _Dic = new Dictionary<string, SymbolUnit>();
 
         public float X
         {

@@ -153,6 +153,7 @@ namespace HuaTuDemo
             XmlTextReader reader = null;
             try
             {
+                
                 reader = new XmlTextReader(fileName);//从本地读取xml文件
                 drawArea.LoadFromXml(reader);
                 drawArea.FileName = fileName;

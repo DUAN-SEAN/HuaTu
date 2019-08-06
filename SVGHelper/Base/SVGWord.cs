@@ -4,10 +4,12 @@ using System.Collections.Generic;
 using System.Diagnostics.Eventing.Reader;
 using System.IO;
 using System.Linq;
+using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
+using SVGHelper.Fix;
 
 namespace SVGHelper.Base
 {
@@ -215,7 +217,18 @@ namespace SVGHelper.Base
                             case XmlNodeType.EndElement:
                                 if (eleParent != null)
                                 {
+
                                     eleParent = eleParent.getParent();
+                                    eleLast = null;
+                                    if (eleParent != null)
+                                    {
+                                        var templast = eleParent.getChild();
+                                        while (templast != null)
+                                        {
+                                            eleLast = templast;
+                                            templast = templast.getNext();
+                                        }
+                                    }
                                 }
 
                                 break;
@@ -498,6 +511,15 @@ namespace SVGHelper.Base
             else if (sName == "devicePort")
             {
                 eleToReturn = AddDevicePort(parent, ref last);
+            }else if (sName == "defs")
+            {
+                eleToReturn = AddDefs(parent, ref last);
+            }else if (sName == "symbol")
+            {
+                eleToReturn = AddSymbols(parent, ref last);
+            }else if (sName == "use")
+            {
+                eleToReturn = AddUse(parent, ref last);
             }
             else
             {
@@ -508,6 +530,30 @@ namespace SVGHelper.Base
             }
 
             return eleToReturn;
+        }
+
+        private SVGUnit AddUse(SVGUnit parent, ref SVGUnit last)
+        {
+            SVGUse svgUse = new SVGUse(this);
+            AddElement(parent, svgUse, ref last);
+            return svgUse;
+
+        }
+
+        private SVGUnit AddSymbols(SVGUnit parent, ref SVGUnit last)
+        {
+            SVGSymbol svgSymbol = new SVGSymbol(this);
+            AddElement(parent, svgSymbol, ref last);
+            return svgSymbol;
+
+        }
+
+        private SVGUnit AddDefs(SVGUnit parent, ref SVGUnit last)
+        {
+            SVGDef svgDef = new SVGDef(this);
+            AddElement(parent, svgDef, ref last);
+            return svgDef;
+
         }
 
         private SVGUnit AddDevicePort(SVGUnit parent, ref SVGUnit last)

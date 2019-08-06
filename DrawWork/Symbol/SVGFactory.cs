@@ -66,14 +66,14 @@ namespace DrawWork.Symbol
             List<DrawObject> drawObjects = new List<DrawObject>();
             if (use != null)
             {
-                string id = use.Id;//获取实体Id
+                string id = use.HRef;//获取实体Id
                 var x = float.Parse(use.X);
                 var y = float.Parse(use.Y);
                 var w = float.Parse(use.Width);
                 var h = float.Parse(use.Height);
-                var symbol = use.HRef;//设备定义引用 指明使用的哪一种设备类型
+                var symbol = use.HRef.Substring(1);//设备定义引用 指明使用的哪一种设备类型
 
-                SymbolUnit._Dic.TryGetValue(id, out SymbolUnit value);
+                SymbolUnit._Dic.TryGetValue(symbol, out SymbolUnit value);
                 if (value != null)
                 {
                     foreach (var unit in value._symbolChildSvgs)
