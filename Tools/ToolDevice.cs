@@ -36,6 +36,13 @@ namespace HuaTuDemo.Tools
         public override void OnMouseUp(DrawArea drawArea, MouseEventArgs e)
         {
             base.OnMouseUp(drawArea, e);
+
+
+            //drawArea.Capture = false;
+            //drawArea.Refresh();
+
+            //IsComplete = true;
+
         }
     }
 }

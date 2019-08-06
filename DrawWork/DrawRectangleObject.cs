@@ -78,7 +78,7 @@ namespace DrawWork
             }
         }
 
-        protected float Height
+        public float Height
         {
             get
             {
@@ -102,7 +102,7 @@ namespace DrawWork
             }
         }
 
-        protected float Width
+        public float Width
         {
             get
             {
@@ -600,7 +600,7 @@ namespace DrawWork
         /// 获取当前中心点
         /// </summary>
         /// <returns></returns>
-        protected virtual PointF GetCenter()
+        public virtual PointF GetCenter()
         {
             float x, xCenter, yCenter;
 

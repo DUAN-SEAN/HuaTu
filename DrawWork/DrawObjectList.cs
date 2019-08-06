@@ -483,10 +483,10 @@ namespace DrawWork
                 //case SVGUnit.SVGUnitType.device:
                 //    o = CreateDevice((SVGDevice)svge);
                     //break;
-                case SVGUnit.SVGUnitType.devicePort:
-                    o = CreateDevicePort((SVGDevicePort) svge);
+                //case SVGUnit.SVGUnitType.devicePort:
+                //    o = CreateDevicePort((SVGDevicePort) svge);
 
-                    break;
+                //    break;
                 default:
                     break;
             }
@@ -495,24 +495,24 @@ namespace DrawWork
             return o;
         }
 
-        private DrawObject CreateDevicePort(SVGDevicePort svge)
-        {
-            PortDrawObject pdo = null;
-            SVGUnit child = svge.getChild();
-            while (child != null)
-            {
-                var o = CreateDrawObject(child) as DrawCircleObject;
+        //private DrawObject CreateDevicePort(SVGDevicePort svge)
+        //{
+        //    PortDrawObject pdo = null;
+        //    SVGUnit child = svge.getChild();
+        //    while (child != null)
+        //    {
+        //        var o = CreateDrawObject(child) as DrawCircleObject;
 
-                pdo = new PortDrawObject(o.Rectangle.X,o.Rectangle.Y,o.Rectangle.Width,o.Rectangle.Height);
+        //        pdo = new PortDrawObject(o.Rectangle.X,o.Rectangle.Y,o.Rectangle.Width,o.Rectangle.Height);
                 
                 
 
-                child = child.getNext();
-            }
+        //        child = child.getNext();
+        //    }
 
-            return pdo;
+        //    return pdo;
 
-        }
+        //}
 
         private void CreateAnimation(DrawObject drawObject, SVGUnit svge)
         {

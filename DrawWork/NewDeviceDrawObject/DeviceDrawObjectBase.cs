@@ -80,7 +80,6 @@ namespace DrawWork
 
             if (deviceDrawObjectBases != null)
             {
-
                 for (int i = 0; i < deviceDrawObjectBases.Count; i++)
                 {
                     deviceDrawObjectBases[i].Update();
@@ -92,11 +91,12 @@ namespace DrawWork
         public override void Rotate(float angle)
         {
             base.Rotate(angle);
+
             if (drawObjects != null)
             {
                 for (int i = 0; i < drawObjects.Count; i++)
                 {
-                    drawObjects[i].Rotate(angle);
+                    drawObjects[i].Rotate(angle,GetCenter());
                 }
             }
 
@@ -106,7 +106,7 @@ namespace DrawWork
 
                 for (int i = 0; i < deviceDrawObjectBases.Count; i++)
                 {
-                    deviceDrawObjectBases[i].Rotate(angle);
+                    deviceDrawObjectBases[i].Rotate(angle,GetCenter());
                 }
             }
 
@@ -139,6 +139,37 @@ namespace DrawWork
                 for (int i = 0; i < deviceDrawObjectBases.Count; i++)
                 {
                     deviceDrawObjectBases[i].Resize(newscale, oldscale);
+                }
+        }
+
+        public override void MoveHandleTo(PointF point, int handleNumber)
+        {
+            base.MoveHandleTo(point, handleNumber);
+
+            if (drawObjects != null)
+                for (int i = 0; i < drawObjects.Count; i++)
+                {
+
+                    if (drawObjects[i] is DrawRectangleObject)
+                    {
+                        var center = GetCenter();
+                        var drawcenter = ((DrawRectangleObject) drawObjects[i]).GetCenter();
+                        var xdis = point.X - center.X;
+                        var ydis = point.Y - center.Y;
+                        var hdis = ((DrawRectangleObject)drawObjects[i]).Height / Height;
+                        var wdis = ((DrawRectangleObject)drawObjects[i]).Width / Width;
+                        drawObjects[i].MoveHandleTo(new PointF(drawcenter.X + xdis * wdis, drawcenter.Y + ydis * hdis),
+                            handleNumber);
+
+
+                    }
+
+
+                }
+            if (deviceDrawObjectBases != null)
+                for (int i = 0; i < deviceDrawObjectBases.Count; i++)
+                {
+                    deviceDrawObjectBases[i].MoveHandleTo(point, handleNumber);
                 }
         }
 
@@ -185,5 +216,13 @@ namespace DrawWork
             return s;
 
         }
+
+
+
+        #region Helper
+
+        
+
+        #endregion
     }
 }

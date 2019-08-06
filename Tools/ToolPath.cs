@@ -49,7 +49,7 @@ namespace HuaTuDemo
             //{
             //    _newPath.AddPoint(e.Location);
             //}
-            AddNewObject(drawArea, new WireConnectLineDrawObject(e.X, e.Y, e.X + 1, e.Y + 1));
+            //AddNewObject(drawArea, new WireConnectLineDrawObject(e.X, e.Y, e.X + 1, e.Y + 1));
             IsComplete = true;
         }
 
