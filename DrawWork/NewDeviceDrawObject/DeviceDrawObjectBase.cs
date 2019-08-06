@@ -89,6 +89,29 @@ namespace DrawWork
 
         }
 
+        public override void Rotate(float angle)
+        {
+            base.Rotate(angle);
+            if (drawObjects != null)
+            {
+                for (int i = 0; i < drawObjects.Count; i++)
+                {
+                    drawObjects[i].Rotate(angle);
+                }
+            }
+
+
+            if (deviceDrawObjectBases != null)
+            {
+
+                for (int i = 0; i < deviceDrawObjectBases.Count; i++)
+                {
+                    deviceDrawObjectBases[i].Rotate(angle);
+                }
+            }
+
+        }
+
         public override void Draw(Graphics g)
         {
             if(drawObjects!=null)
@@ -101,9 +124,38 @@ namespace DrawWork
                 {
                     deviceDrawObjectBases[i].Draw(g);
                 }
+        }
 
-            
+        public override void Resize(SizeF newscale, SizeF oldscale)
+        {
+            base.Resize(newscale, oldscale);
 
+            if (drawObjects != null)
+                for (int i = 0; i < drawObjects.Count; i++)
+                {
+                    drawObjects[i].Resize(newscale, oldscale);
+                }
+            if (deviceDrawObjectBases != null)
+                for (int i = 0; i < deviceDrawObjectBases.Count; i++)
+                {
+                    deviceDrawObjectBases[i].Resize(newscale, oldscale);
+                }
+        }
+
+        public override void Move(float deltaX, float deltaY)
+        {
+            base.Move(deltaX, deltaY);
+
+            if (drawObjects != null)
+                for (int i = 0; i < drawObjects.Count; i++)
+                {
+                    drawObjects[i].Move(deltaX, deltaY);
+                }
+            if (deviceDrawObjectBases != null)
+                for (int i = 0; i < deviceDrawObjectBases.Count; i++)
+                {
+                    deviceDrawObjectBases[i].Move(deltaX, deltaY);
+                }
 
         }
 

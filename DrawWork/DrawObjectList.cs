@@ -480,9 +480,9 @@ namespace DrawWork
                 case SVGUnit.SVGUnitType.typeDesc:
                     Description = ((SVGDesc)svge).Value;
                     break;
-                case SVGUnit.SVGUnitType.device:
-                    o = CreateDevice((SVGDevice)svge);
-                    break;
+                //case SVGUnit.SVGUnitType.device:
+                //    o = CreateDevice((SVGDevice)svge);
+                    //break;
                 case SVGUnit.SVGUnitType.devicePort:
                     o = CreateDevicePort((SVGDevicePort) svge);
 
@@ -532,39 +532,7 @@ namespace DrawWork
             }
         }
 
-        /// <summary>
-        /// 创建一个设备驱动
-        /// </summary>
-        /// <param name="svge"></param>
-        /// <returns></returns>
-        private DrawObject CreateDevice(SVGDevice svg)
-        {
-            DeviceDrawObject ddo = null;
 
-
-
-            switch (svg.DeviceType)
-            {
-                case DeviceDrawType.WireConnectLineDrawObject:
-                    ddo = new WireConnectLineDrawObject();
-                    break;
-                case DeviceDrawType.SingleDisConnectorDrawObject:
-                    ddo =new SingleDisConnectorDrawObject();
-
-
-                    break;
-                default:
-                    return null;
-
-            }
-            SVGUnit child = svg.getChild();
-            while (child != null)
-            {
-                ddo.DrawObjects.Add(CreateDrawObject(child));
-            }
-            return ddo;
-
-        }
 
         DrawObject CreateGroup(SVGGroup svg)
         {
