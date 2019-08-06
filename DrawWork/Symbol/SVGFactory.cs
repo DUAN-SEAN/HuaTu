@@ -38,9 +38,24 @@ namespace DrawWork.Symbol
                         SVGGroup group = svg.getChild() as SVGGroup;
                         while (group != null)
                         {
-                            SVGUse use = group.getChild() as SVGUse;
-                            var gDevice = CreateDeviceDrawObjectBase(use, group.Id);//生成一个实体
+                            var gchild =  group.getChild();
+                            switch (gchild.getElementType())
+                            {
+
+                                case SVGUnit.SVGUnitType.use:
+                                    SVGUse use = gchild as SVGUse;
+                                    var gDevice = CreateDeviceDrawObjectBase(use, group.Id);//TODO 后期添加到工作组中
+                                 
+                                    break;
+                                default:
+                                    //TODO 未编排为设备的图素集合，暂时用临时分组表示
+
+                                    //vBase = new DeviceDrawObjectBase(0f, 0f, 0f, 0f, group.Id, drawObjects, null, "");
+                                    break;
+
+                            }
                             group = group.getNext() as SVGGroup;//获取下一个
+
                         }
 
                         break;
@@ -67,10 +82,10 @@ namespace DrawWork.Symbol
             if (use != null)
             {
                 string id = use.HRef;//获取实体Id
-                var x = float.Parse(use.X);
-                var y = float.Parse(use.Y);
-                var w = float.Parse(use.Width);
-                var h = float.Parse(use.Height);
+                var x = string.IsNullOrEmpty(use.X)?0f:float.Parse(use.X);
+                var y = string.IsNullOrEmpty(use.Y) ? 0f : float.Parse(use.Y);
+                var w = string.IsNullOrEmpty(use.Width) ? 0f : float.Parse(use.Width);
+                var h = string.IsNullOrEmpty(use.Height) ? 0f : float.Parse(use.Height);
                 var symbol = use.HRef.Substring(1);//设备定义引用 指明使用的哪一种设备类型
 
                 SymbolUnit._Dic.TryGetValue(symbol, out SymbolUnit value);
