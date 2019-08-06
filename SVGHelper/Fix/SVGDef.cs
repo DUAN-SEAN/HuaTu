@@ -16,7 +16,7 @@ namespace SVGHelper.Fix
 
         private void Init()
         {
-            m_sElementName = "def";
+            m_sElementName = "defs";
             m_ElementType = SVGUnitType.def;
 
 

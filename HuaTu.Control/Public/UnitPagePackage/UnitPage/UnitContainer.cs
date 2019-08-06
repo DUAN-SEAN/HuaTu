@@ -70,7 +70,7 @@ namespace HuaTu.Controls.Public.UnitPagePackage.UnitPage
         public UnitPage GetPageAt(int pageIndex)
         {
             UnitButton buton = GetButtonAt(pageIndex);
-            return (UnitPage)buton.Page;
+            return (UnitPage)buton?.Page;
         }
 
         #endregion 公开函数

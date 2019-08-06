@@ -48,7 +48,7 @@ namespace DrawWork.Symbol
         /// <summary>
         /// 设备id与设备实体的映射
         /// </summary>
-        public static Dictionary<string, SymbolUnit> _Dic;
+        public static Dictionary<string, SymbolUnit> _Dic = new Dictionary<string, SymbolUnit>();
 
         public float X
         {
@@ -104,12 +104,13 @@ namespace DrawWork.Symbol
             _symbolChildSvgs = new List<SVGUnit>();
 
             string viewBox = svg.ViewBox;
-            var arr = viewBox.Split(',');
+            var arr = viewBox.Split(' ');
             x = float.Parse(arr[0]);
             y = float.Parse(arr[1]);
             width = float.Parse(arr[2]);
             height = float.Parse(arr[3]);
 
+            _symbolId = svg.Id;
             SVGUnit unit = svg.getChild();
             while (unit != null)
             {
@@ -135,6 +136,21 @@ namespace DrawWork.Symbol
             symbolUnit = new SymbolUnit(svg);
             _Dic.Add(svg.Id,symbolUnit);
             return symbolUnit;
+        }
+        /// <summary>
+        /// 获取设备定义的svg
+        /// </summary>
+        public void GetSymbolXml()
+        {
+            string s = "";
+            s += "<symbol ";
+            s += " id\"" + SymbolId + "\"" + " viewBox\"" + x + " " + y + " " + width + " " + height + "\">";
+            s += "\r\n";
+            foreach (var symbolChild in _symbolChildSvgs)
+            {
+                s += symbolChild.GetAttributeXml();
+            }
+            s += "</symbol>";
         }
     }
 }

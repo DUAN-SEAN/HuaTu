@@ -88,7 +88,7 @@ namespace SVGHelper
             }
         }
 
-        protected SVGUse(SVGWord doc) : base(doc)
+        public SVGUse(SVGWord doc) : base(doc)
         {
             Init();
 

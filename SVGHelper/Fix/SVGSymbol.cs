@@ -29,7 +29,7 @@ namespace SVGHelper
 
 
 
-        protected SVGSymbol(SVGWord doc) : base(doc)
+        public SVGSymbol(SVGWord doc) : base(doc)
         {
             Init();
         }
@@ -38,7 +38,7 @@ namespace SVGHelper
         {
             m_sElementName = "symbol";
 
-            m_ElementType = SVGUnitType.device;
+            m_ElementType = SVGUnitType.symbol;
 
             AddAttr(SVGAttribute._SvgAttribute.attrSymbol_viewBox,"");
 

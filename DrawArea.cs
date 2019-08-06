@@ -56,6 +56,9 @@ namespace HuaTuDemo
         private ToolStripSeparator _toolStripSeparator3;
         private int _width, _height;
 
+        public string DeviceId;//选择的设备Id
+
+
         public String FileName { get; set; }
 
         #endregion 字段
@@ -85,6 +88,8 @@ namespace HuaTuDemo
             Text,
             Pan,
             Path,
+            
+            Device,
             NumberOfDrawTools
         }
 
@@ -303,12 +308,13 @@ namespace HuaTuDemo
             _tools[(int)DrawToolType.Bitmap] = new ToolImage();
             _tools[(int)DrawToolType.Pan] = new ToolPan();
             _tools[(int)DrawToolType.Path] = new ToolPath();
+            _tools[(int)DrawToolType.Device] = new ToolDevice();
 
             Graphics g = Owner.CreateGraphics();
             DrawObject.Dpi = new PointF(g.DpiX, g.DpiY);
         }
 
-        public bool LoadFromXml(XmlTextReader reader)
+        public bool LoadModelFromXml(XmlTextReader reader)
         {
             SVGErr.Log("DrawArea", "LoadFromXML", "", SVGErr._LogPriority.Info);
             _graphicsList.Clear();
@@ -338,9 +344,42 @@ namespace HuaTuDemo
                 //3 将所有use的设备实体生成
                 //4 绘制list集合将图素绘制出来
                 SVGFactory.CreateProjectFromXML(ele);
+            }
 
 
-                //_graphicsList.AddFromSvg(ele);
+            Description = _graphicsList.Description;
+            return true;
+        }
+
+        public bool LoadFromXml(XmlTextReader reader)
+        {
+            SVGErr.Log("DrawArea", "LoadFromXML", "", SVGErr._LogPriority.Info);
+            _graphicsList.Clear();
+            var svg = new SVGWord();
+            if (!svg.LoadFromFile(reader))
+                return false;
+            SVGRoot root = svg.GetSvgRoot();
+
+            if (root == null)
+                return false;
+            try
+            {
+                SizePicture = new SizeF(DrawObject.ParseSize(root.Width, DrawObject.Dpi.X),
+                    DrawObject.ParseSize(root.Height, DrawObject.Dpi.Y));
+            }
+            catch
+            {
+            }
+            _mOriginalSize = SizePicture;
+            SVGUnit ele = root.getChild();
+            _mScale = new SizeF(1, 1);
+            if (ele != null)
+            {
+
+                
+
+
+                _graphicsList.AddFromSvg(ele);
             }
 
 
@@ -380,7 +419,8 @@ namespace HuaTuDemo
                 sXml += "<svg xmlns=\"http://www.w3.org/2000/svg\"  xmlns:xlink=\"http://www.w3.org/1999/xlink\"  xmlns:cge=\"http://www.cim.com\" version=\"1.1\" width=\"" + _mOriginalSize.Width.ToString(CultureInfo.InvariantCulture) +
                 "\" height=\"" + _mOriginalSize.Height.ToString(CultureInfo.InvariantCulture) + "\">" + "\r\n";
                 sXml += "<desc>" + Description + "</desc>" + "\r\n";
-                sXml += _graphicsList.GetXmlString(_mScale);//将每一个图形都转换为标准格式
+                //sXml += _graphicsList.GetXmlString(_mScale);//将每一个图形都转换为标准格式
+                sXml += SVGFactory.GenerateSVGXml(_mScale,null);//改为新的svg内容
                 sXml += "</svg>" + "\r\n";
                 sw.Write(sXml);
                 sw.Close();

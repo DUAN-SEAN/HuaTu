@@ -18,7 +18,7 @@ namespace DrawWork
         private DeviceDrawObject _connectDeviceDrawObject;
 
 
-        public PortDrawObject(float x, float y)
+        public PortDrawObject(float x, float y) : base()
         {
             rectangle.X = x;
             rectangle.Y = y;
@@ -28,7 +28,7 @@ namespace DrawWork
             Initialize();
         }
 
-        public PortDrawObject(float x, float y, float width, float height)
+        public PortDrawObject(float x, float y, float width, float height) : base()
         {
             rectangle.X = x;
             rectangle.Y = y;

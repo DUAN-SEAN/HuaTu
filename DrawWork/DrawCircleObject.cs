@@ -5,6 +5,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SVGHelper;
 
 namespace DrawWork
 {
@@ -37,6 +38,14 @@ namespace DrawWork
             get { return Height < Width ? Height/2 : Width/2; }
         }
 
+        public DrawCircleObject()
+        {
+        }
+
+        public DrawCircleObject(float x, float y, float w, float h) : base(x, y, w, h)
+        {
+
+        }
         public override void Draw(Graphics g)
         {
             
@@ -100,6 +109,16 @@ namespace DrawWork
             return s;
         }
 
+        public static DrawCircleObject Create(SVGCircle svg)
+        {
+            float x = float.Parse(svg.CX) - float.Parse(svg.R);
+            float y = float.Parse(svg.CY) - float.Parse(svg.R);
+            float wh = float.Parse(svg.R)/2;
+
+            DrawCircleObject o = new DrawCircleObject(x,y,wh,wh);
+
+            return o;
+        }
         public override string GetXmlEnd()
         {
             return "</circle>" + base.GetXmlEnd();
