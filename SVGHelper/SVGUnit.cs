@@ -629,6 +629,19 @@ namespace SVGHelper
             }
         }
 
+        public string GetAttributeXml()
+        {
+            string s = "";
+            s += "<" + m_sElementName;
+            foreach (var attr in m_attributes)
+            {
+                var attribute = attr as SVGAttribute;
+                s += attribute.GetXML();
+            }
+            
+            s += "/>";
+            return s;
+        }
         // ---------- PRIVATE METHODS END
         public virtual void ParseStyle(string sval)
         {

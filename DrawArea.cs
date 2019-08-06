@@ -380,7 +380,8 @@ namespace HuaTuDemo
                 sXml += "<svg xmlns=\"http://www.w3.org/2000/svg\"  xmlns:xlink=\"http://www.w3.org/1999/xlink\"  xmlns:cge=\"http://www.cim.com\" version=\"1.1\" width=\"" + _mOriginalSize.Width.ToString(CultureInfo.InvariantCulture) +
                 "\" height=\"" + _mOriginalSize.Height.ToString(CultureInfo.InvariantCulture) + "\">" + "\r\n";
                 sXml += "<desc>" + Description + "</desc>" + "\r\n";
-                sXml += _graphicsList.GetXmlString(_mScale);//将每一个图形都转换为标准格式
+                //sXml += _graphicsList.GetXmlString(_mScale);//将每一个图形都转换为标准格式
+                sXml += SVGFactory.GenerateSVGXml(_mScale,null);//改为新的svg内容
                 sXml += "</svg>" + "\r\n";
                 sw.Write(sXml);
                 sw.Close();

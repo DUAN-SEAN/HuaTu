@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -94,15 +95,54 @@ namespace DrawWork.Symbol
                             }
                         }
                     }
+                    vBase = new DeviceDrawObjectBase(x, y, w, h, entityId, drawObjects, deviceDrawObjectBases, value.SymbolId);
+
                 }
 
 
-                vBase = new DeviceDrawObjectBase(x, y, w, h, entityId, drawObjects, deviceDrawObjectBases);
 
             }
 
             return vBase;
 
+        }
+
+        public static string GenerateSVGXml(SizeF scale ,List<DeviceDrawObjectBase> devices)
+        {
+            string s = "";
+            s+=GetDefXML();//得到定义
+
+            s += GetGroupXML(scale,devices);//得到生成的设备实体
+
+            return s;
+        }
+
+        private static string GetGroupXML(SizeF scale ,List<DeviceDrawObjectBase> devices)
+        {
+            string s ="";
+            s += "<g>";
+            foreach (var device in devices)
+            {
+                s += device.GetXmlStr(scale,true);
+                s += "\r\n";
+            }
+
+            s += "</g>";
+            return s;
+        }
+
+        private static string GetDefXML()
+        {
+            string s = "";
+            s += "<defs>";
+            foreach (var symBolUnit in SymbolUnit._Dic.Values)
+            {
+                symBolUnit.GetSymbolXml();
+                s += "\r\n";
+            }
+
+            s += "</defs>";
+            return s;
         }
     }
 }

@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DrawWork.Symbol;
 
 namespace DrawWork
 {
@@ -29,13 +30,18 @@ namespace DrawWork
         /// 设备实体Id
         /// </summary>
         public string _EntityId;
+
+        /// <summary>
+        /// 引用的设备id
+        /// </summary>
+        public string _hrefId;//引用设备id
         public DeviceDrawObjectBase()
         {
             SetRectangleF(0, 0, 1, 1);
             Initialize();
         }
 
-        public DeviceDrawObjectBase(float x, float y, float width, float height,string entityId,List<DrawObject> drawobjs,List<DeviceDrawObjectBase> deviceDrawObjectBases)
+        public DeviceDrawObjectBase(float x, float y, float width, float height,string entityId,List<DrawObject> drawobjs,List<DeviceDrawObjectBase> deviceDrawObjectBases,string hrefId)
         {
             rectangle.X = x;
             rectangle.Y = y;
@@ -44,6 +50,7 @@ namespace DrawWork
             _EntityId = entityId;
             drawObjects = drawobjs;
             this.deviceDrawObjectBases = deviceDrawObjectBases;
+            this._hrefId = hrefId;
             Initialize();
         }
         /// <summary>
@@ -102,6 +109,18 @@ namespace DrawWork
         public override string GetXmlStr(SizeF scale, bool noAnimation = true)
         {
             string s = "";
+            SymbolUnit._Dic.TryGetValue(_hrefId, out SymbolUnit value);
+            if (value != null)
+            {
+                
+                s += "<g id=\"" + _EntityId + "\">";
+
+                s += "<use "+"x=\""+rectangle.X+"\""+" y=\"" + rectangle.Y + "\""+" width=\"" + rectangle.Width + "\""+" height=\"" +
+                    rectangle.Height + "\"" + " fill=\"" + Fill + "\""+" xlink:href=\"#" + _hrefId + "\"";
+
+                s += "</g>";
+            }
+            
             return s;
 
         }

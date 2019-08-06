@@ -104,7 +104,7 @@ namespace DrawWork.Symbol
             _symbolChildSvgs = new List<SVGUnit>();
 
             string viewBox = svg.ViewBox;
-            var arr = viewBox.Split(',');
+            var arr = viewBox.Split(' ');
             x = float.Parse(arr[0]);
             y = float.Parse(arr[1]);
             width = float.Parse(arr[2]);
@@ -135,6 +135,21 @@ namespace DrawWork.Symbol
             symbolUnit = new SymbolUnit(svg);
             _Dic.Add(svg.Id,symbolUnit);
             return symbolUnit;
+        }
+        /// <summary>
+        /// 获取设备定义的svg
+        /// </summary>
+        public void GetSymbolXml()
+        {
+            string s = "";
+            s += "<symbol ";
+            s += " id\"" + SymbolId + "\"" + " viewBox\"" + x + " " + y + " " + width + " " + height + "\">";
+            s += "\r\n";
+            foreach (var symbolChild in _symbolChildSvgs)
+            {
+                s += symbolChild.GetAttributeXml();
+            }
+            s += "</symbol>";
         }
     }
 }
