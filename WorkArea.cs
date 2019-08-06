@@ -164,6 +164,15 @@ namespace HuaTuDemo
             svgForm.Refresh();
         }
 
+        public void LoadSvgModel(String fileName)
+        {
+            var svgForm = new WorkspaceHolder { Dock = DockStyle.Fill, Name = fileName };
+            svgForm.svgDrawForm.ToolDone += OnToolDoneComplete;
+            svgForm.svgDrawForm.ItemsSelected += SvgDrawFormItemsSelected;
+            svgForm.svgDrawForm.LoadModel(fileName);
+            tabbedView.Add(svgForm);
+            svgForm.Refresh();
+        }
         public void PropertyChanged(GridItem itemChanged, object oldVal)
         {
             GetCurrentForm().PropertyChanged(itemChanged, oldVal);
@@ -174,9 +183,9 @@ namespace HuaTuDemo
             GetCurrentForm().SaveFile(fileName);
         }
 
-        public void SetTool(String tool)
+        public void SetTool(String tool,EventArgs e = null)
         {
-            GetCurrentForm().SetTool(tool);
+            GetCurrentForm().SetTool(tool,e);
         }
 
         private void OnToolDoneComplete(object sender, EventArgs e)

@@ -168,6 +168,26 @@ namespace HuaTuDemo
             }
         }
 
+        public void LoadModel(String fileName)
+        {
+            XmlTextReader reader = null;
+            try
+            {
+
+                reader = new XmlTextReader(fileName);//从本地读取xml文件
+                drawArea.LoadModelFromXml(reader);
+                drawArea.FileName = fileName;
+                ResizeDrawArea();
+            }
+            catch (Exception ex)
+            {
+            }
+            finally
+            {
+                if (reader != null) reader.Close();
+            }
+        }
+
         public void Paste()
         {
             drawArea.GraphicsList.PasteSelection();
@@ -266,8 +286,9 @@ namespace HuaTuDemo
             drawArea.Refresh();
         }
 
-        public void SetTool(String tool)
+        public void SetTool(String tool, EventArgs e = null)
         {
+            drawArea.DeviceId = null;
             switch (tool)
             {
                 case "Pointer":
@@ -305,7 +326,13 @@ namespace HuaTuDemo
                 case "Image":
                     drawArea.ActiveTool = DrawArea.DrawToolType.Bitmap;
                     break;
-
+                case "Device":
+                    DeviceEventArg deviceEventArg = e as DeviceEventArg;
+                    if (deviceEventArg != null)
+                        drawArea.DeviceId = deviceEventArg.DeviceId;//drawArea选择的是Device工具
+                    drawArea.ActiveTool = DrawArea.DrawToolType.Device;
+                    break;
+                    
                 default:
                     drawArea.ActiveTool = DrawArea.DrawToolType.Pointer;
                     break;

@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DrawWork.Symbol;
 using static HuaTuDemo.DrawArea;
 
 namespace HuaTuDemo
@@ -23,10 +24,12 @@ namespace HuaTuDemo
         DockableFormInfo _infoFilesMain;
         DockableFormInfo _infoShapeProperties;
         DockableFormInfo _infoToolbar;
+        DockableFormInfo _infoModelbar;
         ShapeProperties _shapeProperties;
         WorkArea _svgMainFiles;
         WorkSpaceControlBox _svgProperties;
         ToolBox _toolBox;
+        ModelBox _modelBox;
         #endregion 字段
         public HuaTuFrom()
         {
@@ -50,6 +53,7 @@ namespace HuaTuDemo
             _svgProperties.GridOptionChange += GridOptionChaged;
             _svgProperties.WorkAreaOptionChange += SvgPropertiesWorkAreaOptionChange;
 
+          
             _infoFilesMain = _docker.Add(_svgMainFiles, DockAllowed.Fill, new Guid("a6402b80-2ebd-4fd3-8930-024a6201d001"));
             _infoFilesMain.ShowCloseButton = false;
 
@@ -61,6 +65,7 @@ namespace HuaTuDemo
 
             _shapeProperties = new ShapeProperties();
             _shapeProperties.PropertyChanged += ShapePropertiesPropertyChanged;
+
             _infoShapeProperties = _docker.Add(_shapeProperties, DockAllowed.All, new Guid("a6402b80-2ebd-4fd3-8930-024a6201d004"));
             _infoShapeProperties.ShowCloseButton = false;
 
@@ -68,6 +73,13 @@ namespace HuaTuDemo
             timer.Interval = 35;
             timer.Tick += new EventHandler(Tick);
             timer.Enabled = true;
+
+
+            _modelBox = new ModelBox();
+            _infoModelbar = _docker.Add(_modelBox, DockAllowed.All, new Guid("a6402b80-2ebd-4fd3-8930-024a6201d005"));
+            _infoModelbar.ShowCloseButton = false;
+            _modelBox.ToolSelectionChanged += ToolSelectionChanged;
+
         }
         /// <summary>
         /// 该方法在主线程调用，100ms轮询一次
@@ -212,13 +224,25 @@ namespace HuaTuDemo
                 _shapeProperties.propertyGrid.SelectedObjects = obj;
             }
         }
-
+        /// <summary>
+        /// 窗体首次显示时调用
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SvgMainShown(object sender, EventArgs e)
         {
             _docker.DockForm(_infoToolbar, DockStyle.Left, DockableMode.Inner);
+            
             _docker.DockForm(_infoFilesMain, DockStyle.Fill, DockableMode.Inner);
+
             _docker.DockForm(_infoDocumentProperties, DockStyle.Right, DockableMode.Inner);
+
             _docker.DockForm(_infoShapeProperties, _infoToolbar, DockStyle.Bottom, DockableMode.Outer);
+
+            _docker.DockForm(_infoModelbar, _infoToolbar, DockStyle.Left, DockableMode.Inner);
+
+            
+            
             _svgMainFiles.AddNewPage("New:" + _counter++);
 
         }
@@ -230,7 +254,7 @@ namespace HuaTuDemo
 
         private void ToolSelectionChanged(object sender, EventArgs e)
         {
-            _svgMainFiles.SetTool((String)sender);
+            _svgMainFiles.SetTool((String)sender,e);
         }
 
         private void ToolStripButtonCloseClick(object sender, EventArgs e)
@@ -265,5 +289,18 @@ namespace HuaTuDemo
 
         }
 
+        private void 本地SVG文本ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            var flgOpenFileDialog = new OpenFileDialog();
+            flgOpenFileDialog.Filter = @"SVG files (*.svg)|*.svg|All files (*.*)|*.*";
+
+            if (flgOpenFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                _svgMainFiles.LoadSvgModel(flgOpenFileDialog.FileName);
+            }
+
+            _modelBox.LoadModel(SymbolUnit._Dic.Values.ToList());
+        }
     }
 }

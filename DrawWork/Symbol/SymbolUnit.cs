@@ -110,6 +110,7 @@ namespace DrawWork.Symbol
             width = float.Parse(arr[2]);
             height = float.Parse(arr[3]);
 
+            _symbolId = svg.Id;
             SVGUnit unit = svg.getChild();
             while (unit != null)
             {
