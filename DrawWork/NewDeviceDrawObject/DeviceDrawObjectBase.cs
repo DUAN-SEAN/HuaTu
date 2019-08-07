@@ -128,7 +128,6 @@ namespace DrawWork
 
         public override void Resize(SizeF newscale, SizeF oldscale)
         {
-            base.Resize(newscale, oldscale);
 
             if (drawObjects != null)
                 for (int i = 0; i < drawObjects.Count; i++)
@@ -140,25 +139,27 @@ namespace DrawWork
                 {
                     deviceDrawObjectBases[i].Resize(newscale, oldscale);
                 }
+            base.Resize(newscale, oldscale);
         }
 
         public override void MoveHandleTo(PointF point, int handleNumber)
         {
-            base.MoveHandleTo(point, handleNumber);
-
+            
             if (drawObjects != null)
                 for (int i = 0; i < drawObjects.Count; i++)
                 {
 
                     if (drawObjects[i] is DrawRectangleObject)
                     {
-                        var center = GetCenter();
-                        var drawcenter = ((DrawRectangleObject) drawObjects[i]).GetCenter();
+                        var center = GetHandle(handleNumber);
+                        var drawcenter =  drawObjects[i].GetHandle(handleNumber);
                         var xdis = point.X - center.X;
                         var ydis = point.Y - center.Y;
-                        var hdis = ((DrawRectangleObject)drawObjects[i]).Height / Height;
-                        var wdis = ((DrawRectangleObject)drawObjects[i]).Width / Width;
-                        drawObjects[i].MoveHandleTo(new PointF(drawcenter.X + xdis * wdis, drawcenter.Y + ydis * hdis),
+                        var pro = drawObjects[i].Proportion;
+                        //var hdis = ((DrawRectangleObject)drawObjects[i]).Height / Height;
+                        //var wdis = ((DrawRectangleObject)drawObjects[i]).Width / Width;
+                        drawObjects[i].MoveHandleTo(
+                            new PointF(drawcenter.X + xdis * pro.X, drawcenter.Y + ydis * pro.Y),
                             handleNumber);
 
 
@@ -169,8 +170,24 @@ namespace DrawWork
             if (deviceDrawObjectBases != null)
                 for (int i = 0; i < deviceDrawObjectBases.Count; i++)
                 {
-                    deviceDrawObjectBases[i].MoveHandleTo(point, handleNumber);
+                    if (deviceDrawObjectBases[i] != null)
+                    {
+                        var center = GetHandle(handleNumber);
+                        var drawcenter = deviceDrawObjectBases[i].GetHandle(handleNumber);
+                        var xdis = point.X - center.X;
+                        var ydis = point.Y - center.Y;
+                        var pro = deviceDrawObjectBases[i].Proportion;
+                        //var hdis = ((DrawRectangleObject)deviceDrawObjectBases[i]).Height / Height;
+                        //var wdis = ((DrawRectangleObject)deviceDrawObjectBases[i]).Width / Width;
+                        deviceDrawObjectBases[i].MoveHandleTo(
+                            new PointF(drawcenter.X + xdis * pro.X, drawcenter.Y + ydis * pro.Y),
+                            handleNumber);
+
+
+                    }
                 }
+            base.MoveHandleTo(point, handleNumber);
+
         }
 
         public override void Move(float deltaX, float deltaY)

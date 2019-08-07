@@ -496,8 +496,6 @@ namespace DrawWork
             switch (handleNumber)
             {
                 case 1:
-
-
                     toRectangleMousePoint = RotatePointReverse(center, point, _angle);
 
                     left = toRectangleMousePoint.X;
@@ -557,7 +555,7 @@ namespace DrawWork
         /// <param name="center"></param>
         /// <param name="handleLocalPoint"></param>
         /// <returns></returns>
-        private PointF GetLocalMousePoint(PointF mousePoint, PointF center, PointF handleLocalPoint)
+        protected PointF GetLocalMousePoint(PointF mousePoint, PointF center, PointF handleLocalPoint)
         {
             var temp2 = RotatePoint(center, handleLocalPoint, _angle);
             var interactPoint = PointForPointToABLine(mousePoint.X, mousePoint.Y, temp2.X, temp2.Y, center.X, center.Y);//鼠标位置到中心和handle线段的垂直交点，作为新的handle

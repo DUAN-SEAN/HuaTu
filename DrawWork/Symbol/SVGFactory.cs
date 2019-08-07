@@ -104,13 +104,19 @@ namespace DrawWork.Symbol
                         var symbolChild = SymbolUnit._Dic[unit.Id];
                         var entityLInk = CreateDeviceDrawObjectBase(unit as SVGUse, entityId);
                         if (deviceDrawObjectBases == null) deviceDrawObjectBases = new List<DeviceDrawObjectBase>();
+                        {
+                            entityLInk.Proportion = new PointF(entityLInk.Width / w, entityLInk.Height / h);
                             deviceDrawObjectBases.Add(entityLInk);
+                        }
                     }
                     else
                     {
                         var o = SVGDrawFactory.CreateDrawObject(unit);
                         if (o != null)
                         {
+                            if (o is DrawRectangleObject rectangleObject)
+                                rectangleObject.Proportion = new PointF(rectangleObject.Width / w,
+                                    rectangleObject.Height / h);
                             drawObjects.Add(o);
                         }
                     }

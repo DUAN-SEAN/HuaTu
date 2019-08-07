@@ -67,9 +67,22 @@ namespace DrawWork
         public RectangleF _imageR = new RectangleF(9, 9, 20, 20);
 
         public List<Animation.Animation> AnimationBases = new List<Animation.Animation>();
+
+
+        /// <summary>
+        /// 与父级元素的长宽比例
+        /// </summary>
+        protected PointF proportion;
         #endregion 字段
 
         #region 属性
+
+        public PointF Proportion
+        {
+            set => proportion = value;
+            get => proportion;
+        }
+
 
         [Browsable(false)]
         public bool HitOnCircumferance { get; set; }
@@ -154,7 +167,17 @@ namespace DrawWork
             Name = "";
             Fill = Color.Empty;
             Id = 0;
+            proportion = new PointF(1,1);
             SetId();
+        }
+
+        protected DrawObject(PointF pro)
+        {
+            Name = "";
+            Fill = Color.Empty;
+            Id = 0;
+            SetId();
+            proportion = pro;
         }
 
         static DrawObject()
