@@ -20,7 +20,8 @@ namespace HuaTuDemo
 
         public override void OnMouseDown(DrawArea drawArea, MouseEventArgs e)
         {
-            AddNewObject(drawArea, new DrawEllipseObject(e.X, e.Y, 1, 1));
+            AddNewObject(drawArea,new DrawCircleObject(e.X,e.Y,1,1));
+           // AddNewObject(drawArea, new DrawEllipseObject(e.X, e.Y, 1, 1));
         }
 
         #endregion 函数
