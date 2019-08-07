@@ -90,7 +90,7 @@ namespace DrawWork
 
         public override void Rotate(float angle)
         {
-            base.Rotate(angle);
+         
 
             if (drawObjects != null)
             {
@@ -109,7 +109,7 @@ namespace DrawWork
                     deviceDrawObjectBases[i].Rotate(angle,GetCenter());
                 }
             }
-
+            base.Rotate(angle);
         }
 
         public override void Draw(Graphics g)
