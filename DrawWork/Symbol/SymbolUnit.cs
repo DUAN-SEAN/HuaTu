@@ -101,23 +101,36 @@ namespace DrawWork.Symbol
 
         public SymbolUnit(SVGSymbol svg)
         {
-            _symbolChildSvgs = new List<SVGUnit>();
-
-            string viewBox = svg.ViewBox;
-            var arr = viewBox.Split(' ');
-            x = float.Parse(arr[0]);
-            y = float.Parse(arr[1]);
-            width = float.Parse(arr[2]);
-            height = float.Parse(arr[3]);
-
-            _symbolId = svg.Id;
-            SVGUnit unit = svg.getChild();
-            while (unit != null)
+            try
             {
-                _symbolChildSvgs.Add(unit);
+                _symbolChildSvgs = new List<SVGUnit>();
+                _symbolId = svg.Id;
+                SVGUnit unit = svg.getChild();
+                while (unit != null)
+                {
+                    _symbolChildSvgs.Add(unit);
 
-                unit = unit.getNext();
+                    unit = unit.getNext();
+                }
+                string viewBox = svg.ViewBox;
+                if (!string.IsNullOrEmpty(viewBox))
+                {
+                    var arr = viewBox.Split(' ');
+                    x = float.Parse(arr[0]);
+                    y = float.Parse(arr[1]);
+                    width = float.Parse(arr[2]);
+                    height = float.Parse(arr[3]);
+
+                }
+
+               
+               
             }
+            catch (Exception e)
+            {
+
+            }
+         
 
         }
 

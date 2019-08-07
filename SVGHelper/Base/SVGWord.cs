@@ -92,7 +92,7 @@ namespace SVGHelper.Base
         /// 它创建一个从文件读取的SVG文档。
         /// 如果当前文档存在，则会将其销毁。
         /// </summary>
-        public bool LoadFromFile(XmlTextReader reader)
+        public bool LoadFromFile(XmlReader reader)
         {
             SVGErr err = new SVGErr("SvgDoc", "LoadFromFile");
             err.LogParameter("sFilename", reader.BaseURI);
@@ -108,12 +108,7 @@ namespace SVGHelper.Base
 
             try
             {
-                //				XmlTextReader reader;
-                //				reader = new XmlTextReader(sFilename);
-                reader.WhitespaceHandling = WhitespaceHandling.None;
-                reader.Normalization = false;
-                reader.XmlResolver = null;
-                reader.Namespaces = false;
+                
 
                 string tmp;
                 SVGUnit eleParent = null;
@@ -208,6 +203,181 @@ namespace SVGHelper.Base
 
                                 m_sXmlDocType = "<!DOCTYPE svg PUBLIC \"" + sDTD1 + "\" \"" + sDTD2 + "\">";
                             }
+                                break;
+
+                            case XmlNodeType.EntityReference:
+                                err.Log("Unexpected item: " + reader.Value, SVGErr._LogPriority.Warning);
+                                break;
+
+                            case XmlNodeType.EndElement:
+                                if (eleParent != null)
+                                {
+
+                                    eleParent = eleParent.getParent();
+                                    eleLast = null;
+                                    if (eleParent != null)
+                                    {
+                                        var templast = eleParent.getChild();
+                                        while (templast != null)
+                                        {
+                                            eleLast = templast;
+                                            templast = templast.getNext();
+                                        }
+                                    }
+                                }
+
+                                break;
+                        } // switch
+                    } // while
+                } // read try
+                catch (XmlException xmle)
+                {
+                    err.LogException(xmle);
+                    err.LogParameter("Line Number", xmle.LineNumber.ToString());
+                    err.LogParameter("Line Position", xmle.LinePosition.ToString());
+
+                    bResult = false;
+                }
+                catch (Exception e)
+                {
+                    err.LogException(e);
+                    bResult = false;
+                }
+                finally
+                {
+                    reader.Close();
+                }
+            }
+            catch
+            {
+                err.LogUnhandledException();
+                bResult = false;
+            }
+
+            err.LogEnd(bResult);
+
+            return bResult;
+        }
+        /// <summary>
+        /// 它创建一个从文件读取的SVG文档。
+        /// 如果当前文档存在，则会将其销毁。
+        /// </summary>
+        public bool LoadFromFile(XmlTextReader reader)
+        {
+            SVGErr err = new SVGErr("SvgDoc", "LoadFromFile");
+            err.LogParameter("sFilename", reader.BaseURI);
+
+            if (m_root != null)
+            {
+                m_root = null;
+                m_nNextId = 1;
+                m_elements.Clear();
+            }
+
+            bool bResult = true;
+
+            try
+            {
+                //				XmlTextReader reader;
+                //				reader = new XmlTextReader(sFilename);
+                reader.WhitespaceHandling = WhitespaceHandling.None;
+                reader.Normalization = false;
+                reader.XmlResolver = null;
+                reader.Namespaces = false;
+
+                string tmp;
+                SVGUnit eleParent = null;
+                SVGUnit eleLast = null;
+
+                try
+                {
+                    // 分析文件并显示每个节点。
+                    while (reader.Read() && bResult)
+                    {
+                        switch (reader.NodeType)
+                        {
+                            case XmlNodeType.Attribute:
+                                tmp = reader.Name;
+                                tmp = reader.Value;
+                                break;
+
+                            case XmlNodeType.Element://找到一个标签
+                                {
+                                    SVGUnit ele = AddElement(eleParent, reader.Name, ref eleLast);
+
+                                    if (ele == null)
+                                    {
+                                        err.Log("Svg element cannot be added. Name: " + reader.Name,
+                                            SVGErr._LogPriority.Warning);
+                                        bResult = false;
+                                    }
+                                    else
+                                    {
+                                        eleParent = ele;
+
+                                        if (reader.IsEmptyElement)
+                                        {
+                                            if (eleParent != null)
+                                            {
+                                                eleParent = eleParent.getParent();
+                                            }
+                                        }
+
+                                        bool bLoop = reader.MoveToFirstAttribute();
+                                        while (bLoop)//直到读完属性为止
+                                        {
+                                            if (!ele.SetAttributeValue(reader.Name, reader.Value))
+                                            {
+                                                err.Log("Read AttributeValue : " + reader.Value, SVGErr._LogPriority.Warning);
+                                            }
+
+                                            bLoop = reader.MoveToNextAttribute();
+                                        }
+                                    }
+                                }
+                                break;
+
+                            case XmlNodeType.Text:
+                                if (eleParent != null)
+                                {
+                                    eleParent.setElementValue(reader.Value);
+                                }
+
+                                break;
+
+                            case XmlNodeType.CDATA:
+
+                                err.Log("Unexpected item: " + reader.Value, SVGErr._LogPriority.Warning);
+                                break;
+
+                            case XmlNodeType.ProcessingInstruction:
+
+                                err.Log("Unexpected item: " + reader.Value, SVGErr._LogPriority.Warning);
+                                break;
+
+                            case XmlNodeType.Comment:
+
+                                err.Log("Unexpected item: " + reader.Value, SVGErr._LogPriority.Warning);
+                                break;
+
+                            case XmlNodeType.XmlDeclaration:
+                                m_sXmlDeclaration = "<?xml " + reader.Value + "?>";
+                                break;
+
+                            case XmlNodeType.Document:
+                                err.Log("Unexpected item: " + reader.Value, SVGErr._LogPriority.Warning);
+                                break;
+
+                            case XmlNodeType.DocumentType:
+                                {
+                                    string sDTD1;
+                                    string sDTD2;
+
+                                    sDTD1 = reader.GetAttribute("PUBLIC");
+                                    sDTD2 = reader.GetAttribute("SYSTEM");
+
+                                    m_sXmlDocType = "<!DOCTYPE svg PUBLIC \"" + sDTD1 + "\" \"" + sDTD2 + "\">";
+                                }
                                 break;
 
                             case XmlNodeType.EntityReference:

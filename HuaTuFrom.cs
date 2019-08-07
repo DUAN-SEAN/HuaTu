@@ -297,10 +297,13 @@ namespace HuaTuDemo
 
             if (flgOpenFileDialog.ShowDialog() == DialogResult.OK)
             {
-                _svgMainFiles.LoadSvgModel(flgOpenFileDialog.FileName);
+                if (_svgMainFiles.LoadSvgModel(flgOpenFileDialog.FileName))
+                {
+
+                    _modelBox.LoadModel(SymbolUnit._Dic.Values.ToList());
+                }
             }
 
-            _modelBox.LoadModel(SymbolUnit._Dic.Values.ToList());
         }
     }
 }

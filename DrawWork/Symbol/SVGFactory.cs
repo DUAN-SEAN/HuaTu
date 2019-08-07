@@ -100,9 +100,10 @@ namespace DrawWork.Symbol
                 {
                     if (unit.getElementType() == SVGUnit.SVGUnitType.use)
                     {
+                        var childSvgUse = unit as SVGUse;
 
-                        var symbolChild = SymbolUnit._Dic[unit.Id];
-                        var entityLInk = CreateDeviceDrawObjectBase(unit as SVGUse, entityId);
+
+                        var entityLInk = CreateDeviceDrawObjectBase(childSvgUse, entityId);
                         if (deviceDrawObjectBases == null) deviceDrawObjectBases = new List<DeviceDrawObjectBase>();
                         {
                             entityLInk.Proportion = new PointF(entityLInk.Width / w, entityLInk.Height / h);
@@ -156,8 +157,7 @@ namespace DrawWork.Symbol
                     {
                         if (unit.getElementType() == SVGUnit.SVGUnitType.use)
                         {
-                            
-                            var symbolChild = SymbolUnit._Dic[unit.Id];
+                            var childSvgUse = unit as SVGUse;
                             var entityLInk =  CreateDeviceDrawObjectBase(unit as SVGUse, entityId);
                             if (deviceDrawObjectBases == null) deviceDrawObjectBases = new List<DeviceDrawObjectBase>();
                             deviceDrawObjectBases.Add(entityLInk);

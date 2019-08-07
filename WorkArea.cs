@@ -3,10 +3,16 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
+using DrawWork;
+using DrawWork.Symbol;
+using SVGHelper;
+using SVGHelper.Base;
 using static HuaTuDemo.DrawArea;
 
 namespace HuaTuDemo
@@ -164,14 +170,54 @@ namespace HuaTuDemo
             svgForm.Refresh();
         }
 
-        public void LoadSvgModel(String fileName)
+        public bool LoadSvgModel(String fileName)
         {
-            var svgForm = new WorkspaceHolder { Dock = DockStyle.Fill, Name = fileName };
-            svgForm.svgDrawForm.ToolDone += OnToolDoneComplete;
-            svgForm.svgDrawForm.ItemsSelected += SvgDrawFormItemsSelected;
-            svgForm.svgDrawForm.LoadModel(fileName);
-            tabbedView.Add(svgForm);
-            svgForm.Refresh();
+           return LoadModelFromXml(fileName);
+        }
+
+        public bool LoadModelFromXml(string fileName)
+        {
+            XmlTextReader reader = null;
+            //XmlReader reader = null;
+            //var txt = File.ReadAllText(fileName);
+            try
+            {
+               // FileStream fs = new FileStream(fileName,FileMode.Open);
+                
+
+                //reader =  XmlReader.Create(fileName);
+                reader = new XmlTextReader(fileName);//从本地读取xml文件
+
+                SVGErr.Log("DrawArea", "LoadFromXML", "", SVGErr._LogPriority.Info);
+                var svg = new SVGWord();
+                if (!svg.LoadFromFile(reader))
+                    return false;
+                SVGRoot root = svg.GetSvgRoot();
+
+                if (root == null)
+                    return false;
+                SVGUnit ele = root.getChild();
+                if (ele != null)
+                {
+
+                    //1 收集symbol获取svg上的设备
+                    //2 从svg元数据中收集symbol之间的关系
+                    //3 将所有use的设备实体生成
+                    //4 绘制list集合将图素绘制出来
+                    SVGFactory.CreateProjectFromXML(ele);
+                }
+
+            }
+            catch (Exception ex)
+            {
+            }
+            finally
+            {
+                if (reader != null) reader.Close();
+            }
+
+        
+            return true;
         }
         public void PropertyChanged(GridItem itemChanged, object oldVal)
         {
