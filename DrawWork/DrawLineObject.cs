@@ -278,7 +278,8 @@ namespace DrawWork
             AreaPath = new GraphicsPath();
             AreaPen = new Pen(Color.Black, 2);
             AreaPath.AddLine(_startPoint.X, _startPoint.Y, _endPoint.X, _endPoint.Y);
-            AreaPath.Widen(AreaPen);
+            if (_startPoint != _endPoint)
+                AreaPath.Widen(AreaPen);
 
             // Create region from the path
             AreaRegion = new Region(AreaPath);
@@ -351,6 +352,8 @@ namespace DrawWork
                 //应用缩放 获取缩放比
                 var zoomw = par.Width / par.ViewBox_w;
                 var zoomh = par.Height / par.ViewBox_h;
+                if (float.IsNaN(zoomw) || float.IsInfinity(zoomw)) zoomw = 0;
+                if (float.IsNaN(zoomh) || float.IsInfinity(zoomh)) zoomh = 0;
 
                 // 固定左上角的点缩放
                 var zoomStart = new PointF(_startPoint.X*zoomw, _startPoint.Y * zoomh);

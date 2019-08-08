@@ -422,7 +422,7 @@ namespace HuaTuDemo
                 //            }
 
                 //        }
-                    //}
+                //}
                 //}
 
                 #endregion
@@ -431,9 +431,9 @@ namespace HuaTuDemo
 
 
                 // 调整大小后
+                _resizedObject.MouseClickOnHandleUp(_resizedObjectHandle);
                 _resizedObject.Normalize();
                 _resizedObject = null;
-                _rerotateObject.MouseClickOnHandleUp(_resizedObjectHandle);
                 drawArea.ResizeCommand(drawArea.GraphicsList.GetFirstSelected(),
                     new PointF(_startPoint.X, _startPoint.Y),
                     new PointF(e.X, e.Y),

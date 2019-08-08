@@ -403,7 +403,8 @@ namespace DrawWork
             AreaPath = new GraphicsPath();
             AreaPen = new Pen(Color.Black, 2);
             AreaPath.AddLine(_startPoint.X, _startPoint.Y, _endPoint.X, _endPoint.Y);
-            AreaPath.Widen(AreaPen);
+            if (_startPoint != _endPoint)
+                AreaPath.Widen(AreaPen);
 
             // Create region from the path
             AreaRegion = new Region(AreaPath);
