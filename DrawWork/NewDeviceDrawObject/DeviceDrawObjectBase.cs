@@ -176,7 +176,7 @@ namespace DrawWork
             {
                 for (int i = 0; i < drawObjects.Count; i++)
                 {
-                    drawObjects[i].Rotate(angle, GetCenter());
+                    drawObjects[i].Rotate(angle);
                 }
             }
 
@@ -186,7 +186,7 @@ namespace DrawWork
 
                 for (int i = 0; i < deviceDrawObjectBases.Count; i++)
                 {
-                    deviceDrawObjectBases[i].Rotate(angle, GetCenter());
+                    deviceDrawObjectBases[i].Rotate(angle);
                 }
             }
             base.Rotate(angle);
