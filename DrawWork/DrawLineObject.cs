@@ -106,9 +106,11 @@ namespace DrawWork
                 {
                     centerTemp = Parent.GetCenter();
                 }
-                
-                var drawPoint1 = RotatePoint(centerTemp, _startPoint, _angle); 
-                var drawPoint2 = RotatePoint(centerTemp, _endPoint, _angle); 
+
+                var drawPoint1 = RotatePoint(centerTemp,
+                    new PointF(_startPoint.X + centerTemp.X, _startPoint.Y + centerTemp.Y), _angle); 
+                var drawPoint2 = RotatePoint(centerTemp, new PointF(_endPoint.X + centerTemp.X, _endPoint.Y + centerTemp.Y), _angle);
+                ;
                 g.DrawLine(pen, drawPoint1.X, drawPoint1.Y, drawPoint2.X, drawPoint2.Y);
                 pen.Dispose();
             }

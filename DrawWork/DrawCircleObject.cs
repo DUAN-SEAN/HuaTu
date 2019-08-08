@@ -56,8 +56,9 @@ namespace DrawWork
                 fixedCenter = GetCenter();
                 hasRotation = false;
              }
-             PointF center = fixedCenter;
-             g.TranslateTransform(center.X, center.Y);
+             PointF center = new PointF(fixedCenter.X + parentPointF.X, fixedCenter.Y + parentPointF.Y);
+
+            g.TranslateTransform(center.X, center.Y);
              g.RotateTransform(-_angle);
              g.TranslateTransform(-center.X, -center.Y);
         

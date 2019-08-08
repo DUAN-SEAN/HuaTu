@@ -106,8 +106,15 @@ namespace DrawWork
         {
             get
             {
-                return new RectangleF(rectangle.X + parentPointF.X, rectangle.Y + parentPointF.Y, rectangle.Width,
-                    rectangle.Height);
+                if(Parent != null)
+                {
+                    var point = Parent.GetCenter();
+                    return new RectangleF(rectangle.X + point.X, rectangle.Y + point.Y, rectangle.Width,
+                        rectangle.Height);
+                }
+
+                return rectangle;
+
             }
 
         }

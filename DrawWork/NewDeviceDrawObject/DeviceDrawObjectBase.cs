@@ -84,6 +84,7 @@ namespace DrawWork
                 foreach (var deviceDrawObjectBase in deviceDrawObjectBases)
                 {
                     deviceDrawObjectBase.ParentPointF = new PointF(left, top);
+                    deviceDrawObjectBase.SetParent(this);
                     deviceDrawObjectBase.Proportion = new PointF(deviceDrawObjectBase.Width / right - left, deviceDrawObjectBase.Height / bottom - top);
 
                 }
@@ -91,6 +92,8 @@ namespace DrawWork
                 foreach (var drawObject in drawobjs)
                 {
                     drawObject.ParentPointF = new PointF(left, top);
+                    drawObject.SetParent(this);
+
                     if (drawObject is DrawRectangleObject rectangleObject)
                         rectangleObject.Proportion = new PointF(rectangleObject.Width / right - left,
                             rectangleObject.Height / bottom - top);
