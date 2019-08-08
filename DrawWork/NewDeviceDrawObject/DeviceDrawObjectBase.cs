@@ -35,16 +35,16 @@ namespace DrawWork
         /// <summary>
         /// 引用的设备id
         /// </summary>
-        public string _hrefId;//引用设备id
+        public string _hrefId; //引用设备id
 
         public float ViewBox_w;
 
         public float ViewBox_h;
-        
+
         public DeviceDrawObjectBase()
         {
             SetRectangleF(0, 0, 1, 1);
-            
+
             Initialize();
         }
 
@@ -53,7 +53,9 @@ namespace DrawWork
             ViewBox_w = w;
             ViewBox_h = h;
         }
-        public DeviceDrawObjectBase(float x, float y, float width, float height,string entityId,List<DrawObject> drawobjs,List<DeviceDrawObjectBase> deviceDrawObjectBases,string hrefId)
+
+        public DeviceDrawObjectBase(float x, float y, float width, float height, string entityId,
+            List<DrawObject> drawobjs, List<DeviceDrawObjectBase> deviceDrawObjectBases, string hrefId)
         {
             //这里的矩形是画布的位置和长宽
             rectangle.X = x;
@@ -80,7 +82,8 @@ namespace DrawWork
                         if (point.Y > bottom) bottom = point.Y;
                     }
                 }
-            if(drawobjs != null)
+
+            if (drawobjs != null)
                 foreach (var drawObject in drawobjs)
                 {
                     for (int i = 0; i < drawObject.HandleCount; i++)
@@ -92,14 +95,17 @@ namespace DrawWork
                         if (point.Y > bottom) bottom = point.Y;
                     }
                 }
+
             if (deviceDrawObjectBases != null)
                 foreach (var deviceDrawObjectBase in deviceDrawObjectBases)
                 {
                     deviceDrawObjectBase.ParentPointF = new PointF(left, top);
                     deviceDrawObjectBase.SetParent(this);
-                    deviceDrawObjectBase.Proportion = new PointF(deviceDrawObjectBase.Width / right - left, deviceDrawObjectBase.Height / bottom - top);
+                    deviceDrawObjectBase.Proportion = new PointF(deviceDrawObjectBase.Width / right - left,
+                        deviceDrawObjectBase.Height / bottom - top);
 
                 }
+
             if (drawobjs != null)
                 foreach (var drawObject in drawobjs)
                 {
@@ -116,15 +122,16 @@ namespace DrawWork
 
 
             this._hrefId = hrefId;
-           
 
-            
+
+
 
 
             Initialize();
         }
+    
 
-        #region DrawMethod
+    #region DrawMethod
         /// <summary>
         /// 获取当前中心点
         /// </summary>
@@ -222,13 +229,13 @@ namespace DrawWork
         //        for (int i = 0; i < drawObjects.Count; i++)
         //        {
 
-                    if (drawObjects[i] is DrawRectangleObject drectangle)
-                    {
-                        var center = GetHandle(handleNumber);
-                        var drawcenter =  drawObjects[i].GetHandle(handleNumber);
-                        var xdis = point.X - center.X;
-                        var ydis = point.Y - center.Y;
-                        var pro = drawObjects[i].Proportion;
+                    //if (drawObjects[i] is DrawRectangleObject drectangle)
+                    //{
+                    //    var center = GetHandle(handleNumber);
+                    //    var drawcenter =  drawObjects[i].GetHandle(handleNumber);
+                    //    var xdis = point.X - center.X;
+                    //    var ydis = point.Y - center.Y;
+                    //    var pro = drawObjects[i].Proportion;
 
         //                drawObjects[i].MoveHandleTo(
         //                    new PointF(drawcenter.X + xdis * pro.X, drawcenter.Y + ydis * pro.Y),
@@ -241,45 +248,45 @@ namespace DrawWork
         //                {
         //                    //中心位置拉伸
 
-                            drectangle.SetRectangleF(drectangle.Rectangle.X + xdis * pro.X,
-                                drectangle.Rectangle.Y + ydis * pro.Y, drectangle.Width, drectangle.Height);
-                        }
+        //                    drectangle.SetRectangleF(drectangle.Rectangle.X + xdis * pro.X,
+        //                        drectangle.Rectangle.Y + ydis * pro.Y, drectangle.Width, drectangle.Height);
+                        
                             
-                    }
-                }
-            if (deviceDrawObjectBases != null)
-                for (int i = 0; i < deviceDrawObjectBases.Count; i++)
-                {
-                    if (deviceDrawObjectBases[i] != null)
-                    {
+                    
+        //        }
+        //    if (deviceDrawObjectBases != null)
+        //        for (int i = 0; i < deviceDrawObjectBases.Count; i++)
+        //        {
+        //            if (deviceDrawObjectBases[i] != null)
+        //            {
 
-        //                var center = GetHandle(handleNumber);
-        //                var drawcenter = deviceDrawObjectBases[i].GetHandle(handleNumber);
-        //                var xdis = point.X - center.X;
-        //                var ydis = point.Y - center.Y;
-        //                var pro = deviceDrawObjectBases[i].Proportion;
+        ////                var center = GetHandle(handleNumber);
+        ////                var drawcenter = deviceDrawObjectBases[i].GetHandle(handleNumber);
+        ////                var xdis = point.X - center.X;
+        ////                var ydis = point.Y - center.Y;
+        ////                var pro = deviceDrawObjectBases[i].Proportion;
 
-        //                deviceDrawObjectBases[i].MoveHandleTo(
-        //                    new PointF(drawcenter.X + xdis * pro.X, drawcenter.Y + ydis * pro.Y),
-        //                    handleNumber);
+        ////                deviceDrawObjectBases[i].MoveHandleTo(
+        ////                    new PointF(drawcenter.X + xdis * pro.X, drawcenter.Y + ydis * pro.Y),
+        ////                    handleNumber);
 
-        //                if (deviceDrawObjectBases[i].Rectangle.X + xdis * pro.X > rectangle.X &&
-        //                    deviceDrawObjectBases[i].Rectangle.X + xdis * pro.X +
-        //                    deviceDrawObjectBases[i].Rectangle.Width < rectangle.X + Width &&
-        //                    deviceDrawObjectBases[i].Rectangle.Y + ydis * pro.Y > rectangle.Y &&
-        //                    deviceDrawObjectBases[i].Rectangle.Y + ydis * pro.Y +
-        //                    deviceDrawObjectBases[i].Rectangle.Height < rectangle.Y + Height)
-        //                {
-        //                    //中心位置拉伸
+        ////                if (deviceDrawObjectBases[i].Rectangle.X + xdis * pro.X > rectangle.X &&
+        ////                    deviceDrawObjectBases[i].Rectangle.X + xdis * pro.X +
+        ////                    deviceDrawObjectBases[i].Rectangle.Width < rectangle.X + Width &&
+        ////                    deviceDrawObjectBases[i].Rectangle.Y + ydis * pro.Y > rectangle.Y &&
+        ////                    deviceDrawObjectBases[i].Rectangle.Y + ydis * pro.Y +
+        ////                    deviceDrawObjectBases[i].Rectangle.Height < rectangle.Y + Height)
+        ////                {
+        ////                    //中心位置拉伸
 
-        //                    deviceDrawObjectBases[i].SetRectangleF(deviceDrawObjectBases[i].Rectangle.X + xdis * pro.X,
-        //                        deviceDrawObjectBases[i].Rectangle.Y + ydis * pro.Y, rectangle.Width, rectangle.Height);
-        //                }
+        ////                    deviceDrawObjectBases[i].SetRectangleF(deviceDrawObjectBases[i].Rectangle.X + xdis * pro.X,
+        ////                        deviceDrawObjectBases[i].Rectangle.Y + ydis * pro.Y, rectangle.Width, rectangle.Height);
+        ////                }
 
-                    }
-                }
-            base.MoveHandleTo(point, handleNumber);
-        }
+        //            }
+        //        }
+        //    base.MoveHandleTo(point, handleNumber);
+        //}
 
 
 
@@ -310,12 +317,43 @@ namespace DrawWork
 
         }
 
+#endregion
+
+
 
 
         #region Helper
 
-        
+
 
         #endregion
+
+        public DeviceDrawObjectBase GetNearestPort(PointF getHandle)
+        {
+            float dis = float.MaxValue;
+            int min = 0;
+            DeviceDrawObjectBase obj = null;
+            if(deviceDrawObjectBases != null)
+            {
+                for (int i = 0; i < deviceDrawObjectBases.Count; i++)
+                {
+                    var point = deviceDrawObjectBases[i].GetCenter();
+                    var disnow = (point.X - getHandle.X) * (point.X - getHandle.X) +
+                                 (point.Y - getHandle.Y) * (point.Y - getHandle.Y);
+                    if (disnow < dis)
+                    {
+                        dis = disnow;
+                        min = i;
+
+                    }
+                }
+
+                obj = deviceDrawObjectBases[min];
+            }
+
+            return obj;
+            
+
+        }
     }
 }
