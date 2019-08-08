@@ -153,17 +153,18 @@ namespace DrawWork.Symbol
         /// <summary>
         /// 获取设备定义的svg
         /// </summary>
-        public void GetSymbolXml()
+        public string GetSymbolXml()
         {
             string s = "";
             s += "<symbol ";
-            s += " id\"" + SymbolId + "\"" + " viewBox\"" + x + " " + y + " " + width + " " + height + "\">";
+            s += " id=\"" + SymbolId + "\"" + " viewBox=\"" + x + " " + y + " " + width + " " + height + "\">";
             s += "\r\n";
             foreach (var symbolChild in _symbolChildSvgs)
             {
                 s += symbolChild.GetAttributeXml();
             }
             s += "</symbol>";
+            return s;
         }
     }
 }

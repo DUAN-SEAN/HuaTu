@@ -426,7 +426,8 @@ namespace HuaTuDemo
                 "\" height=\"" + _mOriginalSize.Height.ToString(CultureInfo.InvariantCulture) + "\">" + "\r\n";
                 sXml += "<desc>" + Description + "</desc>" + "\r\n";
                 //sXml += _graphicsList.GetXmlString(_mScale);//将每一个图形都转换为标准格式
-                sXml += SVGFactory.GenerateSVGXml(_mScale,null);//改为新的svg内容
+                sXml += SVGFactory.GenerateSVGXml(_mScale,GraphicsList);//改为新的svg内容
+                sXml += "\r\n";
                 sXml += "</svg>" + "\r\n";
                 sw.Write(sXml);
                 sw.Close();
