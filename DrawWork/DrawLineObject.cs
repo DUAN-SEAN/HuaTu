@@ -327,13 +327,31 @@ namespace DrawWork
         /// <returns></returns>
         public new  DrawLineObject  GetWorldDrawObject()
         {
+            PointF parents = new PointF(Parent.Rectangle.X, Parent.Rectangle.Y);
+            DeviceDrawObjectBase par = Parent;
+            
+            while (par.Parent != null)
+            {
+                par = par.Parent;
+                parents.X += par.Rectangle.X;
+                parents.Y += par.Rectangle.Y;
+            }
+
             if (Parent != null)//表示有设备父实体 则要求应用
             {
+                ////获取父物体的世界坐标
+                //var parentPosition = new PointF(Parent.Rectangle.X, Parent.Rectangle.Y);
+                ////应用缩放 获取缩放比
+                //var zoomw = Parent.Width / Parent.ViewBox_w;
+                //var zoomh = Parent.Height / Parent.ViewBox_h;
+
+                //吴悠修改
                 //获取父物体的世界坐标
-                var parentPosition = new PointF(Parent.Rectangle.X, Parent.Rectangle.Y);
+                var parentPosition = new PointF(parents.X, parents.Y);
                 //应用缩放 获取缩放比
-                var zoomw = Parent.Width / Parent.ViewBox_w;
-                var zoomh = Parent.Height / Parent.ViewBox_h;
+                var zoomw = par.Width / par.ViewBox_w;
+                var zoomh = par.Height / par.ViewBox_h;
+
                 // 固定左上角的点缩放
                 var zoomStart = new PointF(_startPoint.X*zoomw, _startPoint.Y * zoomh);
                 var zoomEnd = new PointF(_endPoint.X*zoomw, _endPoint.Y * zoomh);

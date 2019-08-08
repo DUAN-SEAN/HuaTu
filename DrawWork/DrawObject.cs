@@ -94,7 +94,20 @@ namespace DrawWork
             get => parentPointF;
         }
 
-        [Browsable(false)] public DeviceDrawObjectBase Parent;
+        protected DeviceDrawObjectBase _parent;
+
+        [Browsable(false)] public DeviceDrawObjectBase Parent {
+            set
+            {
+                _parent = value;
+            }
+
+            get
+            {
+              
+                return _parent;
+            }
+    }
 
         [Browsable(false)]
         public bool HitOnCircumferance { get; set; }

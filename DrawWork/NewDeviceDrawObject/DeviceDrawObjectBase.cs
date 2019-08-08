@@ -70,6 +70,7 @@ namespace DrawWork
             float top = rectangle.Top;
             float right = rectangle.Right;
             float bottom = rectangle.Bottom;
+
             if (deviceDrawObjectBases != null)
                 foreach (var deviceDrawObjectBase in deviceDrawObjectBases)
                 {

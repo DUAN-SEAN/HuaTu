@@ -60,13 +60,31 @@ namespace DrawWork
 
         public new  DrawEllipseObject GetWorldDrawObject()
         {
+            PointF parents = new PointF(Parent.Rectangle.X, Parent.Rectangle.Y);
+            DeviceDrawObjectBase par = Parent;
+
+            while (par.Parent != null)
+            {
+                par = par.Parent;
+                parents.X += par.Rectangle.X;
+                parents.Y += par.Rectangle.Y;
+            }
+
+
             if (Parent != null)
             {
+                ////获取父物体的世界坐标
+                //var parentPosition = new PointF(Parent.Rectangle.X, Parent.Rectangle.Y);
+                ////应用缩放 获取缩放比
+                //var zoomw = Parent.Width / Parent.ViewBox_w;
+                //var zoomh = Parent.Height / Parent.ViewBox_h;
+
+                //吴悠修改
                 //获取父物体的世界坐标
-                var parentPosition = new PointF(Parent.Rectangle.X, Parent.Rectangle.Y);
+                var parentPosition = new PointF(parents.X, parents.Y);
                 //应用缩放 获取缩放比
-                var zoomw = Parent.Width / Parent.ViewBox_w;
-                var zoomh = Parent.Height / Parent.ViewBox_h;
+                var zoomw = par.Width / par.ViewBox_w;
+                var zoomh = par.Height / par.ViewBox_h;
 
                 var worldDrawObj = new DrawEllipseObject(rectangle.X + parentPosition.X, rectangle.Y + parentPosition.Y,
                     zoomw * rectangle.Width, zoomh * rectangle.Height);
