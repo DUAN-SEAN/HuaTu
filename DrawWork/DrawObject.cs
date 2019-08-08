@@ -338,6 +338,8 @@ namespace DrawWork
             return false;
         }
 
+       
+
         /// <summary>
         /// 测试点是否在对象内部
         /// </summary>
@@ -414,10 +416,19 @@ namespace DrawWork
         }
 
         /// <summary>
-        /// 鼠标单击句柄
+        /// 鼠标单击句柄 落下
         /// </summary>
         public virtual void MouseClickOnHandle(int handle)
         {
+        }
+
+        /// <summary>
+        /// 鼠标单击句柄 抬起
+        /// </summary>
+        /// <param name="handle"></param>
+        public virtual void MouseClickOnHandleUp(int handle)
+        {
+
         }
 
         /// <summary>

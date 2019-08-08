@@ -249,7 +249,8 @@ namespace DrawWork
                     {
                         case 'M':
                             p1 = ((PathCommands)enumerator.Current).P;
-                            gp.CloseFigure();
+                            //gp.CloseFigure();
+                            
                             gp.StartFigure();
                             //p0 = p1;
                             break;
@@ -263,7 +264,7 @@ namespace DrawWork
                         case 'Z':
                             p2 = ((PathCommands)enumerator.Current).P;
                             gp.AddLine(p1, p2);
-                            gp.CloseFigure();
+                            //gp.CloseFigure();
                             break;
 
                         default:
