@@ -331,12 +331,14 @@ namespace DrawWork
         public DeviceDrawObjectBase GetNearestPort(PointF getHandle)
         {
             float dis = float.MaxValue;
-            int min = 0;
+            int min = -1;
             DeviceDrawObjectBase obj = null;
             if(deviceDrawObjectBases != null)
             {
                 for (int i = 0; i < deviceDrawObjectBases.Count; i++)
                 {
+                    if(deviceDrawObjectBases[i]._hrefId != "Port:端子") continue;
+
                     var point = deviceDrawObjectBases[i].GetCenter();
                     var disnow = (point.X - getHandle.X) * (point.X - getHandle.X) +
                                  (point.Y - getHandle.Y) * (point.Y - getHandle.Y);
@@ -348,7 +350,8 @@ namespace DrawWork
                     }
                 }
 
-                obj = deviceDrawObjectBases[min];
+                if (min != -1)
+                    obj = deviceDrawObjectBases[min];
             }
 
             return obj;

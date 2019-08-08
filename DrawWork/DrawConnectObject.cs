@@ -40,13 +40,13 @@ namespace DrawWork
 
         public void SetFollowDrawObject(int handleNumber, DeviceDrawObjectBase draw)
         {
-            if (handleNumber < 1)
+            if (handleNumber <= 1)
             {
                 handleNumber = 1;
                 startDrawObject = draw;
             }
 
-            if (handleNumber > _pointArray.Count)
+            if (handleNumber >= _pointArray.Count)
             {
                 handleNumber = _pointArray.Count;
                 endDrawObject = draw;

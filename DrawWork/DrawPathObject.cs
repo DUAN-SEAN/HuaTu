@@ -521,7 +521,8 @@ namespace DrawWork
                 GraphicsPath areaPath1 = new GraphicsPath();
                 Pen AreaPen1 = new Pen(Color.Black, 2);
                 areaPath1.AddLine(points[i].X, points[i].Y, points[i + 1].X, points[i + 1].Y);
-                areaPath1.Widen(AreaPen1);
+                if (points[i] != points[i + 1])
+                    areaPath1.Widen(AreaPen1);
 
                 // Create region from the path
                 Region areaRegion = new Region(areaPath1);
@@ -529,6 +530,8 @@ namespace DrawWork
 
                 InsertAt = i + 1;
                 _pointToInsert = new PointF(hitPoint.X, hitPoint.Y);
+
+                areaPath1.Dispose();
 
                 if (retVal)
                     break;
