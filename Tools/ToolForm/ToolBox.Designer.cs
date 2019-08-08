@@ -43,6 +43,7 @@ namespace HuaTuDemo.Tools.ToolForm
             this.radioButton_text = new System.Windows.Forms.RadioButton();
             this.radioButton_pan = new System.Windows.Forms.RadioButton();
             this.radioButton_image = new System.Windows.Forms.RadioButton();
+            this.radioButton_connect = new System.Windows.Forms.RadioButton();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -57,10 +58,12 @@ namespace HuaTuDemo.Tools.ToolForm
             this.flowLayoutPanel1.Controls.Add(this.radioButton_text);
             this.flowLayoutPanel1.Controls.Add(this.radioButton_pan);
             this.flowLayoutPanel1.Controls.Add(this.radioButton_image);
+            this.flowLayoutPanel1.Controls.Add(this.radioButton_connect);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(94, 240);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(172, 388);
             this.flowLayoutPanel1.TabIndex = 0;
             // 
             // radioButton_Pointer
@@ -68,17 +71,18 @@ namespace HuaTuDemo.Tools.ToolForm
             this.radioButton_Pointer.Appearance = System.Windows.Forms.Appearance.Button;
             this.radioButton_Pointer.ImageKey = "Pointer32x32.ico";
             this.radioButton_Pointer.ImageList = this.imageList;
-            this.radioButton_Pointer.Location = new System.Drawing.Point(3, 3);
+            this.radioButton_Pointer.Location = new System.Drawing.Point(6, 5);
+            this.radioButton_Pointer.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
             this.radioButton_Pointer.Name = "radioButton_Pointer";
-            this.radioButton_Pointer.Size = new System.Drawing.Size(35, 38);
+            this.radioButton_Pointer.Size = new System.Drawing.Size(64, 61);
             this.radioButton_Pointer.TabIndex = 0;
             this.radioButton_Pointer.TabStop = true;
             this.radioButton_Pointer.UseVisualStyleBackColor = true;
             this.radioButton_Pointer.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
-            //
+            // 
             // imageList
-            //
-            this.imageList.ImageStream = (System.Windows.Forms.ImageListStreamer) (Resources.imageList_ImageStream);
+            // 
+            this.imageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList.ImageStream")));
             this.imageList.TransparentColor = System.Drawing.Color.Transparent;
             this.imageList.Images.SetKeyName(0, "Line32x32.ico");
             this.imageList.Images.SetKeyName(1, "Rectangle32x32.ico");
@@ -95,9 +99,10 @@ namespace HuaTuDemo.Tools.ToolForm
             this.radioButton_rectangle.Appearance = System.Windows.Forms.Appearance.Button;
             this.radioButton_rectangle.ImageKey = "Rectangle32x32.ico";
             this.radioButton_rectangle.ImageList = this.imageList;
-            this.radioButton_rectangle.Location = new System.Drawing.Point(44, 3);
+            this.radioButton_rectangle.Location = new System.Drawing.Point(82, 5);
+            this.radioButton_rectangle.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
             this.radioButton_rectangle.Name = "radioButton_rectangle";
-            this.radioButton_rectangle.Size = new System.Drawing.Size(35, 38);
+            this.radioButton_rectangle.Size = new System.Drawing.Size(64, 61);
             this.radioButton_rectangle.TabIndex = 0;
             this.radioButton_rectangle.TabStop = true;
             this.radioButton_rectangle.UseVisualStyleBackColor = true;
@@ -108,9 +113,10 @@ namespace HuaTuDemo.Tools.ToolForm
             this.radioButton_line.Appearance = System.Windows.Forms.Appearance.Button;
             this.radioButton_line.ImageKey = "Line32x32.ico";
             this.radioButton_line.ImageList = this.imageList;
-            this.radioButton_line.Location = new System.Drawing.Point(3, 47);
+            this.radioButton_line.Location = new System.Drawing.Point(6, 76);
+            this.radioButton_line.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
             this.radioButton_line.Name = "radioButton_line";
-            this.radioButton_line.Size = new System.Drawing.Size(35, 38);
+            this.radioButton_line.Size = new System.Drawing.Size(64, 61);
             this.radioButton_line.TabIndex = 0;
             this.radioButton_line.TabStop = true;
             this.radioButton_line.UseVisualStyleBackColor = true;
@@ -121,9 +127,10 @@ namespace HuaTuDemo.Tools.ToolForm
             this.radioButton_ellipse.Appearance = System.Windows.Forms.Appearance.Button;
             this.radioButton_ellipse.ImageIndex = 3;
             this.radioButton_ellipse.ImageList = this.imageList;
-            this.radioButton_ellipse.Location = new System.Drawing.Point(44, 47);
+            this.radioButton_ellipse.Location = new System.Drawing.Point(82, 76);
+            this.radioButton_ellipse.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
             this.radioButton_ellipse.Name = "radioButton_ellipse";
-            this.radioButton_ellipse.Size = new System.Drawing.Size(35, 38);
+            this.radioButton_ellipse.Size = new System.Drawing.Size(64, 61);
             this.radioButton_ellipse.TabIndex = 0;
             this.radioButton_ellipse.TabStop = true;
             this.radioButton_ellipse.UseVisualStyleBackColor = true;
@@ -134,9 +141,10 @@ namespace HuaTuDemo.Tools.ToolForm
             this.radioButton_pencil.Appearance = System.Windows.Forms.Appearance.Button;
             this.radioButton_pencil.ImageKey = "Pencil.ico";
             this.radioButton_pencil.ImageList = this.imageList;
-            this.radioButton_pencil.Location = new System.Drawing.Point(3, 91);
+            this.radioButton_pencil.Location = new System.Drawing.Point(6, 147);
+            this.radioButton_pencil.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
             this.radioButton_pencil.Name = "radioButton_pencil";
-            this.radioButton_pencil.Size = new System.Drawing.Size(35, 38);
+            this.radioButton_pencil.Size = new System.Drawing.Size(64, 61);
             this.radioButton_pencil.TabIndex = 0;
             this.radioButton_pencil.TabStop = true;
             this.radioButton_pencil.UseVisualStyleBackColor = true;
@@ -147,9 +155,10 @@ namespace HuaTuDemo.Tools.ToolForm
             this.radioButton_path.Appearance = System.Windows.Forms.Appearance.Button;
             this.radioButton_path.ImageKey = "Path32x32.ico";
             this.radioButton_path.ImageList = this.imageList;
-            this.radioButton_path.Location = new System.Drawing.Point(44, 91);
+            this.radioButton_path.Location = new System.Drawing.Point(82, 147);
+            this.radioButton_path.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
             this.radioButton_path.Name = "radioButton_path";
-            this.radioButton_path.Size = new System.Drawing.Size(35, 38);
+            this.radioButton_path.Size = new System.Drawing.Size(64, 61);
             this.radioButton_path.TabIndex = 0;
             this.radioButton_path.TabStop = true;
             this.radioButton_path.UseVisualStyleBackColor = true;
@@ -160,9 +169,10 @@ namespace HuaTuDemo.Tools.ToolForm
             this.radioButton_text.Appearance = System.Windows.Forms.Appearance.Button;
             this.radioButton_text.ImageKey = "Text23x32.ico";
             this.radioButton_text.ImageList = this.imageList;
-            this.radioButton_text.Location = new System.Drawing.Point(3, 135);
+            this.radioButton_text.Location = new System.Drawing.Point(6, 218);
+            this.radioButton_text.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
             this.radioButton_text.Name = "radioButton_text";
-            this.radioButton_text.Size = new System.Drawing.Size(35, 38);
+            this.radioButton_text.Size = new System.Drawing.Size(64, 61);
             this.radioButton_text.TabIndex = 0;
             this.radioButton_text.TabStop = true;
             this.radioButton_text.UseVisualStyleBackColor = true;
@@ -173,9 +183,10 @@ namespace HuaTuDemo.Tools.ToolForm
             this.radioButton_pan.Appearance = System.Windows.Forms.Appearance.Button;
             this.radioButton_pan.ImageKey = "PanHand.ico";
             this.radioButton_pan.ImageList = this.imageList;
-            this.radioButton_pan.Location = new System.Drawing.Point(44, 135);
+            this.radioButton_pan.Location = new System.Drawing.Point(82, 218);
+            this.radioButton_pan.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
             this.radioButton_pan.Name = "radioButton_pan";
-            this.radioButton_pan.Size = new System.Drawing.Size(35, 38);
+            this.radioButton_pan.Size = new System.Drawing.Size(64, 61);
             this.radioButton_pan.TabIndex = 0;
             this.radioButton_pan.TabStop = true;
             this.radioButton_pan.UseVisualStyleBackColor = true;
@@ -186,24 +197,40 @@ namespace HuaTuDemo.Tools.ToolForm
             this.radioButton_image.Appearance = System.Windows.Forms.Appearance.Button;
             this.radioButton_image.ImageKey = "image.png";
             this.radioButton_image.ImageList = this.imageList;
-            this.radioButton_image.Location = new System.Drawing.Point(3, 179);
+            this.radioButton_image.Location = new System.Drawing.Point(6, 289);
+            this.radioButton_image.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
             this.radioButton_image.Name = "radioButton_image";
-            this.radioButton_image.Size = new System.Drawing.Size(35, 38);
+            this.radioButton_image.Size = new System.Drawing.Size(64, 61);
             this.radioButton_image.TabIndex = 0;
             this.radioButton_image.TabStop = true;
             this.radioButton_image.UseVisualStyleBackColor = true;
             this.radioButton_image.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
             // 
+            // radioButton_connect
+            // 
+            this.radioButton_connect.Appearance = System.Windows.Forms.Appearance.Button;
+            this.radioButton_connect.ImageKey = "Line32x32.ico";
+            this.radioButton_connect.ImageList = this.imageList;
+            this.radioButton_connect.Location = new System.Drawing.Point(82, 289);
+            this.radioButton_connect.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
+            this.radioButton_connect.Name = "radioButton_connect";
+            this.radioButton_connect.Size = new System.Drawing.Size(64, 61);
+            this.radioButton_connect.TabIndex = 1;
+            this.radioButton_connect.TabStop = true;
+            this.radioButton_connect.UseVisualStyleBackColor = true;
+            this.radioButton_connect.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
+
+            // 
             // ToolBox
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(97, 243);
+            this.ClientSize = new System.Drawing.Size(178, 393);
             this.Controls.Add(this.flowLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            //this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
             this.Name = "ToolBox";
-            this.Padding = new System.Windows.Forms.Padding(0, 0, 3, 3);
+            this.Padding = new System.Windows.Forms.Padding(0, 0, 6, 5);
             this.Text = "ToolBox";
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -223,11 +250,6 @@ namespace HuaTuDemo.Tools.ToolForm
         private System.Windows.Forms.RadioButton radioButton_text;
         private System.Windows.Forms.RadioButton radioButton_path;
         private System.Windows.Forms.RadioButton radioButton_image;
-
-
-
-
-
-
+        private System.Windows.Forms.RadioButton radioButton_connect;
     }
 }

@@ -223,10 +223,10 @@ namespace DrawWork
 
         public void SetFollowObjectNull(int handleNumber)
         {
-            if(handleNumber == 1)
-            _startObject = null;
+            if (handleNumber == 1)
+                _startObject = null;
             else if (handleNumber != 2)
-            _endObject = null;
+                _endObject = null;
         }
 
         ////TODO 等待段瑞重写

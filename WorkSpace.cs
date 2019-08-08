@@ -326,6 +326,10 @@ namespace HuaTuDemo
                 case "Image":
                     drawArea.ActiveTool = DrawArea.DrawToolType.Bitmap;
                     break;
+                case "Connect":
+                    drawArea.ActiveTool = DrawArea.DrawToolType.Connect;
+                    break;
+                    
                 case "Device":
                     DeviceEventArg deviceEventArg = e as DeviceEventArg;
                     if (deviceEventArg != null)

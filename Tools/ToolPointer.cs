@@ -79,6 +79,11 @@ namespace HuaTuDemo
                     {
                         ((DrawConnectLine)o).SetFollowObjectNull(handleNumber);
                     }
+
+                    if (o is DrawConnectObject connect)
+                    {
+                        connect.SetFollowDrawObject(handleNumber,null);
+                    }
                     //if (o is WireConnectLineDrawObject && handleNumber != 2)
                     //{
                     //    ((WireConnectLineDrawObject)o).SetFollowObjectNull(handleNumber);
@@ -334,6 +339,21 @@ namespace HuaTuDemo
                         if (drawArea.GraphicsList[i].HitTest(line.GetHandle(_resizedObjectHandle)) >= 0)
                         {
                             line.SetFollowObject(_resizedObjectHandle, drawArea.GraphicsList[i]);
+                        }
+                    }
+                }
+
+                if (_resizedObject is DrawConnectObject connect)
+                {
+                    for (int i = 0; i < drawArea.GraphicsList.Count; i++)
+                    {
+                        if(drawArea.GraphicsList[i] is DeviceDrawObjectBase device)
+                        {
+                            if (device.HitTest(connect.GetHandle(_resizedObjectHandle)) >= 0)
+                            {
+                                connect.SetFollowDrawObject(_resizedObjectHandle,
+                                    device.GetNearestPort(connect.GetHandle(_resizedObjectHandle)));
+                            }
                         }
                     }
                 }

@@ -111,6 +111,8 @@ namespace DrawWork
 
             Initialize();
         }
+
+        #region DrawMethod
         /// <summary>
         /// 获取当前中心点
         /// </summary>
@@ -148,13 +150,13 @@ namespace DrawWork
 
         public override void Rotate(float angle)
         {
-         
+
 
             if (drawObjects != null)
             {
                 for (int i = 0; i < drawObjects.Count; i++)
                 {
-                    drawObjects[i].Rotate(angle,GetCenter());
+                    drawObjects[i].Rotate(angle, GetCenter());
                 }
             }
 
@@ -164,7 +166,7 @@ namespace DrawWork
 
                 for (int i = 0; i < deviceDrawObjectBases.Count; i++)
                 {
-                    deviceDrawObjectBases[i].Rotate(angle,GetCenter());
+                    deviceDrawObjectBases[i].Rotate(angle, GetCenter());
                 }
             }
             base.Rotate(angle);
@@ -172,13 +174,13 @@ namespace DrawWork
 
         public override void Draw(Graphics g)
         {
-            if(drawObjects!=null)
+            if (drawObjects != null)
                 for (int i = 0; i < drawObjects.Count; i++)
                 {
                     drawObjects[i].ParentPointF = new PointF(ParentAndRectangleF.X, ParentAndRectangleF.Y);
                     drawObjects[i].Draw(g);
                 }
-            if(deviceDrawObjectBases!=null)
+            if (deviceDrawObjectBases != null)
                 for (int i = 0; i < deviceDrawObjectBases.Count; i++)
                 {
                     deviceDrawObjectBases[i].ParentPointF = new PointF(ParentAndRectangleF.X, ParentAndRectangleF.Y);
@@ -211,7 +213,7 @@ namespace DrawWork
                     if (drawObjects[i] is DrawRectangleObject drectangle)
                     {
                         var center = GetHandle(handleNumber);
-                        var drawcenter =  drawObjects[i].GetHandle(handleNumber);
+                        var drawcenter = drawObjects[i].GetHandle(handleNumber);
                         var xdis = point.X - center.X;
                         var ydis = point.Y - center.Y;
                         var pro = drawObjects[i].Proportion;
@@ -230,7 +232,7 @@ namespace DrawWork
                             drectangle.SetRectangleF(drectangle.Rectangle.X + xdis * pro.X,
                                 drectangle.Rectangle.Y + ydis * pro.Y, drectangle.Width, drectangle.Height);
                         }
-                            
+
                     }
                 }
             if (deviceDrawObjectBases != null)
@@ -266,8 +268,62 @@ namespace DrawWork
                 }
             base.MoveHandleTo(point, handleNumber);
         }
+        #endregion
 
-       
+
+        #region 设备函数
+
+        /// <summary>
+        /// 得到最近的端子
+        /// </summary>
+        /// <param name="point"></param>
+        /// <returns></returns>
+        public DeviceDrawObjectBase GetNearestPort(PointF point)
+        {
+            float dis = float.MaxValue;
+            int min = 0;
+            if(deviceDrawObjectBases != null)
+                for (int i = 0; i < deviceDrawObjectBases.Count; i++)
+                {
+                    if (deviceDrawObjectBases[i]._hrefId != "Port:端子") continue;
+
+                    var p = deviceDrawObjectBases[i].GetCenter();
+
+                    float disnow = (p.X - point.X) * (p.X - point.X) + (p.Y - point.Y) * (p.Y - point.Y);
+
+                    if (disnow < dis)
+                    {
+                        dis = disnow;
+                        min = i;
+                    }
+                }
+
+            //if(drawObjects != null)
+            //    for (int i = 0; i < drawObjects.Count; i++)
+            //    {
+            //        if (drawObjects[i]._hrefId != "Port:端子") continue;
+
+            //        var p = deviceDrawObjectBases[i].GetCenter();
+
+            //        float disnow = (p.X - point.X) * (p.X - point.X) + (p.Y - point.Y) * (p.Y - point.Y);
+
+            //        if (disnow < dis)
+            //        {
+            //            dis = disnow;
+            //            min = i;
+            //        }
+            //    }
+            return deviceDrawObjectBases[min];
+
+        }
+
+        #endregion
+
+
+
+
+
+
 
         /// <summary>
         /// 获取设备实体的xm

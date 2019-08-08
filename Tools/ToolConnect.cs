@@ -1,42 +1,36 @@
-﻿
-
+﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
+using System.Reflection;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using DrawTools;
 using DrawWork;
-using HuaTuDemo;
 
-namespace DrawTools
+namespace HuaTuDemo.Tools
 {
-    using System.Drawing;
-    using System.Reflection;
-    using System.Windows.Forms;
-    /// <summary>
-    /// Polygon tool
-    /// </summary>
-    public class ToolPath : ToolObject
+    public class ToolConnect : ToolObject
     {
         #region Fields
 
-        private DrawPathObject  _newPath;
+        private DrawConnectObject _newPath;
         bool _startPathDraw = true;
 
         #endregion Fields
+        #region 构造器
 
-        #region Constructors
-
-        public ToolPath()
+        public ToolConnect()
         {
-            //Cursor = new Cursor(GetType(), "Pencil.cur");
+            //Cursor = new Cursor(GetType(), "Line.cur");
             Cursor = new Cursor(Assembly.GetExecutingAssembly().GetManifestResourceStream("HuaTuDemo.Resources.Pencil.cur"));
         }
 
-        #endregion Constructors
+        #endregion 构造器
 
-        #region Methods
+        #region 函数
 
-        /// <summary>
-        /// Left nouse button is pressed
-        /// </summary>
-        /// <param name="drawArea"></param>
-        /// <param name="e"></param>
         public override void OnMouseDown(DrawArea drawArea, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right)
@@ -49,7 +43,7 @@ namespace DrawTools
             // and keep reference to it
             if (_startPathDraw)
             {
-                _newPath = new DrawPathObject(e.X, e.Y);
+                _newPath = new DrawConnectObject(e.X, e.Y);
                 AddNewObject(drawArea, _newPath);
                 _startPathDraw = false;
                 IsComplete = false;
@@ -60,11 +54,6 @@ namespace DrawTools
             }
         }
 
-        /// <summary>
-        /// Mouse move - resize new polygon
-        /// </summary>
-        /// <param name="drawArea"></param>
-        /// <param name="e"></param>
         public override void OnMouseMove(DrawArea drawArea, MouseEventArgs e)
         {
             drawArea.Cursor = Cursor;
@@ -75,7 +64,6 @@ namespace DrawTools
                 drawArea.Refresh();
             }
         }
-
         public override void OnMouseUp(DrawArea drawArea, MouseEventArgs e)
         {
         }
@@ -88,7 +76,6 @@ namespace DrawTools
             IsComplete = true;
             _newPath = null;
         }
-
-        #endregion Methods
+        #endregion 函数
     }
 }
