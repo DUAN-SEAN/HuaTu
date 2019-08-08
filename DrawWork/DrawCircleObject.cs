@@ -237,7 +237,7 @@ namespace DrawWork
         {
             float x = float.Parse(svg.CX) - float.Parse(svg.R);
             float y = float.Parse(svg.CY) - float.Parse(svg.R);
-            float wh = float.Parse(svg.R)/2;
+            float wh = float.Parse(svg.R) * 2;
 
             DrawCircleObject o = new DrawCircleObject(x,y,wh,wh);
 

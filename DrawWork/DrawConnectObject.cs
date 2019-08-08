@@ -70,14 +70,14 @@ namespace DrawWork
                     {
                         case 'M':
                             if (startDrawObject != null)
-                                if (enumerator.Current != null && startDrawObject != null)
-                                    ((PathCommands) enumerator.Current).P = startDrawObject.GetWorldDrawObject().GetCenter();
+                                if (enumerator.Current != null && startDrawObject != null && startDrawObject.drawObjects[0] is DrawCircleObject cirstar)
+                                    ((PathCommands) enumerator.Current).P = cirstar.GetWorldDrawObject().GetCenter();
                             break;
 
 
                         case 'Z':
-                            if (enumerator.Current != null && endDrawObject != null)
-                                ((PathCommands) enumerator.Current).P = endDrawObject.GetWorldDrawObject().GetCenter();
+                            if (enumerator.Current != null && endDrawObject != null && endDrawObject.drawObjects[0] is DrawCircleObject cirend)
+                                ((PathCommands) enumerator.Current).P = cirend.GetWorldDrawObject().GetCenter();
                             break;
 
                         default:
