@@ -102,6 +102,26 @@ namespace DrawWork
             }
         }
 
+        protected RectangleF ParentAndRectangleF
+        {
+            get
+            {
+                return new RectangleF(rectangle.X + parentPointF.X, rectangle.Y + parentPointF.Y, rectangle.Width,
+                    rectangle.Height);
+            }
+
+        }
+
+        public override PointF ParentPointF
+        {
+            get => parentPointF;
+            set
+            {
+                parentPointF = value;
+               
+            }
+        }
+
         public float Width
         {
             get
@@ -244,7 +264,7 @@ namespace DrawWork
 
                 //先设定到中心位置 旋转
                 //PointF center = GetCenter();
-                PointF center = fixedCenter;
+                PointF center = new PointF(fixedCenter.X + parentPointF.X, fixedCenter.Y + parentPointF.Y);
                 g.TranslateTransform(center.X, center.Y);
                 g.RotateTransform(-_angle);
                 //设置画笔起始位置\
@@ -255,7 +275,7 @@ namespace DrawWork
 
 
 
-                RectangleF r = GetNormalizedRectangle(RectangleF);
+                RectangleF r = GetNormalizedRectangle(ParentAndRectangleF);
                 if (Fill != Color.Empty)
                 {
                     Brush brush = new SolidBrush(Fill);
@@ -474,10 +494,10 @@ namespace DrawWork
 
         public override void MoveHandleTo(PointF point, int handleNumber)
         {
-            float left = RectangleF.Left;
-            float top = RectangleF.Top;
-            float right = RectangleF.Right;
-            float bottom = RectangleF.Bottom;
+            float left = rectangle.Left;
+            float top = rectangle.Top;
+            float right = rectangle.Right;
+            float bottom = rectangle.Bottom;
 
             float x, xCenter, yCenter;
 
@@ -586,7 +606,7 @@ namespace DrawWork
             return rectangle.Contains(point);
         }
 
-        protected void SetRectangleF(float x, float y, float width, float height)
+        public void SetRectangleF(float x, float y, float width, float height)
         {
             rectangle.X = x;
             rectangle.Y = y;

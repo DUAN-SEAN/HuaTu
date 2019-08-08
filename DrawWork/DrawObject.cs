@@ -73,6 +73,11 @@ namespace DrawWork
         /// 与父级元素的长宽比例
         /// </summary>
         protected PointF proportion;
+
+        /// <summary>
+        /// 父级元素坐标
+        /// </summary>
+        protected PointF parentPointF;
         #endregion 字段
 
         #region 属性
@@ -83,6 +88,11 @@ namespace DrawWork
             get => proportion;
         }
 
+        public virtual PointF ParentPointF
+        {
+            set => parentPointF = value;
+            get => parentPointF;
+        }
 
         [Browsable(false)]
         public bool HitOnCircumferance { get; set; }

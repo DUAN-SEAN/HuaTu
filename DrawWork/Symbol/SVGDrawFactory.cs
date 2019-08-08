@@ -36,7 +36,6 @@ namespace DrawWork.Symbol
                     break;
                 case SVGUnit.SVGUnitType.typePath:
                     o = DrawPathObject.Create((SVGPath)svge);
-
                     break;
                 case SVGUnit.SVGUnitType.typeCircle:
                     o = DrawCircleObject.Create((SVGCircle) svge);

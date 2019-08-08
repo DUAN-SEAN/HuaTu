@@ -106,7 +106,6 @@ namespace DrawWork.Symbol
                         var entityLInk = CreateDeviceDrawObjectBase(childSvgUse, entityId);
                         if (deviceDrawObjectBases == null) deviceDrawObjectBases = new List<DeviceDrawObjectBase>();
                         {
-                            entityLInk.Proportion = new PointF(entityLInk.Width / w, entityLInk.Height / h);
                             deviceDrawObjectBases.Add(entityLInk);
                         }
                     }
