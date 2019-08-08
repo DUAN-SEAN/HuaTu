@@ -85,36 +85,48 @@ namespace DrawWork
 
         public new DrawCircleObject GetWorldDrawObject()
         {
-            PointF parents = new PointF(Parent.Rectangle.X, Parent.Rectangle.Y);
-            DeviceDrawObjectBase par = Parent;
-
-            while (par.Parent != null)
-            {
-                par = par.Parent;
-                parents.X += par.Rectangle.X;
-                parents.Y += par.Rectangle.Y;
-            }
 
             if (Parent != null)
             {
+                
+              
+                PointF worldTemp = new PointF();
+                var tempR = new PointF(rectangle.Width,rectangle.Height);
+                worldTemp.X = rectangle.X;//当前坐标
+                worldTemp.Y = rectangle.Y;
+                var worldPosition= new PointF(worldTemp.X,worldTemp.Y);
+                var p = Parent;
+                while (p != null)
+                {
 
-                ////获取父物体的世界坐标
-                //var parentPosition = new PointF(Parent.Rectangle.X, Parent.Rectangle.Y);
-                ////应用缩放 获取缩放比
-                //var zoomw = Parent.Width / Parent.ViewBox_w;
-                //var zoomh = Parent.Height / Parent.ViewBox_h;
+                    if (p.Width == 0 || p.Height == 0)
+                    {
+                        //worldTemp.X += p.Rectangle.X;
+                        //worldTemp.Y += p.Rectangle.Y;
+                    }
+                    else
+                    {
+                        var zw = p.Width / p.ViewBox_w;
+                        var zh = p.Height / p.ViewBox_h;
+                        worldPosition.X += worldTemp.X*zw;
+                        worldPosition.Y += worldTemp.Y*zh;
+                        tempR.X += tempR.X * zw;
+                        tempR.Y += tempR.Y * zh;
+                    }
 
-                //吴悠修改
-                //获取父物体的世界坐标
-                var parentPosition = new PointF(parents.X, parents.Y);
-                //应用缩放 获取缩放比
-                var zoomw = par.Width / par.ViewBox_w;
-                var zoomh = par.Height / par.ViewBox_h;
+                    worldTemp.X = p.Rectangle.X;
+                    worldTemp.Y = p.Rectangle.Y;
 
 
-                var worldDrawObj = new DrawCircleObject((rectangle.X * zoomw + parentPosition.X), (rectangle.Y * zoomh + parentPosition.Y),
-                    zoomw * rectangle.Width, zoomh * rectangle.Height);
+                    p = p.Parent;
+                }
 
+                worldPosition.X += worldTemp.X;
+                worldPosition.Y += worldTemp.Y;
+
+                //var worldDrawObj = new DrawCircleObject(worldPosition.X, worldPosition.Y, tempR.X, tempR.Y);
+                var worldDrawObj = new DrawCircleObject(worldPosition.X, worldPosition.Y, 5, 5);
+                
                 return worldDrawObj;
             }
 
