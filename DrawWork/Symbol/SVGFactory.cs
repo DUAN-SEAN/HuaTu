@@ -122,7 +122,7 @@ namespace DrawWork.Symbol
                     }
                 }
                 vBase = new DeviceDrawObjectBase(x, y, w, h, entityId, drawObjects, deviceDrawObjectBases, value.SymbolId);
-
+                vBase.SetViewBox(value.W,value.H);
             }
 
 
@@ -171,7 +171,7 @@ namespace DrawWork.Symbol
                         }
                     }
                     vBase = new DeviceDrawObjectBase(x, y, w, h, entityId, drawObjects, deviceDrawObjectBases, value.SymbolId);
-
+                    vBase.SetViewBox(value.W,value.H);
                 }
 
 

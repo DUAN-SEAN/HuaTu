@@ -225,6 +225,12 @@ namespace DrawWork
         {
             return $" transform=\"rotate({-angle}, {center.X} {center.Y})\"";
         }
+
+        public override float GetAngle()
+        {
+            return _angle;
+        }
+
         public static string GetRectStringXml(RectangleF rect, SizeF scale, String shapeName)
         {
             string s = "";
@@ -243,10 +249,34 @@ namespace DrawWork
             s += " ShapeName = \"" + shapeName + "\"";
             return s;
         }
+
         public override string GetXmlEnd()
         {
             return "<\\rect>" + base.GetXmlEnd();
         }
+
+
+        public new DrawRectangleObject GetWorldDrawObject()
+        {
+            if (Parent != null)
+            {
+                //获取父物体的世界坐标
+                var parentPosition = new PointF(Parent.Rectangle.X, Parent.Rectangle.Y);
+                //应用缩放 获取缩放比
+                var zoomw = Parent.Width / Parent.ViewBox_w;
+                var zoomh = Parent.Height / Parent.ViewBox_h;
+
+                var worldDrawObj =  new DrawRectangleObject(rectangle.X + parentPosition.X, rectangle.Y + parentPosition.Y,
+                    zoomw * rectangle.Width, zoomh * rectangle.Height);
+                worldDrawObj._angle = Parent.GetAngle();
+
+                return worldDrawObj;
+
+
+            }
+            return null;
+        }
+
         /// <summary>
         /// Draw rectangle
         /// </summary>
@@ -269,9 +299,21 @@ namespace DrawWork
                 //    hasMove = false;
                 //}
 
+             
+                RectangleF r = GetNormalizedRectangle(ParentAndRectangleF);
+
+                PointF center = new PointF(fixedCenter.X + parentPointF.X, fixedCenter.Y + parentPointF.Y);
+
+                if (Parent != null)
+                {
+                    var worldObj = GetWorldDrawObject();
+
+                    center = Parent.GetCenter();
+
+                    r = GetNormalizedRectangle(worldObj.Rectangle);
+                }
                 //先设定到中心位置 旋转
                 //PointF center = GetCenter();
-                PointF center = new PointF(fixedCenter.X + parentPointF.X, fixedCenter.Y + parentPointF.Y);
                 g.TranslateTransform(center.X, center.Y);
                 g.RotateTransform(-_angle);
                 //设置画笔起始位置\
@@ -282,7 +324,7 @@ namespace DrawWork
 
 
 
-                RectangleF r = GetNormalizedRectangle(ParentAndRectangleF);
+                
                 if (Fill != Color.Empty)
                 {
                     Brush brush = new SolidBrush(Fill);
@@ -290,7 +332,7 @@ namespace DrawWork
                 }
                 Pen pen = new Pen(Stroke, StrokeWidth);
                 g.DrawRectangle(pen, r.X, r.Y, r.Width, r.Height);
-                //new
+                
                 g.ResetTransform();
                 pen.Dispose();
             }
