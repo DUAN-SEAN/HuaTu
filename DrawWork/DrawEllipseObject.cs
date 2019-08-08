@@ -83,13 +83,24 @@ namespace DrawWork
                 hasRotation = false;
             }
             PointF center = fixedCenter;
+
+            RectangleF r = GetNormalizedRectangle(RectangleF);
+
+            if (Parent != null)
+            {
+                center = Parent.GetCenter();
+                var worldDrawObj =  GetWorldDrawObject();
+                r = GetNormalizedRectangle(worldDrawObj.rectangle);
+            }
+
+
             g.TranslateTransform(center.X, center.Y);
             g.RotateTransform(-_angle);
             g.TranslateTransform(-center.X, -center.Y);
-        
+            
 
 
-            RectangleF r = GetNormalizedRectangle(RectangleF);
+
             if (Fill != Color.Empty)
             {
                 Brush brush = new SolidBrush(Fill);
