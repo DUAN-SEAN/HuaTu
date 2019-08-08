@@ -58,13 +58,19 @@ namespace DrawWork
              }
              PointF center = new PointF(fixedCenter.X + parentPointF.X, fixedCenter.Y + parentPointF.Y);
 
-            g.TranslateTransform(center.X, center.Y);
+             RectangleF r = GetNormalizedRectangle(ParentAndRectangleF);
+             if (Parent != null)
+             {
+                center = Parent.GetCenter();
+                var worldDrawObj = GetWorldDrawObject();
+                r = GetNormalizedRectangle(worldDrawObj.rectangle);
+             }
+             g.TranslateTransform(center.X, center.Y);
              g.RotateTransform(-_angle);
              g.TranslateTransform(-center.X, -center.Y);
         
 
 
-             RectangleF r = GetNormalizedRectangle(ParentAndRectangleF);
 
              if (Fill != Color.Empty)
              {
@@ -77,6 +83,25 @@ namespace DrawWork
              pen.Dispose();
         }
 
+        public new DrawCircleObject GetWorldDrawObject()
+        {
+            if (Parent != null)
+            {
+
+                //获取父物体的世界坐标
+                var parentPosition = new PointF(Parent.Rectangle.X, Parent.Rectangle.Y);
+                //应用缩放 获取缩放比
+                var zoomw = Parent.Width / Parent.ViewBox_w;
+                var zoomh = Parent.Height / Parent.ViewBox_h;
+
+                var worldDrawObj = new DrawCircleObject(rectangle.X + parentPosition.X, rectangle.Y + parentPosition.Y,
+                    zoomw * rectangle.Width, zoomh * rectangle.Height);
+
+
+            }
+
+            return this;
+        }
 
         public override void Update()
         {

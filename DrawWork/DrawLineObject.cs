@@ -336,7 +336,7 @@ namespace DrawWork
                 var zoomh = Parent.Height / Parent.ViewBox_h;
                 // 固定左上角的点缩放
                 var zoomStart = new PointF(_startPoint.X, _startPoint.Y * zoomh);
-                var zoomEnd = new PointF(_endPoint.X, _endPoint.Y * zoomh);
+                var zoomEnd = new PointF(_endPoint.X*zoomw, _endPoint.Y * zoomh);
 
                 //移动到世界坐标
                 var moveStart = new PointF(parentPosition.X + zoomStart.X, parentPosition.Y + zoomStart.Y);
