@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms.VisualStyles;
+using DrawWork.NewDeviceDrawObject;
 using SVGHelper;
 using SVGHelper.Base;
 
@@ -122,7 +123,13 @@ namespace DrawWork.Symbol
                         }
                     }
                 }
-                vBase = new DeviceDrawObjectBase(x, y, w, h, entityId, drawObjects, deviceDrawObjectBases, value.SymbolId);
+                if(value.SymbolId.Contains("负荷开关@1"))
+                    vBase = new SingleDisConnectorDevice(x, y, w, h, entityId, drawObjects, deviceDrawObjectBases, value.SymbolId);
+                else
+                {
+                    vBase = new DeviceDrawObjectBase(x, y, w, h, entityId, drawObjects, deviceDrawObjectBases,
+                        value.SymbolId);
+                }
                 vBase.SetViewBox(value.W,value.H);
             }
 
