@@ -54,6 +54,7 @@
     </Compile>
     <Compile Include="Command.cs" />
     <Compile Include="Tools\DeviceEventArg.cs" />
+    <Compile Include="Tools\ToolConnect.cs" />
     <Compile Include="Tools\ToolDevice.cs" />
     <Compile Include="Tools\ToolForm\ModelBox.cs">
       <SubType>Form</SubType>
@@ -131,6 +132,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Tools\ToolForm\ModelBox.resx">
       <DependentUpon>ModelBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools\ToolForm\ToolBox.resx">
+      <DependentUpon>ToolBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WorkSpace.resx">
       <DependentUpon>WorkSpace.cs</DependentUpon>

@@ -13,7 +13,7 @@ using System.Windows.Forms;
 
 namespace DrawWork
 {
-    public sealed class DrawPathObject : DrawLineObject
+    public class DrawPathObject : DrawLineObject
     {
         #region 字段
 
@@ -23,7 +23,7 @@ namespace DrawWork
 
         readonly char[] _commands = { 'M', 'L', 'Z' }; //--M indicates move to, L LineTo and Z Close Figure
         private readonly bool _gotX, _gotY;
-        private readonly List<PathCommands> _pointArray;// list of points
+        protected readonly List<PathCommands> _pointArray;// list of points
         private readonly float _x, _y;
         private readonly String _xStr, _yStr, _xStrNxt;
 

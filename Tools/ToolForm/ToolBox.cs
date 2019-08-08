@@ -62,6 +62,10 @@ namespace HuaTuDemo.Tools.ToolForm
                 case "radioButton_image":
                     ToolSelection = "Image";
                     break;
+                case "radioButton_connect":
+                    ToolSelection = "Connect";
+                    break;
+                    
             }
 
             if (ToolSelectionChanged != null)
@@ -90,10 +94,15 @@ namespace HuaTuDemo.Tools.ToolForm
                 case DrawArea.DrawToolType.Polygon:
                     radioButton_pencil.Checked = true;
                     break;
+                case DrawArea.DrawToolType.Connect:
+                    radioButton_connect.Checked = true;
+                    break;
                 default:
                     radioButton_Pointer.Checked = true;
                     break;
             }
         }
+
+       
     }
 }

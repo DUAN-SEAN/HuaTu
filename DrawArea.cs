@@ -15,6 +15,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
+using DrawTools;
 using DrawWork.Symbol;
 
 namespace HuaTuDemo
@@ -90,7 +91,9 @@ namespace HuaTuDemo
             Path,
             
             Device,
-            NumberOfDrawTools
+            Connect,
+
+            NumberOfDrawTools,
         }
 
         #endregion 枚举
@@ -309,7 +312,7 @@ namespace HuaTuDemo
             _tools[(int)DrawToolType.Pan] = new ToolPan();
             _tools[(int)DrawToolType.Path] = new ToolPath();
             _tools[(int)DrawToolType.Device] = new ToolDevice();
-
+            _tools[(int)DrawToolType.Connect] = new ToolConnect();
             Graphics g = Owner.CreateGraphics();
             DrawObject.Dpi = new PointF(g.DpiX, g.DpiY);
         }
