@@ -102,24 +102,33 @@ namespace DrawWork
                 g.SmoothingMode = SmoothingMode.AntiAlias;
                 var pen = new Pen(Stroke, StrokeWidth);
                 PointF centerTemp = GetCenter();
-                if (Parent != null)
+                if (Parent != null)//表示有设备父实体 则要求应用
                 {
-                    centerTemp = Parent.GetCenter();
+                    var worldObj =  GetWorldDrawObject();
+                    var drawPoint1 = worldObj._startPoint;
+                    var drawPoint2 = worldObj._endPoint;
+                    //最终绘画
+                    g.DrawLine(pen, drawPoint1.X, drawPoint1.Y, drawPoint2.X, drawPoint2.Y);
+                    pen.Dispose();
+                }
+                else
+                {
+                    var drawPoint1 = RotatePoint(centerTemp,
+                        new PointF(_startPoint.X + centerTemp.X, _startPoint.Y + centerTemp.Y), _angle);
+                    var drawPoint2 = RotatePoint(centerTemp, new PointF(_endPoint.X + centerTemp.X, _endPoint.Y + centerTemp.Y), _angle);
+                    ;
+                    g.DrawLine(pen, drawPoint1.X, drawPoint1.Y, drawPoint2.X, drawPoint2.Y);
+                    pen.Dispose();
                 }
 
-                var drawPoint1 = RotatePoint(centerTemp,
-                    new PointF(_startPoint.X + centerTemp.X, _startPoint.Y + centerTemp.Y), _angle); 
-                var drawPoint2 = RotatePoint(centerTemp, new PointF(_endPoint.X + centerTemp.X, _endPoint.Y + centerTemp.Y), _angle);
-                ;
-                g.DrawLine(pen, drawPoint1.X, drawPoint1.Y, drawPoint2.X, drawPoint2.Y);
-                pen.Dispose();
+                
             }
             catch (Exception ex)
             {
                 SVGErr.Log("DrawLine", "Draw", ex.ToString(), SVGErr._LogPriority.Info);
             }
         }
-
+        
         public override PointF GetCenter()
         {
             return new PointF((_startPoint.X + _endPoint.X) / 2, (_startPoint.Y + _endPoint.Y) / 2);
@@ -301,11 +310,47 @@ namespace DrawWork
             }
         }
 
+        public override Cursor GetOutlineCursor(int handleNumber)
+        {
+            return base.GetOutlineCursor(handleNumber);
+        }
+
         protected override bool PointInObject(PointF point)
         {
             CreateObjects();
 
             return AreaRegion.IsVisible(point);
+        }
+        /// <summary>
+        /// 获取该物体在世界坐标下的变换物体
+        /// </summary>
+        /// <returns></returns>
+        public new  DrawLineObject  GetWorldDrawObject()
+        {
+            if (Parent != null)//表示有设备父实体 则要求应用
+            {
+                //获取父物体的世界坐标
+                var parentPosition = new PointF(Parent.Rectangle.X, Parent.Rectangle.Y);
+                //应用缩放 获取缩放比
+                var zoomw = Parent.Width / Parent.ViewBox_w;
+                var zoomh = Parent.Height / Parent.ViewBox_h;
+                // 固定左上角的点缩放
+                var zoomStart = new PointF(_startPoint.X, _startPoint.Y * zoomh);
+                var zoomEnd = new PointF(_endPoint.X, _endPoint.Y * zoomh);
+
+                //移动到世界坐标
+                var moveStart = new PointF(parentPosition.X + zoomStart.X, parentPosition.Y + zoomStart.Y);
+                var moveEnd = new PointF(parentPosition.X + zoomEnd.X, parentPosition.Y + zoomEnd.Y);
+
+                //最终旋转 获取父物体的位置
+                var centerTemp = Parent.GetCenter();
+                var drawPoint1 = RotatePoint(centerTemp, moveStart, _angle);
+                var drawPoint2 = RotatePoint(centerTemp, moveEnd, _angle);
+
+                return new DrawLineObject(drawPoint1.X, drawPoint1.Y, drawPoint2.X, drawPoint2.Y);
+            }
+
+            return this;
         }
 
         #region 段瑞旋转

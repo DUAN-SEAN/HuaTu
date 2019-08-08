@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using DrawWork.Symbol;
 
 namespace DrawWork
@@ -35,6 +36,11 @@ namespace DrawWork
         /// 引用的设备id
         /// </summary>
         public string _hrefId;//引用设备id
+
+        public float ViewBox_w;
+
+        public float ViewBox_h;
+        
         public DeviceDrawObjectBase()
         {
             SetRectangleF(0, 0, 1, 1);
@@ -42,8 +48,14 @@ namespace DrawWork
             Initialize();
         }
 
+        public void SetViewBox(float w, float h)
+        {
+            ViewBox_w = w;
+            ViewBox_h = h;
+        }
         public DeviceDrawObjectBase(float x, float y, float width, float height,string entityId,List<DrawObject> drawobjs,List<DeviceDrawObjectBase> deviceDrawObjectBases,string hrefId)
         {
+            //这里的矩形是画布的位置和长宽
             rectangle.X = x;
             rectangle.Y = y;
             rectangle.Width = width;
@@ -202,70 +214,70 @@ namespace DrawWork
             base.Resize(newscale, oldscale);
         }
 
-        public override void MoveHandleTo(PointF point, int handleNumber)
-        {
-            if (drawObjects != null)
-                for (int i = 0; i < drawObjects.Count; i++)
-                {
+        //public override void MoveHandl eTo(PointF point, int handleNumber)
+        //{
+        //    if (drawObjects != null)
+        //        for (int i = 0; i < drawObjects.Count; i++)
+        //        {
 
-                    if (drawObjects[i] is DrawRectangleObject drectangle)
-                    {
-                        var center = GetHandle(handleNumber);
-                        var drawcenter =  drawObjects[i].GetHandle(handleNumber);
-                        var xdis = point.X - center.X;
-                        var ydis = point.Y - center.Y;
-                        var pro = drawObjects[i].Proportion;
+        //            if (drawObjects[i] is DrawRectangleObject drectangle)
+        //            {
+        //                var center = GetHandle(handleNumber);
+        //                var drawcenter =  drawObjects[i].GetHandle(handleNumber);
+        //                var xdis = point.X - center.X;
+        //                var ydis = point.Y - center.Y;
+        //                var pro = drawObjects[i].Proportion;
 
-                        drawObjects[i].MoveHandleTo(
-                            new PointF(drawcenter.X + xdis * pro.X, drawcenter.Y + ydis * pro.Y),
-                            handleNumber);
+        //                drawObjects[i].MoveHandleTo(
+        //                    new PointF(drawcenter.X + xdis * pro.X, drawcenter.Y + ydis * pro.Y),
+        //                    handleNumber);
 
-                        if (drectangle.Rectangle.X + xdis * pro.X > rectangle.X &&
-                            drectangle.Rectangle.X + xdis * pro.X + drectangle.Rectangle.Width < rectangle.X + Width &&
-                            drectangle.Rectangle.Y + ydis * pro.Y > rectangle.Y &&
-                            drectangle.Rectangle.Y + ydis * pro.Y + drectangle.Rectangle.Height < rectangle.Y + Height)
-                        {
-                            //中心位置拉伸
+        //                if (drectangle.Rectangle.X + xdis * pro.X > rectangle.X &&
+        //                    drectangle.Rectangle.X + xdis * pro.X + drectangle.Rectangle.Width < rectangle.X + Width &&
+        //                    drectangle.Rectangle.Y + ydis * pro.Y > rectangle.Y &&
+        //                    drectangle.Rectangle.Y + ydis * pro.Y + drectangle.Rectangle.Height < rectangle.Y + Height)
+        //                {
+        //                    //中心位置拉伸
 
-                            drectangle.SetRectangleF(drectangle.Rectangle.X + xdis * pro.X,
-                                drectangle.Rectangle.Y + ydis * pro.Y, drectangle.Width, drectangle.Height);
-                        }
+        //                    drectangle.SetRectangleF(drectangle.Rectangle.X + xdis * pro.X,
+        //                        drectangle.Rectangle.Y + ydis * pro.Y, drectangle.Width, drectangle.Height);
+        //                }
                             
-                    }
-                }
-            if (deviceDrawObjectBases != null)
-                for (int i = 0; i < deviceDrawObjectBases.Count; i++)
-                {
-                    if (deviceDrawObjectBases[i] != null)
-                    {
+        //            }
+        //        }
+        //    if (deviceDrawObjectBases != null)
+        //        for (int i = 0; i < deviceDrawObjectBases.Count; i++)
+        //        {
+        //            if (deviceDrawObjectBases[i] != null)
+        //            {
 
-                        var center = GetHandle(handleNumber);
-                        var drawcenter = deviceDrawObjectBases[i].GetHandle(handleNumber);
-                        var xdis = point.X - center.X;
-                        var ydis = point.Y - center.Y;
-                        var pro = deviceDrawObjectBases[i].Proportion;
+        //                var center = GetHandle(handleNumber);
+        //                var drawcenter = deviceDrawObjectBases[i].GetHandle(handleNumber);
+        //                var xdis = point.X - center.X;
+        //                var ydis = point.Y - center.Y;
+        //                var pro = deviceDrawObjectBases[i].Proportion;
 
-                        deviceDrawObjectBases[i].MoveHandleTo(
-                            new PointF(drawcenter.X + xdis * pro.X, drawcenter.Y + ydis * pro.Y),
-                            handleNumber);
+        //                deviceDrawObjectBases[i].MoveHandleTo(
+        //                    new PointF(drawcenter.X + xdis * pro.X, drawcenter.Y + ydis * pro.Y),
+        //                    handleNumber);
 
-                        if (deviceDrawObjectBases[i].Rectangle.X + xdis * pro.X > rectangle.X &&
-                            deviceDrawObjectBases[i].Rectangle.X + xdis * pro.X +
-                            deviceDrawObjectBases[i].Rectangle.Width < rectangle.X + Width &&
-                            deviceDrawObjectBases[i].Rectangle.Y + ydis * pro.Y > rectangle.Y &&
-                            deviceDrawObjectBases[i].Rectangle.Y + ydis * pro.Y +
-                            deviceDrawObjectBases[i].Rectangle.Height < rectangle.Y + Height)
-                        {
-                            //中心位置拉伸
+        //                if (deviceDrawObjectBases[i].Rectangle.X + xdis * pro.X > rectangle.X &&
+        //                    deviceDrawObjectBases[i].Rectangle.X + xdis * pro.X +
+        //                    deviceDrawObjectBases[i].Rectangle.Width < rectangle.X + Width &&
+        //                    deviceDrawObjectBases[i].Rectangle.Y + ydis * pro.Y > rectangle.Y &&
+        //                    deviceDrawObjectBases[i].Rectangle.Y + ydis * pro.Y +
+        //                    deviceDrawObjectBases[i].Rectangle.Height < rectangle.Y + Height)
+        //                {
+        //                    //中心位置拉伸
 
-                            deviceDrawObjectBases[i].SetRectangleF(deviceDrawObjectBases[i].Rectangle.X + xdis * pro.X,
-                                deviceDrawObjectBases[i].Rectangle.Y + ydis * pro.Y, rectangle.Width, rectangle.Height);
-                        }
+        //                    deviceDrawObjectBases[i].SetRectangleF(deviceDrawObjectBases[i].Rectangle.X + xdis * pro.X,
+        //                        deviceDrawObjectBases[i].Rectangle.Y + ydis * pro.Y, rectangle.Width, rectangle.Height);
+        //                }
 
-                    }
-                }
-            base.MoveHandleTo(point, handleNumber);
-        }
+        //            }
+        //        }
+        //    base.MoveHandleTo(point, handleNumber);
+        //}
 
        
 

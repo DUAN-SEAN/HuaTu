@@ -94,7 +94,7 @@ namespace DrawWork
             get => parentPointF;
         }
 
-        [Browsable(false)] public DrawObject Parent;
+        [Browsable(false)] public DeviceDrawObjectBase Parent;
 
         [Browsable(false)]
         public bool HitOnCircumferance { get; set; }
@@ -364,7 +364,7 @@ namespace DrawWork
         /// <returns></returns>
         public virtual float GetAngle()
         {
-            return 0;
+            return _angle;
         }
 
         /// <summary>
@@ -659,11 +659,25 @@ namespace DrawWork
             StrokeWidth = LastUsedPenWidth * Zoom;
         }
         //设置父物体
-        public void SetParent(DrawObject drawObject)
+        public void SetParent(DeviceDrawObjectBase drawObject)
         {
             this.Parent = drawObject;
         }
-
+        /// <summary>
+        /// 获取图素在世界坐标下的图形
+        /// </summary>
+        /// <returns></returns>
+        public virtual DrawObject GetWorldDrawObject() { return null;}
+        /// <summary>
+        /// 从局部坐标转换到世界坐标
+        /// </summary>
+        /// <param name="current">局部坐标</param>
+        /// <param name="world">世界坐标</param>
+        /// <returns></returns>
+        public PointF PositionToWorld(PointF current, PointF world)
+        {
+            return new PointF(current.X + world.X, current.Y + world.Y);
+        }
         public virtual PointF GetCenter()
         {
             return default;

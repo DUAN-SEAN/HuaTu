@@ -20,7 +20,7 @@ namespace HuaTuDemo.Tools
             SymbolUnit._Dic.TryGetValue(currentDeviceId, out SymbolUnit value);
             var id = DateTime.Now.Ticks.ToString();
             DeviceDrawObjectBase deviceDrawObjectBase = SVGFactory.CreateDeviceDrawObjectBase((float) e.X, (float) e.Y,
-                1, 1, currentDeviceId, id);
+                10, 20, currentDeviceId, id);
 
             drawArea.GraphicsList.Add(deviceDrawObjectBase);
 

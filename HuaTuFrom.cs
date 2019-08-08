@@ -80,7 +80,23 @@ namespace HuaTuDemo
             _infoModelbar.ShowCloseButton = false;
             _modelBox.ToolSelectionChanged += ToolSelectionChanged;
 
+
+            TestInit();
+
+
         }
+
+        private void TestInit()
+        {
+
+
+            if (_svgMainFiles.LoadSvgModel("1.svg"))
+            {
+
+                _modelBox.LoadModel(SymbolUnit._Dic.Values.ToList());
+            }
+        }
+
         /// <summary>
         /// 该方法在主线程调用，100ms轮询一次
         /// </summary>
