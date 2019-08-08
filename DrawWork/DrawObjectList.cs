@@ -38,7 +38,10 @@ namespace DrawWork
         #endregion 构造器
 
         #region 属性
-
+        public ArrayList GraphicsList
+        {
+            get => _graphicsList;
+        }
         /// <summary>
         /// Count和此[Nindex]允许读取所有图形对象
         ///从循环中的graphicslist。

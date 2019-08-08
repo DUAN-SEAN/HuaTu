@@ -308,10 +308,14 @@ namespace DrawWork
                 
                 s += "<g id=\"" + _EntityId + "\">";
 
-                s += "<use "+"x=\""+rectangle.X+"\""+" y=\"" + rectangle.Y + "\""+" width=\"" + rectangle.Width + "\""+" height=\"" +
-                    rectangle.Height + "\"" + " fill=\"" + Fill + "\""+" xlink:href=\"#" + _hrefId + "\"";
+                s += "<use " + "x=\"" + rectangle.X + "\"" + " y=\"" + rectangle.Y + "\"" + " width=\"" +
+                     rectangle.Width + "\"" + " height=\"" +
+                     rectangle.Height + "\"" + " fill=\"" + Fill + "\"" + " xlink:href=\"#" + _hrefId + "\"";
+                s += GetTransformXML(_angle,GetCenter());
+                s+="/>";
 
                 s += "</g>";
+                s += "\r\n";
             }
             
             return s;

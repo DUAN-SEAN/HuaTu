@@ -190,27 +190,29 @@ namespace DrawWork.Symbol
 
         }
 
-        public static string GenerateSVGXml(SizeF scale ,List<DeviceDrawObjectBase> devices)
+        public static string GenerateSVGXml(SizeF scale ,DrawObjectList list)
         {
             string s = "";
             s+=GetDefXML();//得到定义
 
-            s += GetGroupXML(scale,devices);//得到生成的设备实体
+            s += GetGroupXML(scale,list);//得到生成的设备实体
 
             return s;
         }
 
-        private static string GetGroupXML(SizeF scale ,List<DeviceDrawObjectBase> devices)
+        private static string GetGroupXML(SizeF scale ,DrawObjectList list)
         {
             string s ="";
             s += "<g>";
-            foreach (var device in devices)
+            foreach (var drawObj in list.GraphicsList)
             {
-                s += device.GetXmlStr(scale,true);
+
+                s +=( drawObj as DrawObject)?.GetXmlStr(scale,true);
                 s += "\r\n";
             }
 
             s += "</g>";
+            s += "\r\n";
             return s;
         }
 
@@ -220,7 +222,7 @@ namespace DrawWork.Symbol
             s += "<defs>";
             foreach (var symBolUnit in SymbolUnit._Dic.Values)
             {
-                symBolUnit.GetSymbolXml();
+                s+=symBolUnit.GetSymbolXml();
                 s += "\r\n";
             }
 
