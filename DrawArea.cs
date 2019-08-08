@@ -42,7 +42,7 @@ namespace HuaTuDemo
         private ToolStripMenuItem _deleteToolStripMenuItem;
         private DrawObjectList _graphicsList; // list of draw objects
         private string _mDescription = "Svg picture";
-        private SizeF _mOriginalSize = new SizeF(500, 400);
+        private SizeF _mOriginalSize = new SizeF(1600F, 900F);
 
         // group selection rectangle
         // Information about owner form
@@ -118,7 +118,10 @@ namespace HuaTuDemo
         #endregion
 
         #region 属性
-
+        public DrawObjectList DrawObjectList
+        {
+            get => _graphicsList;
+        }
         /// <summary>
         /// 激活的绘图工具
         /// </summary>
@@ -346,7 +349,7 @@ namespace HuaTuDemo
                 //2 从svg元数据中收集symbol之间的关系
                 //3 将所有use的设备实体生成
                 //4 绘制list集合将图素绘制出来
-                SVGFactory.CreateProjectFromXML(ele);
+                SVGFactory.CreateProjectFromXML(ele,GraphicsList);
             }
 
 

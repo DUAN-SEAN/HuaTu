@@ -177,6 +177,13 @@ namespace HuaTuDemo
 
         public bool LoadModelFromXml(string fileName)
         {
+            var svgForm = new WorkspaceHolder { Dock = DockStyle.Fill, Name = fileName };
+            svgForm.svgDrawForm.ToolDone += OnToolDoneComplete;
+            svgForm.svgDrawForm.ItemsSelected += SvgDrawFormItemsSelected;
+
+            svgForm.svgDrawForm.drawArea.Width = 1600;
+            svgForm.svgDrawForm.drawArea.Height = 900;
+
             XmlTextReader reader = null;
             //XmlReader reader = null;
             //var txt = File.ReadAllText(fileName);
@@ -204,7 +211,7 @@ namespace HuaTuDemo
                     //2 从svg元数据中收集symbol之间的关系
                     //3 将所有use的设备实体生成
                     //4 绘制list集合将图素绘制出来
-                    SVGFactory.CreateProjectFromXML(ele);
+                    SVGFactory.CreateProjectFromXML(ele, svgForm.svgDrawForm.drawArea.GraphicsList);
                 }
 
             }
@@ -215,8 +222,10 @@ namespace HuaTuDemo
             {
                 if (reader != null) reader.Close();
             }
+            
+            tabbedView.Add(svgForm);
+            svgForm.Refresh();
 
-        
             return true;
         }
         public void PropertyChanged(GridItem itemChanged, object oldVal)

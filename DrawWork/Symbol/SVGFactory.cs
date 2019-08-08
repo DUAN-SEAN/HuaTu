@@ -16,7 +16,7 @@ namespace DrawWork.Symbol
         /// 根据读取的xml生成项目
         /// </summary>
         /// <param name="svg"></param>
-        public static void CreateProjectFromXML(SVGUnit svg)
+        public static void CreateProjectFromXML(SVGUnit svg, DrawObjectList list)
         {
             while (svg != null)
             {
@@ -45,11 +45,12 @@ namespace DrawWork.Symbol
                                 case SVGUnit.SVGUnitType.use:
                                     SVGUse use = gchild as SVGUse;
                                     var gDevice = CreateDeviceDrawObjectBase(use, group.Id);//TODO 后期添加到工作组中
-                                 
+                                    list.Add(gDevice);
                                     break;
                                 default:
                                     //TODO 未编排为设备的图素集合，暂时用临时分组表示
-
+                                    var o =  SVGDrawFactory.CreateDrawObject(svg);
+                                    list.Add(o);
                                     //vBase = new DeviceDrawObjectBase(0f, 0f, 0f, 0f, group.Id, drawObjects, null, "");
                                     break;
 

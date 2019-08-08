@@ -112,7 +112,7 @@ namespace DrawWork
                 var zoomh = par.Height / par.ViewBox_h;
 
 
-                var worldDrawObj = new DrawCircleObject(rectangle.X + parentPosition.X, rectangle.Y + parentPosition.Y,
+                var worldDrawObj = new DrawCircleObject((rectangle.X * zoomw + parentPosition.X), (rectangle.Y * zoomh + parentPosition.Y),
                     zoomw * rectangle.Width, zoomh * rectangle.Height);
 
                 return worldDrawObj;

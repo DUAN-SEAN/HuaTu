@@ -71,55 +71,55 @@ namespace DrawWork
             float right = rectangle.Right;
             float bottom = rectangle.Bottom;
 
+            //if (deviceDrawObjectBases != null)
+            //    foreach (var deviceDrawObjectBase in deviceDrawObjectBases)
+            //    {
+            //        for (int i = 0; i < deviceDrawObjectBase.HandleCount; i++)
+            //        {
+            //            var point = deviceDrawObjectBase.GetHandle(i);
+            //            if (point.X < left) left = point.X;
+            //            if (point.X > right) right = point.X;
+            //            if (point.Y < top) top = point.Y;
+            //            if (point.Y > bottom) bottom = point.Y;
+            //        }
+            //    }
+
+            //if (drawobjs != null)
+            //    foreach (var drawObject in drawobjs)
+            //    {
+            //        for (int i = 0; i < drawObject.HandleCount; i++)
+            //        {
+            //            var point = drawObject.GetHandle(i);
+            //            if (point.X < left) left = point.X;
+            //            if (point.X > right) right = point.X;
+            //            if (point.Y < top) top = point.Y;
+            //            if (point.Y > bottom) bottom = point.Y;
+            //        }
+            //    }
+
             if (deviceDrawObjectBases != null)
                 foreach (var deviceDrawObjectBase in deviceDrawObjectBases)
                 {
-                    for (int i = 0; i < deviceDrawObjectBase.HandleCount; i++)
-                    {
-                        var point = deviceDrawObjectBase.GetHandle(i);
-                        if (point.X < left) left = point.X;
-                        if (point.X > right) right = point.X;
-                        if (point.Y < top) top = point.Y;
-                        if (point.Y > bottom) bottom = point.Y;
-                    }
-                }
-
-            if (drawobjs != null)
-                foreach (var drawObject in drawobjs)
-                {
-                    for (int i = 0; i < drawObject.HandleCount; i++)
-                    {
-                        var point = drawObject.GetHandle(i);
-                        if (point.X < left) left = point.X;
-                        if (point.X > right) right = point.X;
-                        if (point.Y < top) top = point.Y;
-                        if (point.Y > bottom) bottom = point.Y;
-                    }
-                }
-
-            if (deviceDrawObjectBases != null)
-                foreach (var deviceDrawObjectBase in deviceDrawObjectBases)
-                {
-                    deviceDrawObjectBase.ParentPointF = new PointF(left, top);
+                    //deviceDrawObjectBase.ParentPointF = new PointF(left, top);
                     deviceDrawObjectBase.SetParent(this);
-                    deviceDrawObjectBase.Proportion = new PointF(deviceDrawObjectBase.Width / right - left,
-                        deviceDrawObjectBase.Height / bottom - top);
+                  //  deviceDrawObjectBase.Proportion = new PointF(deviceDrawObjectBase.Width / right - left,
+                    //    deviceDrawObjectBase.Height / bottom - top);
 
                 }
 
             if (drawobjs != null)
                 foreach (var drawObject in drawobjs)
                 {
-                    drawObject.ParentPointF = new PointF(left, top);
+                    //drawObject.ParentPointF = new PointF(left, top);
                     drawObject.SetParent(this);
 
-                    if (drawObject is DrawRectangleObject rectangleObject)
-                        rectangleObject.Proportion = new PointF(rectangleObject.Width / right - left,
-                            rectangleObject.Height / bottom - top);
+                    //if (drawObject is DrawRectangleObject rectangleObject)
+                       // rectangleObject.Proportion = new PointF(rectangleObject.Width / right - left,
+                       //     rectangleObject.Height / bottom - top);
 
                 }
 
-            SetRectangleF(left, top, right - left, bottom - top);
+           // SetRectangleF(left, top, right - left, bottom - top);
 
 
             this._hrefId = hrefId;

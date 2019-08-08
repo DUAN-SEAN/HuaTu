@@ -48,11 +48,11 @@ namespace HuaTuDemo
             this.drawArea.Name = "drawArea";
             this.drawArea.NetRectangle = ((System.Drawing.RectangleF)(resources.GetObject("drawArea.NetRectangle")));
             this.drawArea.OldScale = new System.Drawing.SizeF(1F, 1F);
-            this.drawArea.OriginalSize = new System.Drawing.SizeF(500F, 400F);
+            this.drawArea.OriginalSize = new System.Drawing.SizeF(1600F, 900F);
             this.drawArea.Owner = null;
             this.drawArea.ScaleDraw = new System.Drawing.SizeF(1F, 1F);
             this.drawArea.Size = new System.Drawing.Size(66, 66);
-            this.drawArea.SizePicture = new System.Drawing.SizeF(500F, 400F);
+            this.drawArea.SizePicture = new System.Drawing.SizeF(1600F, 900F);
             this.drawArea.TabIndex = 0;
             // 
             // WorkSpace
@@ -70,7 +70,7 @@ namespace HuaTuDemo
 
         #endregion
 
-        private DrawArea drawArea;
+        public DrawArea drawArea;
         public Point _scrollPersistance = new Point(0, 0);
 
     }
