@@ -340,7 +340,7 @@ namespace DrawWork
                 {
                     if(deviceDrawObjectBases[i]._hrefId != "Port:端子") continue;
 
-                    var point = deviceDrawObjectBases[i].GetCenter();
+                    var point = deviceDrawObjectBases[i].GetWorldDrawObject().GetCenter();
                     var disnow = (point.X - getHandle.X) * (point.X - getHandle.X) +
                                  (point.Y - getHandle.Y) * (point.Y - getHandle.Y);
                     if (disnow < dis)

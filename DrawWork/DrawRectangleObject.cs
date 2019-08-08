@@ -292,7 +292,7 @@ namespace DrawWork
 
 
             }
-            return null;
+            return this;
         }
 
         /// <summary>

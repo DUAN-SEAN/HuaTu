@@ -89,6 +89,8 @@ namespace DrawWork
                 var worldDrawObj = new DrawEllipseObject(rectangle.X + parentPosition.X, rectangle.Y + parentPosition.Y,
                     zoomw * rectangle.Width, zoomh * rectangle.Height);
                 worldDrawObj._angle = Parent.GetAngle();
+                return worldDrawObj;
+
             }
             return this;
         }

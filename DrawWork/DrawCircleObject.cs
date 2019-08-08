@@ -61,7 +61,7 @@ namespace DrawWork
              RectangleF r = GetNormalizedRectangle(ParentAndRectangleF);
              if (Parent != null)
              {
-                center = Parent.GetCenter();
+                center = Parent.GetRoot().GetCenter();
                 var worldDrawObj = GetWorldDrawObject();
                 r = GetNormalizedRectangle(worldDrawObj.rectangle);
              }
@@ -115,7 +115,7 @@ namespace DrawWork
                 var worldDrawObj = new DrawCircleObject(rectangle.X + parentPosition.X, rectangle.Y + parentPosition.Y,
                     zoomw * rectangle.Width, zoomh * rectangle.Height);
 
-
+                return worldDrawObj;
             }
 
             return this;

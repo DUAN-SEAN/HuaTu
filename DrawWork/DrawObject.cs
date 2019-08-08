@@ -676,6 +676,12 @@ namespace DrawWork
         {
             this.Parent = drawObject;
         }
+
+        public DeviceDrawObjectBase GetRoot()
+        {
+            if (Parent == null) return this as DeviceDrawObjectBase;
+            return Parent.GetRoot();
+        }
         /// <summary>
         /// 获取图素在世界坐标下的图形
         /// </summary>

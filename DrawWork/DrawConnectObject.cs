@@ -71,13 +71,13 @@ namespace DrawWork
                         case 'M':
                             if (startDrawObject != null)
                                 if (enumerator.Current != null && startDrawObject != null)
-                                    ((PathCommands) enumerator.Current).P = startDrawObject.GetCenter();
+                                    ((PathCommands) enumerator.Current).P = startDrawObject.GetWorldDrawObject().GetCenter();
                             break;
 
 
                         case 'Z':
                             if (enumerator.Current != null && endDrawObject != null)
-                                ((PathCommands) enumerator.Current).P = endDrawObject.GetCenter();
+                                ((PathCommands) enumerator.Current).P = endDrawObject.GetWorldDrawObject().GetCenter();
                             break;
 
                         default:
