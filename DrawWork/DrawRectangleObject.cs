@@ -614,18 +614,7 @@ namespace DrawWork
             rectangle.Height = height;
         }
         #region 段瑞旋转
-        /// <summary>
-        /// 获取当前中心点
-        /// </summary>
-        /// <returns></returns>
-        public virtual PointF GetCenter()
-        {
-            float x, xCenter, yCenter;
-
-            xCenter = rectangle.X + rectangle.Width / 2;
-            yCenter = rectangle.Y + rectangle.Height / 2;
-            return new PointF(xCenter, yCenter);
-        }
+        
 
         
 
@@ -646,6 +635,15 @@ namespace DrawWork
 
 
 
+        }
+
+        public override PointF GetCenter()
+        {
+            float x, xCenter, yCenter;
+
+            xCenter = rectangle.X + rectangle.Width / 2;
+            yCenter = rectangle.Y + rectangle.Height / 2;
+            return new PointF(xCenter, yCenter);
         }
 
         public override void Rotate(float angle, PointF center)

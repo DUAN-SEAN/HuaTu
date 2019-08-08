@@ -101,7 +101,15 @@ namespace DrawWork
             {
                 g.SmoothingMode = SmoothingMode.AntiAlias;
                 var pen = new Pen(Stroke, StrokeWidth);
-                g.DrawLine(pen, _startPoint.X, _startPoint.Y, _endPoint.X, _endPoint.Y);
+                PointF centerTemp = GetCenter();
+                if (Parent != null)
+                {
+                    centerTemp = Parent.GetCenter();
+                }
+                
+                var drawPoint1 = RotatePoint(centerTemp, _startPoint, _angle); 
+                var drawPoint2 = RotatePoint(centerTemp, _endPoint, _angle); 
+                g.DrawLine(pen, drawPoint1.X, drawPoint1.Y, drawPoint2.X, drawPoint2.Y);
                 pen.Dispose();
             }
             catch (Exception ex)
@@ -110,12 +118,26 @@ namespace DrawWork
             }
         }
 
+        public override PointF GetCenter()
+        {
+            return new PointF((_startPoint.X + _endPoint.X) / 2, (_startPoint.Y + _endPoint.Y) / 2);
+        }
+
         public override PointF GetHandle(int handleNumber)
         {
-            if (handleNumber == 1)
-                return _startPoint;
+            PointF centerTemp = GetCenter();
+            if (Parent != null)
+            {
+                centerTemp = Parent.GetCenter();
+            }
 
-            return _endPoint;
+            var drawPoint1 = RotatePoint(centerTemp, _startPoint, _angle);
+            var drawPoint2 = RotatePoint(centerTemp, _endPoint, _angle);
+
+            if (handleNumber == 1)
+                return drawPoint1;
+
+            return drawPoint2;
         }
         //TODO 等待段瑞重写
         public override PointF GetKnobPoint()
@@ -293,29 +315,31 @@ namespace DrawWork
 
         public override void Rotate(float angle)
         {
-            PointF center = new PointF((_startPoint.X + _endPoint.X) / 2, (_startPoint.Y + _endPoint.Y) / 2);
+            //PointF center = new PointF((_startPoint.X + _endPoint.X) / 2, (_startPoint.Y + _endPoint.Y) / 2);
 
-            _startPoint = RotatePoint(center, _startPoint, angle);
-            _endPoint = RotatePoint(center, _endPoint, angle);
-
+            //_startPoint = RotatePoint(center, _startPoint, angle);
+            //_endPoint = RotatePoint(center, _endPoint, angle);
+            _angle -= angle;
             Invalidate();
         }
 
         public override void Rotate(float angle, PointF center)
         {
-            _startPoint = RotatePoint(center, _startPoint, angle);
-            _endPoint = RotatePoint(center, _endPoint, angle);
+            //_startPoint = RotatePoint(center, _startPoint, angle);
+            //_endPoint = RotatePoint(center, _endPoint, angle);
+
+            _angle -= angle;
 
             Invalidate();
         }
 
         public override void Rotate(float angle, float x, float y)
         {
-            PointF center = new PointF(x, y);
+            //PointF center = new PointF(x, y);
 
-            _startPoint = RotatePoint(center, _startPoint, angle);
-            _endPoint = RotatePoint(center, _endPoint, angle);
-
+            //_startPoint = RotatePoint(center, _startPoint, angle);
+            //_endPoint = RotatePoint(center, _endPoint, angle);
+            _angle -= angle;
             Invalidate();
         }
 

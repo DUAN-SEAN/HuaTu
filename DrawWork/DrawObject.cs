@@ -94,6 +94,8 @@ namespace DrawWork
             get => parentPointF;
         }
 
+        [Browsable(false)] public DrawObject Parent;
+
         [Browsable(false)]
         public bool HitOnCircumferance { get; set; }
 
@@ -656,7 +658,16 @@ namespace DrawWork
             Stroke = LastUsedColor;
             StrokeWidth = LastUsedPenWidth * Zoom;
         }
+        //设置父物体
+        public void SetParent(DrawObject drawObject)
+        {
+            this.Parent = drawObject;
+        }
 
+        public virtual PointF GetCenter()
+        {
+            return default;
+        }
         public static string Color2String(Color c)
         {
             if (c.IsNamedColor)
