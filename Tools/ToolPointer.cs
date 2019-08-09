@@ -82,7 +82,7 @@ namespace HuaTuDemo
 
                     if (o is DrawConnectObject connect)
                     {
-                        connect.SetFollowDrawObject(handleNumber,null);
+                        connect.SetFollowDrawObject(handleNumber,null,-1);
                     }
                     //if (o is WireConnectLineDrawObject && handleNumber != 2)
                     //{
@@ -352,7 +352,7 @@ namespace HuaTuDemo
                             if (device.HitTest(connect.GetHandle(_resizedObjectHandle)) >= 0)
                             {
                                 connect.SetFollowDrawObject(_resizedObjectHandle,
-                                    device.GetNearestPort(connect.GetHandle(_resizedObjectHandle)));
+                                    device,device.GetNearestPort(connect.GetHandle(_resizedObjectHandle)));
                             }
                         }
                     }

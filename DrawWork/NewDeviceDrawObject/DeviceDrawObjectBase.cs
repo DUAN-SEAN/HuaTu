@@ -379,16 +379,46 @@ namespace DrawWork
 
         #endregion
 
-        public DeviceDrawObjectBase GetNearestPort(PointF getHandle)
+        //public DeviceDrawObjectBase GetNearestPort(PointF getHandle)
+        //{
+        //    float dis = float.MaxValue;
+        //    int min = -1;
+        //    DeviceDrawObjectBase obj = null;
+        //    if(deviceDrawObjectBases != null)
+        //    {
+        //        for (int i = 0; i < deviceDrawObjectBases.Count; i++)
+        //        {
+        //            if(deviceDrawObjectBases[i]._hrefId != "Port:端子") continue;
+
+        //            var point = deviceDrawObjectBases[i].GetWorldDrawObject().GetCenter();
+        //            var disnow = (point.X - getHandle.X) * (point.X - getHandle.X) +
+        //                         (point.Y - getHandle.Y) * (point.Y - getHandle.Y);
+        //            if (disnow < dis)
+        //            {
+        //                dis = disnow;
+        //                min = i;
+
+        //            }
+        //        }
+
+        //        if (min != -1)
+        //            obj = deviceDrawObjectBases[min];
+        //    }
+
+        //    return obj;
+
+
+        //}
+        public int GetNearestPort(PointF getHandle)
         {
             float dis = float.MaxValue;
             int min = -1;
-            DeviceDrawObjectBase obj = null;
-            if(deviceDrawObjectBases != null)
+            int obj = -1;
+            if (deviceDrawObjectBases != null)
             {
                 for (int i = 0; i < deviceDrawObjectBases.Count; i++)
                 {
-                    if(deviceDrawObjectBases[i]._hrefId != "Port:端子") continue;
+                    if (deviceDrawObjectBases[i]._hrefId != "Port:端子") continue;
 
                     var point = deviceDrawObjectBases[i].GetWorldDrawObject().GetCenter();
                     var disnow = (point.X - getHandle.X) * (point.X - getHandle.X) +
@@ -402,11 +432,11 @@ namespace DrawWork
                 }
 
                 if (min != -1)
-                    obj = deviceDrawObjectBases[min];
+                    obj = min;
             }
 
             return obj;
-            
+
 
         }
     }

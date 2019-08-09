@@ -82,7 +82,7 @@ namespace DrawWork
                 {
                     if (device.GetDeviceDrawObjectBydeviceId(deviceId,out var port))
                     {
-                        SetFollowDrawObject(index, port);
+                        SetFollowDrawObject(index, port,portIndex);
                         break;
                     }
                 }
