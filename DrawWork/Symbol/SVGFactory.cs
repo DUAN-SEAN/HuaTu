@@ -40,14 +40,11 @@ namespace DrawWork.Symbol
                         if (svg.Id == SVGDefine.ConnectLineClass)
                         {
                             SVGGroup group = svg.getChild() as SVGGroup;
-                            var path =  SVGDrawFactory.CreateDrawObject(group.getChild()) as DrawPathObject;
+                            DrawConnectObject drawConnectObject =DrawConnectObject.Create(group.getChild() as SVGPath);
+                            SVGCN_Ref svgcnRef = group.getChild().getNext().getChild() as SVGCN_Ref;
 
-
-                            DrawConnectObject drawConnectObject = new DrawConnectObject(path.pathStr);
-                            SVGCN_Ref svgcnRef = group.getChild().getNext() as SVGCN_Ref;
-
-                            drawConnectObject.SetConnectDeviceFromXml(svgcnRef.LinkObjecttlDnd,0,list.GetDeviceList());
-                            drawConnectObject.SetConnectDeviceFromXml(svgcnRef.LinkObjectIDznd, 1, list.GetDeviceList());
+                            drawConnectObject.SetConnectDeviceFromXml(svgcnRef.LinkObjecttlDnd,1,list.GetDeviceList());
+                            drawConnectObject.SetConnectDeviceFromXml(svgcnRef.LinkObjectIDznd, 2, list.GetDeviceList());
 
                             drawConnectObject.Id = int.Parse(group.Id);
                             list.Add(drawConnectObject);

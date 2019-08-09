@@ -5,6 +5,9 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DrawWork.Command;
+using SVGHelper;
+using SVGHelper.Base;
 
 namespace DrawWork
 {
@@ -37,6 +40,31 @@ namespace DrawWork
         }
 
         public string EndHrefId => endDrawObject?._hrefId;
+
+        public static DrawConnectObject Create(SVGPath svg)
+        {
+            DrawConnectObject dp;
+
+            try
+            {
+                string s = svg.PathData.Trim();
+                s = s.Replace("\r", "");
+                s = s.Replace("\n", " ");
+                s = s.Trim();
+                string[] arr = s.Split(' ');
+
+                dp = new DrawConnectObject(arr) { Name = svg.ShapeName };
+                dp.SetStyleFromSvg(svg);
+            }
+            catch (Exception ex)
+            {
+                SVGErr.Log("DrawPathObject", "Create", ex.ToString(), SVGErr._LogPriority.Info);
+                dp = null;
+            }
+
+            return dp;
+        }
+
 
         /// <summary>
         /// 通过端口ID连接端口
