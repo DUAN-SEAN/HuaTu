@@ -129,8 +129,10 @@ namespace DrawWork
 
                         case 'Z':
                             if (endDrawObject != null && endDrawObject.deviceDrawObjectBases != null)
-                            if (enumerator.Current != null && endDrawObject != null && endDrawObject.deviceDrawObjectBases[endportindex].drawObjects[0] is DrawCircleObject cirend)
-                                ((PathCommands) enumerator.Current).P = cirend.GetWorldDrawObject().GetCenter();
+                                if (enumerator.Current != null && endDrawObject != null &&
+                                    endDrawObject.deviceDrawObjectBases[endportindex].drawObjects[0] is DrawCircleObject
+                                        cirend)
+                                    ((PathCommands) enumerator.Current).P = cirend.GetWorldDrawObject().GetCenter();
                             break;
                         default:
                             break;
