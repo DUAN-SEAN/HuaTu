@@ -14,7 +14,9 @@ namespace DrawWork
     public class DrawConnectObject : DrawPathObject
     {
         protected DeviceDrawObjectBase startDrawObject;
+        protected int startportindex;
         protected DeviceDrawObjectBase endDrawObject;
+        protected int endportindex;
 
 
         public DrawConnectObject(float x, float y) : base(x,y)
@@ -58,18 +60,20 @@ namespace DrawWork
                 }
             }
         }
-        public void SetFollowDrawObject(int handleNumber, DeviceDrawObjectBase draw)
+        public void SetFollowDrawObject(int handleNumber, DeviceDrawObjectBase draw,int portindex)
         {
             if (handleNumber <= 1)
             {
                 handleNumber = 1;
                 startDrawObject = draw;
+                startportindex = portindex;
             }
 
             if (handleNumber >= _pointArray.Count)
             {
                 handleNumber = _pointArray.Count;
                 endDrawObject = draw;
+                endportindex = portindex;
             }
 
            
@@ -89,14 +93,15 @@ namespace DrawWork
                     switch (((PathCommands) enumerator.Current).Pc)
                     {
                         case 'M':
-                            if (startDrawObject != null)
-                                if (enumerator.Current != null && startDrawObject != null && startDrawObject.drawObjects[0] is DrawCircleObject cirstar)
+                            if (startDrawObject != null && startDrawObject.deviceDrawObjectBases != null)
+                                if (enumerator.Current != null && startDrawObject != null && startDrawObject.deviceDrawObjectBases[startportindex].drawObjects[0] is DrawCircleObject cirstar)
                                     ((PathCommands) enumerator.Current).P = cirstar.GetWorldDrawObject().GetCenter();
                             break;
 
 
                         case 'Z':
-                            if (enumerator.Current != null && endDrawObject != null && endDrawObject.drawObjects[0] is DrawCircleObject cirend)
+                            if (endDrawObject != null && endDrawObject.deviceDrawObjectBases != null)
+                            if (enumerator.Current != null && endDrawObject != null && endDrawObject.deviceDrawObjectBases[endportindex].drawObjects[0] is DrawCircleObject cirend)
                                 ((PathCommands) enumerator.Current).P = cirend.GetWorldDrawObject().GetCenter();
                             break;
                         default:

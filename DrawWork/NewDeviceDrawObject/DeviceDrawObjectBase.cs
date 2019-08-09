@@ -41,6 +41,30 @@ namespace DrawWork
 
         public float ViewBox_h;
 
+        #region 属性
+
+        /// <summary>
+        /// 设备实体ID
+        /// 用于面板显示
+        /// </summary>
+        public string EntityId => _EntityId;
+
+        /// <summary>
+        /// 引用设备id
+        /// 用于面板显示
+        /// </summary>
+        public string HrefId => _hrefId;
+
+        /// <summary>
+        /// 面板显示测试字段
+        /// </summary>
+        public string MetaData { set; get; }
+
+        #endregion
+
+
+
+
         public DeviceDrawObjectBase()
         {
             SetRectangleF(0, 0, 1, 1);
@@ -337,9 +361,9 @@ namespace DrawWork
         public bool GetDeviceDrawObjectBydeviceId(string deviceid, out DeviceDrawObjectBase port)
         {
             port = null;
-            if (deviceid == _EntityId)
+            if (deviceid == _EntityId && _hrefId == "")
             {
-                port = this;
+                
                 return true;
             }
 
