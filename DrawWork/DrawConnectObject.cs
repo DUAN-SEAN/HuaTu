@@ -74,7 +74,7 @@ namespace DrawWork
         /// <param name="deviceId"></param>
         /// <param name="index"></param>
         /// <param name="deviceDrawObjectBases"></param>
-        public void SetConnectDeviceFromXml(string deviceId, int index,List<DeviceDrawObjectBase> deviceDrawObjectBases)
+        public void SetConnectDeviceFromXml(string deviceId, int index,int portIndex,List<DeviceDrawObjectBase> deviceDrawObjectBases)
         {
             for (int i = 0; i < deviceDrawObjectBases.Count; i++)
             {
