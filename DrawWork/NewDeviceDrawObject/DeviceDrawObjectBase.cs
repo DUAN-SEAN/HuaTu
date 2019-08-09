@@ -361,9 +361,9 @@ namespace DrawWork
         public bool GetDeviceDrawObjectBydeviceId(string deviceid, out DeviceDrawObjectBase port)
         {
             port = null;
-            if (deviceid == _EntityId && _hrefId == "")
+            if (deviceid == _EntityId)
             {
-                
+                port = this;
                 return true;
             }
 
