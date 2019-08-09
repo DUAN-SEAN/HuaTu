@@ -147,7 +147,7 @@ namespace DrawWork
             string end = endDrawObject != null ? endDrawObject._EntityId : "";
             string s = base.GetXmlStr(scale, noanimation);
             s += "<metadata>" + "\r\n";
-            s += "<cge:CN_Ref LinkObjectlDnd=\"" + start + "\"" + " LinkObjectIDznd=\"" + end + "\"/>";
+            s += "<cge:CN_Ref LinkObjectlDnd=\"" + start+"@" + "\"" + " LinkObjectIDznd=\"" + end +"@"+ "\"/>";
             s += "\r\n</metadata>";
             return s;
         }
