@@ -104,6 +104,17 @@ namespace DrawWork
             _undoRedo.AddCommand(create);//添加到回退
         }
 
+        public List<DeviceDrawObjectBase> GetDeviceList()
+        {
+            List<DeviceDrawObjectBase> list = new List<DeviceDrawObjectBase>();
+            foreach (var drawobj in GraphicsList)
+            {
+                if(drawobj is DeviceDrawObjectBase)
+                    list.Add(drawobj as DeviceDrawObjectBase);
+            }
+
+            return list;
+        }
         //将读取的svg根传入 扫描每一个unit
         //现在图元按照设备进行分组，读取的时候按照分组为单位读取
         public void AddFromSvg(SVGUnit ele)
