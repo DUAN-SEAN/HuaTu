@@ -42,9 +42,11 @@ namespace DrawWork.Symbol
                             SVGGroup group = svg.getChild() as SVGGroup;
                             DrawConnectObject drawConnectObject =DrawConnectObject.Create(group.getChild() as SVGPath);
                             SVGCN_Ref svgcnRef = group.getChild().getNext().getChild() as SVGCN_Ref;
+                            var linkDnd = svgcnRef.LinkObjecttlDnd.Split('@');
 
-                            drawConnectObject.SetConnectDeviceFromXml(svgcnRef.LinkObjecttlDnd,1,list.GetDeviceList());
-                            drawConnectObject.SetConnectDeviceFromXml(svgcnRef.LinkObjectIDznd, 2, list.GetDeviceList());
+                            drawConnectObject.SetConnectDeviceFromXml(linkDnd[0],1,int.Parse(linkDnd[1]),list.GetDeviceList());
+                            linkDnd = svgcnRef.LinkObjectIDznd.Split('@');
+                            drawConnectObject.SetConnectDeviceFromXml(linkDnd[0], 2, int.Parse(linkDnd[1]), list.GetDeviceList());
 
                             drawConnectObject.Id = int.Parse(group.Id);
                             list.Add(drawConnectObject);
