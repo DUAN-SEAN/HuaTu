@@ -39,14 +39,24 @@ namespace DrawWork
         public string EndHrefId => endDrawObject?._hrefId;
 
         /// <summary>
-        /// 
+        /// 通过端口ID连接端口
         /// </summary>
         /// <param name="deviceId"></param>
         /// <param name="index"></param>
         /// <param name="deviceDrawObjectBases"></param>
         public void SetConnectDeviceFromXml(string deviceId, int index,List<DeviceDrawObjectBase> deviceDrawObjectBases)
         {
-
+            for (int i = 0; i < deviceDrawObjectBases.Count; i++)
+            {
+                if (deviceDrawObjectBases[i] is DeviceDrawObjectBase device)
+                {
+                    if (device.GetDeviceDrawObjectBydeviceId(deviceId,out var port))
+                    {
+                        SetFollowDrawObject(index, port);
+                        break;
+                    }
+                }
+            }
         }
         public void SetFollowDrawObject(int handleNumber, DeviceDrawObjectBase draw)
         {

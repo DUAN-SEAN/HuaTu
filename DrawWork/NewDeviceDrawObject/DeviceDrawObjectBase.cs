@@ -328,7 +328,29 @@ namespace DrawWork
 
 
         #region Helper
+        /// <summary>
+        /// 通过端口id寻找端口
+        /// </summary>
+        /// <param name="deviceid"></param>
+        /// <param name="port"></param>
+        /// <returns></returns>
+        public bool GetDeviceDrawObjectBydeviceId(string deviceid, out DeviceDrawObjectBase port)
+        {
+            port = null;
+            if (deviceid == _EntityId)
+            {
+                port = this;
+                return true;
+            }
 
+            if(deviceDrawObjectBases != null)
+                foreach (var deviceDrawObjectBase in deviceDrawObjectBases)
+                {
+                    return deviceDrawObjectBase.GetDeviceDrawObjectBydeviceId(deviceid, out port);
+                }
+
+            return false;
+        }
 
 
         #endregion
