@@ -83,6 +83,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="SVGDefine.cs" />
     <Compile Include="Symbol\SVGDrawFactory.cs" />
     <Compile Include="Symbol\SVGFactory.cs" />
     <Compile Include="Symbol\SymbolUnit.cs" />

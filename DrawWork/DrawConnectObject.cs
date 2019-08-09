@@ -38,6 +38,16 @@ namespace DrawWork
 
         public string EndHrefId => endDrawObject?._hrefId;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="deviceId"></param>
+        /// <param name="index"></param>
+        /// <param name="deviceDrawObjectBases"></param>
+        public void SetConnectDeviceFromXml(string deviceId, int index,List<DeviceDrawObjectBase> deviceDrawObjectBases)
+        {
+
+        }
         public void SetFollowDrawObject(int handleNumber, DeviceDrawObjectBase draw)
         {
             if (handleNumber <= 1)
@@ -86,8 +96,7 @@ namespace DrawWork
             base.Draw(g);
         }
         /// <summary>
-        /// 连接线序列化成xml
-        /// 包含连接的物体信息，复现时需读取
+        /// 连接线的svg逻辑单独写
         /// </summary>
         /// <param name="scale"></param>
         /// <param name="noanimation"></param>
@@ -95,8 +104,13 @@ namespace DrawWork
         public override string GetXmlStr(SizeF scale, bool noanimation = true)
         {
             //编写metadata
-
-            return null;
+            string start = startDrawObject != null ? startDrawObject._EntityId : "";
+            string end = endDrawObject != null ? endDrawObject._EntityId : "";
+            string s = base.GetXmlStr(scale, noanimation);
+            s += "<metadata>" + "\r\n";
+            s += "<cge:CN_Ref LinkObjectlDnd=\"" + start + "\"" + " LinkObjectIDznd=\"" + end + "\"/>";
+            s += "\r\n</metadata>";
+            return s;
         }
     }
 }

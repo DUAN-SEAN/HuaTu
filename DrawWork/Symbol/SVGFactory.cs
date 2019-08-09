@@ -196,26 +196,53 @@ namespace DrawWork.Symbol
             s+=GetDefXML();//得到定义
 
             s += GetGroupXML(scale,list);//得到生成的设备实体
-
+            s += GetConnectXML(scale, list);
             return s;
         }
 
         private static string GetGroupXML(SizeF scale ,DrawObjectList list)
         {
-            string s ="";
+            string s = "";
             s += "<g>";
             foreach (var drawObj in list.GraphicsList)
             {
-
-                s +=( drawObj as DrawObject)?.GetXmlStr(scale,true);
-                s += "\r\n";
+                if (drawObj is DrawConnectObject)
+                {
+                    continue;;
+                }
+                else
+                {
+                    s += (drawObj as DrawObject)?.GetXmlStr(scale, true);
+                    s += "\r\n";
+                }
+              
             }
-
             s += "</g>";
             s += "\r\n";
             return s;
         }
 
+        private static string GetConnectXML(SizeF scale ,DrawObjectList list)
+        {
+            string connect = "<g id=\"" + SVGDefine.ConnectLineClass + "\">";
+            connect += "\r\n";
+            foreach (var drawObj in list.GraphicsList)
+            {
+                if (drawObj is DrawConnectObject)
+                {
+                    var dco = drawObj as DrawConnectObject;
+                    connect += "<g id=\"" + dco.Id + "\">";
+                    connect += "\r\n";
+                    connect += dco.GetXmlStr(scale);
+                    connect += "</g>";
+                    connect += "\r\n";
+                }
+              
+            }
+
+            connect += "</g>";
+            return connect;
+        }
         private static string GetDefXML()
         {
             string s = "";
