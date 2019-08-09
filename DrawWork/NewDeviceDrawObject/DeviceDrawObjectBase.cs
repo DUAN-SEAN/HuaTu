@@ -41,6 +41,12 @@ namespace DrawWork
 
         public float ViewBox_h;
 
+        /// <summary>
+        /// 判断设备是否属于激活状态
+        /// </summary>
+        protected bool isOn;
+
+
         #region 属性
 
         /// <summary>
@@ -60,6 +66,10 @@ namespace DrawWork
         /// </summary>
         public string MetaData { set; get; }
 
+        /// <summary>
+        /// 判断是否是激活状态
+        /// </summary>
+        public bool IsOn => isOn;
         #endregion
 
 

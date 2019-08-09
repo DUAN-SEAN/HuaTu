@@ -19,6 +19,7 @@ namespace DrawWork
         #region 字段
 
         private readonly ArrayList _graphicsList;
+        private static readonly ArrayList _animationList = new ArrayList();
         private readonly ArrayList _inMemoryList;
         private readonly UndoRedo _undoRedo;
 
@@ -31,6 +32,7 @@ namespace DrawWork
         public DrawObjectList()
         {
             _graphicsList = new ArrayList();
+           
             _inMemoryList = new ArrayList();
             _undoRedo = new UndoRedo();
         }
@@ -42,6 +44,9 @@ namespace DrawWork
         {
             get => _graphicsList;
         }
+
+        public static ArrayList AnimationList => _animationList;
+
         /// <summary>
         /// Count和此[Nindex]允许读取所有图形对象
         ///从循环中的graphicslist。
@@ -115,6 +120,26 @@ namespace DrawWork
 
             return list;
         }
+
+        /// <summary>
+        /// 添加动画
+        /// </summary>
+        /// <param name="obj"></param>
+        public static void AddAnimation(DrawObject obj)
+        {
+            if (!_animationList.Contains(obj))
+                _animationList.Add(obj);
+        }
+
+        /// <summary>
+        /// 删除动画
+        /// </summary>
+        /// <param name="obj"></param>
+        public static void RemoveAnimation(DrawObject obj)
+        {
+            if (_animationList.Contains(obj))
+                _animationList.Remove(obj);
+        }
         //将读取的svg根传入 扫描每一个unit
         //现在图元按照设备进行分组，读取的时候按照分组为单位读取
         public void AddFromSvg(SVGUnit ele)
@@ -124,7 +149,7 @@ namespace DrawWork
                 DrawObject o = CreateDrawObject(ele);
                 if (o != null)
                     Add(o);
-                 SVGUnit child = ele.getChild();
+                SVGUnit child = ele.getChild();
                 while (child != null)
                 {
                     AddFromSvg(child);
