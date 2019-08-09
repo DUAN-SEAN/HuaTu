@@ -139,7 +139,7 @@ namespace DrawWork
                             }
                         }
 
-                        if (_xStrNxt.Length > 0)
+                        if (_xStrNxt?.Length > 0)
                         {
                             _xStr = _xStrNxt;
                             _xStrNxt = "";
