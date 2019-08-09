@@ -68,7 +68,7 @@
     <Compile Include="SVGPolyline.cs" />
     <Compile Include="SVGRect.cs" />
     <Compile Include="SVGText.cs" />
-    <Compile Include="SVGUnit.cs" />
+    <Compile Include="Base\SVGUnit.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
