@@ -380,8 +380,10 @@ namespace DrawWork
             float y = rectangle.Y;
 
             //PointF center = new PointF(xCenter, yCenter);
+            PointF center = fixedCenter;
             var root = GetRoot();
-            PointF center = new PointF(fixedCenter.X + root.rectangle.X + root.rectangle.Width / 2, fixedCenter.Y + root.rectangle.Y + root.rectangle.Height / 2);
+            if(root != null)
+                    center = new PointF(fixedCenter.X + root.rectangle.X + root.rectangle.Width / 2, fixedCenter.Y + root.rectangle.Y + root.rectangle.Height / 2);
 
             PointF temp = default(PointF);
             switch (handleNumber)
@@ -435,8 +437,10 @@ namespace DrawWork
         public override PointF GetKnobPoint()
         {
             float x, xCenter, yCenter;
+            PointF center = fixedCenter;
             var root = GetRoot();
-            PointF center = new PointF(fixedCenter.X + root.rectangle.X + root.rectangle.Width / 2, fixedCenter.Y + root.rectangle.Y + root.rectangle.Height / 2);
+            if (root != null)
+                center = new PointF(fixedCenter.X + root.rectangle.X + root.rectangle.Width / 2, fixedCenter.Y + root.rectangle.Y + root.rectangle.Height / 2);
 
             xCenter = rectangle.X + rectangle.Width / 2;
             yCenter = rectangle.Y + rectangle.Height / 2;
