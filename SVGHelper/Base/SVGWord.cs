@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
 using SVGHelper.Fix;
+using SVGHelper.metaData;
 
 namespace SVGHelper.Base
 {
@@ -690,6 +691,12 @@ namespace SVGHelper.Base
             }else if (sName == "use")
             {
                 eleToReturn = AddUse(parent, ref last);
+            }else if (sName == "metaData")
+            {
+                eleToReturn = AddMetaData(parent, ref last);
+            }else if(sName== "cge:CN_Ref")
+            {
+                eleToReturn = AddCN_Ref(parent, ref last);
             }
             else
             {
@@ -700,6 +707,21 @@ namespace SVGHelper.Base
             }
 
             return eleToReturn;
+        }
+
+        private SVGUnit AddCN_Ref(SVGUnit parent, ref SVGUnit last)
+        {
+            SVGCN_Ref svgcnRef = new SVGCN_Ref(this);
+            AddElement(parent, svgcnRef, ref last);
+            return svgcnRef;
+        }
+
+        private SVGUnit AddMetaData(SVGUnit parent, ref SVGUnit last)
+        {
+            SVGMetaData metaData = new SVGMetaData(this);
+            AddElement(parent, metaData, ref last);
+            return metaData;
+
         }
 
         private SVGUnit AddUse(SVGUnit parent, ref SVGUnit last)

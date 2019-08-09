@@ -88,35 +88,42 @@ namespace DrawWork
 
             if (Parent != null)
             {
-                
-              
+
+
                 PointF worldTemp = new PointF();
-                var tempR = new PointF(rectangle.Width,rectangle.Height);
+                var tempR = new PointF(rectangle.Width, rectangle.Height);
                 worldTemp.X = rectangle.X;//当前坐标
                 worldTemp.Y = rectangle.Y;
-                var worldPosition= new PointF(worldTemp.X,worldTemp.Y);
+                var worldPosition = new PointF(0f, 0f);
+                var worldR = PointF.Empty;
                 var p = Parent;
                 while (p != null)
                 {
-
+                    var zw = 0f;
+                    var zh = 0f;
                     if (p.Width == 0 || p.Height == 0)
                     {
+                        zw = 1f;
+                        zh = 1f;
                         //worldTemp.X += p.Rectangle.X;
                         //worldTemp.Y += p.Rectangle.Y;
                     }
                     else
                     {
-                        var zw = p.Width / p.ViewBox_w;
-                        var zh = p.Height / p.ViewBox_h;
-                        worldPosition.X += worldTemp.X*zw;
-                        worldPosition.Y += worldTemp.Y*zh;
-                        tempR.X += tempR.X * zw;
-                        tempR.Y += tempR.Y * zh;
+                        zw = p.Width / p.ViewBox_w;
+                        zh = p.Height / p.ViewBox_h;
+
+
                     }
+                    worldPosition.X += worldTemp.X * zw;
+                    worldPosition.Y += worldTemp.Y * zh;
+                    worldR.X += tempR.X * zw;
+                    worldR.Y += tempR.Y * zh;
 
                     worldTemp.X = p.Rectangle.X;
                     worldTemp.Y = p.Rectangle.Y;
 
+                    tempR = worldR;
 
                     p = p.Parent;
                 }

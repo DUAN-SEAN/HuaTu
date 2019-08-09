@@ -79,12 +79,24 @@ namespace DrawWork
                             if (enumerator.Current != null && endDrawObject != null && endDrawObject.drawObjects[0] is DrawCircleObject cirend)
                                 ((PathCommands) enumerator.Current).P = cirend.GetWorldDrawObject().GetCenter();
                             break;
-
                         default:
                             break;
                     }
             }
             base.Draw(g);
+        }
+        /// <summary>
+        /// 连接线序列化成xml
+        /// 包含连接的物体信息，复现时需读取
+        /// </summary>
+        /// <param name="scale"></param>
+        /// <param name="noanimation"></param>
+        /// <returns></returns>
+        public override string GetXmlStr(SizeF scale, bool noanimation = true)
+        {
+            //编写metadata
+
+            return null;
         }
     }
 }

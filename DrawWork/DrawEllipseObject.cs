@@ -60,38 +60,56 @@ namespace DrawWork
 
         public new  DrawEllipseObject GetWorldDrawObject()
         {
-            PointF parents = new PointF(Parent.Rectangle.X, Parent.Rectangle.Y);
-            DeviceDrawObjectBase par = Parent;
-
-            while (par.Parent != null)
+            if(Parent != null)
             {
-                par = par.Parent;
-                parents.X += par.Rectangle.X;
-                parents.Y += par.Rectangle.Y;
-            }
 
 
-            if (Parent != null)
-            {
-                ////获取父物体的世界坐标
-                //var parentPosition = new PointF(Parent.Rectangle.X, Parent.Rectangle.Y);
-                ////应用缩放 获取缩放比
-                //var zoomw = Parent.Width / Parent.ViewBox_w;
-                //var zoomh = Parent.Height / Parent.ViewBox_h;
+                PointF worldTemp = new PointF();
+                var tempR = new PointF(rectangle.Width, rectangle.Height);
+                worldTemp.X = rectangle.X;//当前坐标
+                worldTemp.Y = rectangle.Y;
+                var worldPosition = new PointF(0f, 0f);
+                var worldR = PointF.Empty;
+                var p = Parent;
+                while (p != null)
+                {
+                    var zw = 0f;
+                    var zh =0f;
+                    if (p.Width == 0 || p.Height == 0)
+                    {
+                        zw = 1f;
+                        zh = 1f;
+                        //worldTemp.X += p.Rectangle.X;
+                        //worldTemp.Y += p.Rectangle.Y;
+                    }
+                    else
+                    {   zw = p.Width / p.ViewBox_w;
+                        zh = p.Height / p.ViewBox_h;
+                   
+                        
+                    }
+                    worldPosition.X += worldTemp.X * zw;
+                    worldPosition.Y += worldTemp.Y * zh;
+                    worldR.X += tempR.X * zw;
+                    worldR.Y += tempR.Y * zh;
 
-                //吴悠修改
-                //获取父物体的世界坐标
-                var parentPosition = new PointF(parents.X, parents.Y);
-                //应用缩放 获取缩放比
-                var zoomw = par.Width / par.ViewBox_w;
-                var zoomh = par.Height / par.ViewBox_h;
+                    worldTemp.X = p.Rectangle.X;
+                    worldTemp.Y = p.Rectangle.Y;
 
-                var worldDrawObj = new DrawEllipseObject(rectangle.X + parentPosition.X, rectangle.Y + parentPosition.Y,
-                    zoomw * rectangle.Width, zoomh * rectangle.Height);
-                worldDrawObj._angle = Parent.GetAngle();
+                    tempR = worldR;
+
+                    p = p.Parent;
+                }
+
+                worldPosition.X += worldTemp.X;
+                worldPosition.Y += worldTemp.Y;
+
+                var worldDrawObj = new DrawEllipseObject(worldPosition.X, worldPosition.Y, worldR.X, worldR.Y);
+                //var worldDrawObj = new DrawEllipseObject(wokrldPosition.X, worldPosition.Y, 5, 5);
+
                 return worldDrawObj;
-
             }
+
             return this;
         }
 

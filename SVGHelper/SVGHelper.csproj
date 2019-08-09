@@ -57,6 +57,8 @@
     <Compile Include="Fix\SVGDef.cs" />
     <Compile Include="Fix\SVGSymbol.cs" />
     <Compile Include="Fix\SVGUse.cs" />
+    <Compile Include="metaData\SVGCN_Ref.cs" />
+    <Compile Include="metaData\SVGMetaData.cs" />
     <Compile Include="SVGCircle.cs" />
     <Compile Include="SVGEllipse.cs" />
     <Compile Include="SVGImage.cs" />

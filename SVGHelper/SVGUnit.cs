@@ -39,7 +39,9 @@ namespace SVGHelper
             device,
             symbol,
             use,
-            def
+            def,
+            metaData,
+            CN_Ref
         };
 
 

@@ -127,7 +127,11 @@ namespace SVGHelper.Base
         attrSymbol_viewBox,
 
         //use
-        attrSysmbol_terminal_index
+        attrSysmbol_terminal_index,
+
+        //metaData
+        attrLinkObjecttlDnd,
+        attrLinkObjectIDznd
 
         }
 
@@ -151,7 +155,8 @@ namespace SVGHelper.Base
         groupDevice,
 
         groupSymbol,
-        use
+        use,
+        metaData
     }
 
     /// <summary>
@@ -618,7 +623,29 @@ namespace SVGHelper.Base
 
         InitAnimation();
         InitDevice();
+
+        InitMetaData();
     }
+
+    private void InitMetaData()
+    {
+        _AttrInfo info;
+        //Timing attribute 
+        info = new _AttrInfo();
+        info._type = _SvgAttribute.attrLinkObjecttlDnd;
+        info._group = _SvgAttributeGroup.metaData;
+        info._name = "LinkObjectlDnd";
+
+        m_mapAttrInfo.Add(info._type, info);
+
+        info = new _AttrInfo();
+        info._type = _SvgAttribute.attrLinkObjectIDznd;
+        info._group = _SvgAttributeGroup.metaData;
+        info._name = "LinkObjectIDznd";
+
+        m_mapAttrInfo.Add(info._type, info);
+
+        }
 
     private void InitDevice()
     {
