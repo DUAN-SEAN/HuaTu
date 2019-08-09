@@ -8,6 +8,7 @@ using System.Windows.Forms.VisualStyles;
 using DrawWork.NewDeviceDrawObject;
 using SVGHelper;
 using SVGHelper.Base;
+using SVGHelper.metaData;
 
 namespace DrawWork.Symbol
 {
@@ -36,29 +37,49 @@ namespace DrawWork.Symbol
                         }
                         break;
                     case SVGUnit.SVGUnitType.typeGroup:
-                        SVGGroup group = svg.getChild() as SVGGroup;
-                        while (group != null)
+                        if (svg.Id == SVGDefine.ConnectLineClass)
                         {
-                            var gchild =  group.getChild();
-                            switch (gchild.getElementType())
-                            {
+                            SVGGroup group = svg.getChild() as SVGGroup;
+                            var path =  SVGDrawFactory.CreateDrawObject(group.getChild()) as DrawPathObject;
 
-                                case SVGUnit.SVGUnitType.use:
-                                    SVGUse use = gchild as SVGUse;
-                                    var gDevice = CreateDeviceDrawObjectBase(use, group.Id);//TODO 后期添加到工作组中
-                                    list.Add(gDevice);
-                                    break;
-                                default:
-                                    //TODO 未编排为设备的图素集合，暂时用临时分组表示
-                                    var o =  SVGDrawFactory.CreateDrawObject(svg);
-                                    list.Add(o);
-                                    //vBase = new DeviceDrawObjectBase(0f, 0f, 0f, 0f, group.Id, drawObjects, null, "");
-                                    break;
+
+                            DrawConnectObject drawConnectObject = new DrawConnectObject(path.pathStr);
+                            SVGCN_Ref svgcnRef = group.getChild().getNext() as SVGCN_Ref;
+
+                            drawConnectObject.SetConnectDeviceFromXml(svgcnRef.LinkObjecttlDnd,0,list.GetDeviceList());
+                            drawConnectObject.SetConnectDeviceFromXml(svgcnRef.LinkObjectIDznd, 1, list.GetDeviceList());
+
+                            drawConnectObject.Id = int.Parse(group.Id);
+                            list.Add(drawConnectObject);
+                            group = group.getNext() as SVGGroup;
+                        }
+                        else
+                        {
+                            SVGGroup group = svg.getChild() as SVGGroup;
+                            while (group != null)
+                            {
+                                var gchild = group.getChild();
+                                switch (gchild.getElementType())
+                                {
+
+                                    case SVGUnit.SVGUnitType.use:
+                                        SVGUse use = gchild as SVGUse;
+                                        var gDevice = CreateDeviceDrawObjectBase(use, group.Id);//TODO 后期添加到工作组中
+                                        list.Add(gDevice);
+                                        break;
+                                    default:
+                                        //TODO 未编排为设备的图素集合，暂时用临时分组表示
+                                        var o = SVGDrawFactory.CreateDrawObject(svg);
+                                        list.Add(o);
+                                        //vBase = new DeviceDrawObjectBase(0f, 0f, 0f, 0f, group.Id, drawObjects, null, "");
+                                        break;
+
+                                }
+                                group = group.getNext() as SVGGroup;//获取下一个
 
                             }
-                            group = group.getNext() as SVGGroup;//获取下一个
-
                         }
+                      
 
                         break;
                     default:break;

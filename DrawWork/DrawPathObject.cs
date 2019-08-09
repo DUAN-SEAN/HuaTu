@@ -29,7 +29,7 @@ namespace DrawWork
 
         private GraphicsPath _lastGp;
         PointF _pointToInsert;
-
+        public string[] pathStr;
         #endregion 字段
 
         #region 构造器
@@ -49,6 +49,7 @@ namespace DrawWork
 
         public DrawPathObject(String[] arr)
         {
+            pathStr = arr;
             _x = 0.0F;
             char currentCommand = new char();
             char nextCommand = new char();
