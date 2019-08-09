@@ -21,7 +21,10 @@ namespace DrawWork
         protected DeviceDrawObjectBase endDrawObject;
         protected int endportindex;
 
-
+        /// <summary>
+        /// 正在播放的动画
+        /// </summary>
+        protected List<DrawObject> animationList;
         public DrawConnectObject(float x, float y) : base(x,y)
         {
 
@@ -67,7 +70,51 @@ namespace DrawWork
             return dp;
         }
 
+        public override void Update()
+        {
+           if(startDrawObject == null || endDrawObject == null)
+           {
+               RemoveAnimation();
+               return;
+           }
 
+           if(startDrawObject.IsOn && endDrawObject.IsOn) 
+               AddAnimation();
+
+               
+        }
+        /// <summary>
+        /// 判断到左右点设备都是On
+        /// 就添加动画
+        /// 已经添加过则不会再重复添加
+        /// </summary>
+        protected void AddAnimation()
+        {
+            //TODO 添加动画对象到animationList中
+
+
+
+
+            foreach (var drawObject in animationList)
+            {
+                DrawObjectList.AddAnimation(drawObject);
+            }
+        }
+
+        /// <summary>
+        /// 判断到有设备是 oFF
+        /// 就删除动画
+        /// 没有动画则不会重复删除
+        /// </summary>
+        protected void RemoveAnimation()
+        {
+
+            foreach (var drawObject in animationList)
+            {
+                DrawObjectList.RemoveAnimation(drawObject);
+            }
+            animationList.Clear();
+        }
         /// <summary>
         /// 通过端口ID连接端口
         /// </summary>
