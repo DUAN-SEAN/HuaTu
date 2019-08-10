@@ -107,6 +107,9 @@ namespace DrawWork
             {
                 if(VARIABLE is DeviceDrawObjectBase device)
                     list.AddRange(device.GetAnimaitionArrayList());
+                if (VARIABLE is DrawConnectObject connect)
+                    if (connect.AnimationList.Count != 0)
+                        list.AddRange(connect.AnimationList);
             }
 
             return list;

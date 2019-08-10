@@ -373,6 +373,10 @@ namespace DrawWork
             {
                 if (VARIABLE.AnimationBases.Count != 0)
                     list.Add(VARIABLE);
+
+                if(VARIABLE is DrawConnectObject connect)
+                    if (connect.AnimationList.Count != 0)
+                        list.AddRange(connect.AnimationList);
             }
 
             foreach (var VARIABLE in deviceDrawObjectBases)

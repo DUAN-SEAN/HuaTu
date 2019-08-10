@@ -28,11 +28,12 @@ namespace DrawWork
         protected List<DrawObject> animationList;
         public DrawConnectObject(float x, float y) : base(x,y)
         {
-
+            animationList = new List<DrawObject>();
         }
 
         public DrawConnectObject(String[] arr) : base(arr)
         {
+            animationList = new List<DrawObject>();
 
         }
 
@@ -44,6 +45,8 @@ namespace DrawWork
                 return startDrawObject?._hrefId;
             }
         }
+
+        public List<DrawObject> AnimationList => animationList;
 
         public string EndHrefId => endDrawObject?._hrefId;
 
