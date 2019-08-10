@@ -91,6 +91,8 @@ namespace DrawWork
         /// </summary>
         protected void AddAnimation()
         {
+           if(animationList.Count> 0 ) return;
+           
             //TODO 添加动画对象到animationList中
             PointF[] points = new PointF[_pointArray.Count];
             for (int i = 0; i < _pointArray.Count; i++)
@@ -104,11 +106,8 @@ namespace DrawWork
             DrawCircleObject circle = new DrawCircleObject(point.X,point.Y,10,10);
             circle.AnimationBases.Add(path);
             animationList.Add(circle);
-
-            foreach (var drawObject in animationList)
-            {
-                DrawObjectList.AddAnimation(drawObject);
-            }
+            
+           
         }
 
         /// <summary>
@@ -119,10 +118,7 @@ namespace DrawWork
         protected void RemoveAnimation()
         {
 
-            foreach (var drawObject in animationList)
-            {
-                DrawObjectList.RemoveAnimation(drawObject);
-            }
+           
             animationList.Clear();
         }
 

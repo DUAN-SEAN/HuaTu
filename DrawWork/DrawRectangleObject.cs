@@ -31,7 +31,7 @@ namespace DrawWork
 
         #region 构造器
 
-        public DrawRectangleObject()
+        public DrawRectangleObject() 
         {
             SetRectangleF(0, 0, 1, 1);
             Initialize();

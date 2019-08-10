@@ -64,6 +64,9 @@ namespace DrawWork
         public DeviceType _type;//设备类型
 
         #region 字段
+
+
+
         public RectangleF _imageR = new RectangleF(9, 9, 20, 20);
 
         public List<Animation.Animation> AnimationBases = new List<Animation.Animation>();
@@ -78,6 +81,14 @@ namespace DrawWork
         /// 父级元素坐标
         /// </summary>
         protected PointF parentPointF;
+
+        /// <summary>
+        /// 上一次时间
+        /// </summary>
+        protected long lastdrawtime;
+
+
+
         #endregion 字段
 
         #region 属性
@@ -189,6 +200,7 @@ namespace DrawWork
 
         protected DrawObject()
         {
+           
             Name = "";
             Fill = Color.Empty;
             Id = 0;
@@ -198,6 +210,7 @@ namespace DrawWork
 
         protected DrawObject(PointF pro)
         {
+     
             Name = "";
             Fill = Color.Empty;
             Id = 0;

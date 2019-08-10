@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -356,12 +357,33 @@ namespace DrawWork
 
         }
 
-#endregion
+        #endregion
 
 
 
 
         #region Helper
+
+        public ArrayList GetAnimaitionArrayList()
+        {
+            ArrayList list = new ArrayList();
+
+
+            foreach (var VARIABLE in drawObjects)
+            {
+                if (VARIABLE.AnimationBases.Count != 0)
+                    list.Add(VARIABLE);
+            }
+
+            foreach (var VARIABLE in deviceDrawObjectBases)
+            {
+                list.AddRange(VARIABLE.GetAnimaitionArrayList());
+            }
+
+            return list;
+        }
+
+
         /// <summary>
         /// 通过端口id寻找端口
         /// </summary>
