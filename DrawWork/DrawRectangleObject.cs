@@ -111,6 +111,11 @@ namespace DrawWork
                     var point = Parent.GetCenter();
                     return new RectangleF(rectangle.X + point.X, rectangle.Y + point.Y, rectangle.Width,
                         rectangle.Height);
+                }else if (ParentDrawObject != null)
+                {
+                    var point = ParentDrawObject.GetCenter();
+                    return new RectangleF(rectangle.X + point.X, rectangle.Y + point.Y, rectangle.Width,
+                        rectangle.Height);
                 }
 
                 return rectangle;
@@ -565,6 +570,7 @@ namespace DrawWork
             fixedCenter.X += deltaX;
             fixedCenter.Y += deltaY;
 
+            OnHandleMove?.Invoke(-1);
         }
 
         public override void MoveHandleTo(PointF point, int handleNumber)
@@ -642,6 +648,8 @@ namespace DrawWork
             }
 
             SetRectangleF(left, top, right - left, bottom - top);
+
+            OnHandleMove?.Invoke(handleNumber);
         }
         /// <summary>
         /// 获取光标从世界坐标到矩形局部坐标的转换

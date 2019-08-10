@@ -76,13 +76,9 @@ namespace DrawWork
 
         public override void Update()
         {
-           if(startDrawObject == null || endDrawObject == null || !startDrawObject.IsOn || !endDrawObject.IsOn)
-           {
-               RemoveAnimation();
-               return;
-           }
 
-           if(startDrawObject.IsOn && endDrawObject.IsOn) 
+            RemoveAnimation();
+            
                AddAnimation();
 
                
@@ -94,19 +90,40 @@ namespace DrawWork
         /// </summary>
         protected void AddAnimation()
         {
-           if(animationList.Count> 0 ) return;
+
+            if (startDrawObject == null || endDrawObject == null || !startDrawObject.IsOn || !endDrawObject.IsOn)
+                return;
+
+            if (animationList.Count > 0) return;
            
             //TODO 添加动画对象到animationList中
             PointF[] points = new PointF[_pointArray.Count];
+            var point = _pointArray[0].P;
             for (int i = 0; i < _pointArray.Count; i++)
             {
-                points[i] = _pointArray[i].P;
+                if (_pointArray[i].Pc == 'M')
+                    point = _pointArray[i].P;
+
+                var pi = _pointArray[i].P;
+                points[i] = new PointF( pi.X - point.X , pi.Y- point.Y);
             }
-            AnimationPath path = new AnimationPath(points);
+            PointF[] worldpoints = new PointF[_pointArray.Count];
+            for (int i = 0; i < _pointArray.Count; i++)
+            {
+                var pi = new PointF(_pointArray[i].P.X - 5, _pointArray[i].P.Y - 5);
+                worldpoints[i] = pi;
+            }
 
-            var point = points[0];
+            AnimationPath path = new AnimationPath(points,worldpoints)
+            {
+                TimingAttr = {Dur = "10"}
+            };
 
-            DrawCircleObject circle = new DrawCircleObject(point.X,point.Y,10,10);
+
+            DrawCircleObject circle = new DrawCircleObject(-point.X, -point.Y, 10, 10)
+            {
+                
+            };
             circle.AnimationBases.Add(path);
             animationList.Add(circle);
             
@@ -121,14 +138,15 @@ namespace DrawWork
         protected void RemoveAnimation()
         {
 
-           
-            animationList.Clear();
+            if (startDrawObject == null || endDrawObject == null || !startDrawObject.IsOn || !endDrawObject.IsOn)
+                animationList.Clear();
         }
 
         public override void MoveHandleTo(PointF point, int handleNumber)
         {
             RemoveAnimation();
             base.MoveHandleTo(point, handleNumber);
+            OnHandleMove?.Invoke(handleNumber);
             AddAnimation();
         }
 
@@ -160,6 +178,12 @@ namespace DrawWork
                 handleNumber = 1;
                 startDrawObject = draw;
                 startportindex = portindex;
+                if (startDrawObject == null) return;
+                startDrawObject.OnHandleMove += i =>
+                {
+                   animationList.Clear();
+                    AddAnimation();
+                };
             }
 
             if (handleNumber >= _pointArray.Count)
@@ -167,6 +191,13 @@ namespace DrawWork
                 handleNumber = _pointArray.Count;
                 endDrawObject = draw;
                 endportindex = portindex;
+                if(endDrawObject == null) return;
+                
+                endDrawObject.OnHandleMove += i =>
+                {
+                    animationList.Clear();
+                    AddAnimation();
+                };
             }
 
            
@@ -176,7 +207,10 @@ namespace DrawWork
 
         public override void Draw(Graphics g)
         {
-            
+            foreach (var drawObject in animationList)
+            {
+                drawObject.Draw(g);
+            }
 
             IEnumerator enumerator = _pointArray.GetEnumerator();
 

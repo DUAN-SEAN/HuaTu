@@ -85,13 +85,15 @@ namespace DrawWork
         /// <summary>
         /// 上一次时间
         /// </summary>
-        protected long lastdrawtime;
+        protected float lastdrawtime;
 
 
 
         #endregion 字段
 
         #region 属性
+
+        public Action<int> OnHandleMove;
 
         public PointF Proportion
         {
@@ -106,19 +108,23 @@ namespace DrawWork
         }
 
         protected DeviceDrawObjectBase _parent;
+        protected DrawObject _parentdrawobject;
 
-        [Browsable(false)] public DeviceDrawObjectBase Parent {
-            set
-            {
-                _parent = value;
-            }
+        [Browsable(false)]
+        public DeviceDrawObjectBase Parent
+        {
+            set { _parent = value; }
 
-            get
-            {
-              
-                return _parent;
-            }
-    }
+            get { return _parent; }
+        }
+
+        [Browsable(false)]
+        public DrawObject ParentDrawObject
+        {
+            set { _parentdrawobject = value; }
+
+            get { return _parentdrawobject; }
+        }
 
         [Browsable(false)]
         public bool HitOnCircumferance { get; set; }
@@ -885,5 +891,8 @@ namespace DrawWork
         }
 
         #endregion
+
+
+       
     }
 }

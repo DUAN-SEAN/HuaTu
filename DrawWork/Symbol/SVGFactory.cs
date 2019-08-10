@@ -229,7 +229,7 @@ namespace DrawWork.Symbol
         {
             string s = "<g id=\"" + SVGDefine.AnimationClass + "\">";
             s += Environment.NewLine;
-            foreach (var obj in list.GraphicsList)
+            foreach (var obj in list.GetAnimaitionArrayList())
             {
                 var drawobj = obj as DrawObject;
                 if(drawobj.AnimationBases==null||drawobj.AnimationBases.Count==0) continue;
@@ -237,8 +237,8 @@ namespace DrawWork.Symbol
                 s += drawobj.GetXmlStr(scale, false);
                 foreach (var anim in drawobj.AnimationBases)
                 {
-                    s += "     < ";
-                    switch (anim._animationType)
+                    s += "     <";
+                    switch (anim.AnimationType)
                     {
                         case AnimationType.None:
                             s += "animate";

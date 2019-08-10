@@ -45,7 +45,7 @@ namespace DrawWork
         /// <summary>
         /// 判断设备是否属于激活状态
         /// </summary>
-        protected bool isOn;
+        protected bool isOn = true;
 
 
         #region 属性
@@ -369,20 +369,22 @@ namespace DrawWork
             ArrayList list = new ArrayList();
 
 
-            foreach (var VARIABLE in drawObjects)
-            {
-                if (VARIABLE.AnimationBases.Count != 0)
-                    list.Add(VARIABLE);
+            if(drawObjects != null)
+                foreach (var VARIABLE in drawObjects)
+                {
+                    if (VARIABLE.AnimationBases.Count != 0)
+                        list.Add(VARIABLE);
 
-                if(VARIABLE is DrawConnectObject connect)
-                    if (connect.AnimationList.Count != 0)
-                        list.AddRange(connect.AnimationList);
-            }
+                    if (VARIABLE is DrawConnectObject connect)
+                        if (connect.AnimationList.Count != 0)
+                            list.AddRange(connect.AnimationList);
+                }
 
-            foreach (var VARIABLE in deviceDrawObjectBases)
-            {
-                list.AddRange(VARIABLE.GetAnimaitionArrayList());
-            }
+            if(deviceDrawObjectBases != null)
+                foreach (var VARIABLE in deviceDrawObjectBases)
+                {
+                    list.AddRange(VARIABLE.GetAnimaitionArrayList());
+                }
 
             return list;
         }

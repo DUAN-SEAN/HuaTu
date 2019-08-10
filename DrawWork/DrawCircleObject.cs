@@ -5,6 +5,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DrawWork.Animation;
 using SVGHelper;
 
 namespace DrawWork
@@ -49,34 +50,79 @@ namespace DrawWork
         public override void Draw(Graphics g)
         {
             
-            
 
-             if (hasRotation)
-             {
+            if (hasRotation)
+            {
                 fixedCenter = GetCenter();
                 hasRotation = false;
-             }
-             PointF center = new PointF(fixedCenter.X + parentPointF.X, fixedCenter.Y + parentPointF.Y);
+            }
+
+
+
+
+
+            foreach (var animationBase in AnimationBases)
+            {
+                if (animationBase.AnimationType == AnimationType.AnimationPath)
+                    if (animationBase is AnimationPath path)
+                    {
+                        if (!int.TryParse(path.TimingAttr.Dur, out int dur)) continue;
+                        if (path._worldpath.Length == 0) continue;
+
+                        int index = lastdrawtime < 0.05
+                            ? 0
+                            : (int) ((lastdrawtime / dur /
+                                      ((dur / (float) (path._worldpath.Length - 1)) / dur)) + 1);
+                        if (index >= path._worldpath.Length)
+                        {
+                            lastdrawtime = (lastdrawtime + SVGDefine.AnimationSpeed) % dur;
+                            continue;
+                        }
+                        var point = path._worldpath[index];
+                        if (index == 0)
+                        {
+                            rectangle.X = point.X;
+                            rectangle.Y = point.Y;
+                        }
+                        else
+                        {
+                            var lastpoint = path._worldpath[index - 1];
+                            float proc = ((float) lastdrawtime) / (float) dur ;
+                            rectangle.X = lastpoint.X + ( point.X - lastpoint.X) * proc;
+                            rectangle.Y = lastpoint.Y + ( point.Y - lastpoint.Y) * proc;
+
+                        }
+
+                        lastdrawtime = (lastdrawtime + SVGDefine.AnimationSpeed ) % dur;
+                        break;
+                    }
+            }
+
+            PointF center = new PointF(fixedCenter.X + parentPointF.X, fixedCenter.Y + parentPointF.Y);
 
              RectangleF r = GetNormalizedRectangle(ParentAndRectangleF);
              if (Parent != null)
              {
-                center = Parent.GetRoot().GetCenter();
-                var worldDrawObj = GetWorldDrawObject();
-                r = GetNormalizedRectangle(worldDrawObj.rectangle);
+                 center = Parent.GetRoot().GetCenter();
+                 var worldDrawObj = GetWorldDrawObject();
+                 r = GetNormalizedRectangle(worldDrawObj.rectangle);
              }
-             g.TranslateTransform(center.X, center.Y);
+             if (ParentDrawObject != null)
+             {
+                 center = ParentDrawObject.GetRoot().GetCenter();
+                 var worldDrawObj = GetWorldDrawObject();
+                 r = GetNormalizedRectangle(worldDrawObj.rectangle);
+             }
+            g.TranslateTransform(center.X, center.Y);
              g.RotateTransform(-_angle);
              g.TranslateTransform(-center.X, -center.Y);
-        
-
-
 
              if (Fill != Color.Empty)
              {
                  Brush brush = new SolidBrush(Fill);
                  g.FillEllipse(brush, r);
              }
+
              var pen = new Pen(Stroke, StrokeWidth);
              g.DrawEllipse(pen, r);
              g.ResetTransform();
@@ -88,8 +134,6 @@ namespace DrawWork
 
             if (Parent != null)
             {
-
-
                 PointF worldTemp = new PointF();
                 var tempR = new PointF(rectangle.Width, rectangle.Height);
                 worldTemp.X = rectangle.X;//当前坐标
@@ -136,7 +180,7 @@ namespace DrawWork
                 
                 return worldDrawObj;
             }
-
+            
             return this;
         }
 
@@ -236,12 +280,32 @@ namespace DrawWork
         public override string GetXmlStr(SizeF scale, bool noAnimation = true)
         {
             string s = "<";
-            s += Tag;
-            s += GetStrStyle(scale);
-            s += " cx = \"" + CX + "\"";
-            s += " cy = \"" + CY + "\"";
-            s += " r = \"" + R + "\"";
-            s += GetTransformXML(_angle, fixedCenter);
+            if (AnimationBases.Count == 0)
+            {
+               
+                s += Tag;
+                s += GetStrStyle(scale);
+                s += " cx = \"" + CX + "\"";
+                s += " cy = \"" + CY + "\"";
+                s += " r = \"" + R + "\"";
+                s += GetTransformXML(_angle, fixedCenter);
+            }
+            else
+            {
+                for (int i = 0; i < AnimationBases.Count; i++)
+                {
+                    if (AnimationBases[i] is AnimationPath path)
+                    {
+                        s += Tag;
+                        s += GetStrStyle(scale);
+                        s += " cx = \"" + path._worldpath[0].X + "\"";
+                        s += " cy = \"" + path._worldpath[0].Y + "\"";
+                        s += " r = \"" + R + "\"";
+                        s += GetTransformXML(_angle, fixedCenter);
+                        break;
+                    }
+                }
+            }
 
 
             
@@ -264,7 +328,7 @@ namespace DrawWork
         }
         public override string GetXmlEnd()
         {
-            return "</circle>" + base.GetXmlEnd();
+            return "</circle>";
         }
     }
 }

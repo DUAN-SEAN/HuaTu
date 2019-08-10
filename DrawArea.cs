@@ -433,8 +433,9 @@ namespace HuaTuDemo
                 sw.Close();
                 return true;
             }
-            catch
+            catch(Exception e)
             {
+                var e1 = e;
                 return false;
             }
         }

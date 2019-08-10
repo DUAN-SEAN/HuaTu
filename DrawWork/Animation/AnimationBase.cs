@@ -195,7 +195,8 @@ namespace DrawWork.Animation
 
         private string _additive;//-replace|sum
         private string _accumulate;//-none|sum
-        private PointF[] _path;//路径
+        public PointF[] _path;//路径
+        public PointF[] _worldpath;//路径
         private string origin;//default
         public override AnimationType AnimationType
         {
@@ -204,6 +205,13 @@ namespace DrawWork.Animation
         public AnimationPath(PointF[] path)
         {
             _path = path;
+        }
+
+        public AnimationPath(PointF[] path,PointF[] worldpath)
+        {
+            _path = path;
+            _worldpath = worldpath;
+
         }
         public AnimationPath(SVGAnimate svgAnimate) : base(svgAnimate)
         {
@@ -219,7 +227,7 @@ namespace DrawWork.Animation
                 s += " " + p.X + " " + p.Y;
             }
 
-            s += "Z\" ";
+            s += "\" ";
 
 
             if (CheckValue(CalcMode))
@@ -236,7 +244,34 @@ namespace DrawWork.Animation
                 s += " keyTimes=\"" + KeyTimes + "\" ";
             if (CheckValue(KeySplines))
                 s += " keySplines=\"" + KeySplines + "\" ";
-
+            if (CheckValue(_timeTimingAttribute.Begin))
+            {
+                s += " begin=\"" + _timeTimingAttribute.Begin + "s\" ";
+            }
+            if (CheckValue(_timeTimingAttribute.Dur))
+            {
+                s += " dur=\"" + _timeTimingAttribute.Dur + "s\" ";
+            }
+            if (CheckValue(_timeTimingAttribute.End))
+            {
+                s += " end=\"" + _timeTimingAttribute.End + "s\" ";
+            }
+            if (CheckValue(_timeTimingAttribute.Restart))
+            {
+                s += " restart=\"" + _timeTimingAttribute.Restart + "\" ";
+            }
+            if (CheckValue(_timeTimingAttribute.RepeatCount))
+            {
+                s += " repeatCount=\"" + _timeTimingAttribute.RepeatCount + "\" ";
+            }
+            if (CheckValue(_timeTimingAttribute.RepeatDur))
+            {
+                s += " repeatDur=\"" + _timeTimingAttribute.RepeatDur + "\" ";
+            }
+            if (CheckValue(_timeTimingAttribute.Fill))
+            {
+                s += " fill=\"" + _timeTimingAttribute.Fill + "\" ";
+            }
             return s;
         }
     }

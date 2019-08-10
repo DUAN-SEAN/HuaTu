@@ -73,7 +73,7 @@ namespace DrawWork.NewDeviceDrawObject
         {
             if (handle == HandleCount)
                 isClose = !isClose;
-            ;
+            isOn = !isClose;
         }
     }
 }
