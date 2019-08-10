@@ -73,7 +73,7 @@ namespace DrawWork
 
         public override void Update()
         {
-           if(startDrawObject == null || endDrawObject == null)
+           if(startDrawObject == null || endDrawObject == null || !startDrawObject.IsOn || !endDrawObject.IsOn)
            {
                RemoveAnimation();
                return;
@@ -92,9 +92,18 @@ namespace DrawWork
         protected void AddAnimation()
         {
             //TODO 添加动画对象到animationList中
-            AnimationPath path = new AnimationPath();
+            PointF[] points = new PointF[_pointArray.Count];
+            for (int i = 0; i < _pointArray.Count; i++)
+            {
+                points[i] = _pointArray[i].P;
+            }
+            AnimationPath path = new AnimationPath(points);
 
+            var point = points[0];
 
+            DrawCircleObject circle = new DrawCircleObject(point.X,point.Y,10,10);
+            circle.AnimationBases.Add(path);
+            animationList.Add(circle);
 
             foreach (var drawObject in animationList)
             {
@@ -116,6 +125,15 @@ namespace DrawWork
             }
             animationList.Clear();
         }
+
+        public override void MoveHandleTo(PointF point, int handleNumber)
+        {
+            RemoveAnimation();
+            base.MoveHandleTo(point, handleNumber);
+            AddAnimation();
+        }
+
+
         /// <summary>
         /// 通过端口ID连接端口
         /// </summary>

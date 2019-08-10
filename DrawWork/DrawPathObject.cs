@@ -436,6 +436,7 @@ namespace DrawWork
                 handleNumber = _pointArray.Count;
 
             _pointArray[handleNumber - 1].P = point;
+            
             Invalidate();
         }
 
