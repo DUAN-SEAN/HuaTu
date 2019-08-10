@@ -158,7 +158,7 @@ namespace DrawWork.Symbol
             string s = "";
             s += "<symbol ";
             s += " id=\"" + SymbolId + "\"" + " viewBox=\"" + x + " " + y + " " + width + " " + height + "\">";
-            s += "\r\n";
+            s += Environment.NewLine;
             foreach (var symbolChild in _symbolChildSvgs)
             {
                 s += symbolChild.GetAttributeXml();

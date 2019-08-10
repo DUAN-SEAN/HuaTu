@@ -420,15 +420,15 @@ namespace HuaTuDemo
                 const string mSXmlDeclaration = "<?xml version=\"1.0\" standalone=\"no\"?>";
                 const string mSXmlDocType = "<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\" \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd \">";
 
-                string sXml = mSXmlDeclaration + "\r\n";
-                sXml += mSXmlDocType + "\r\n";
+                string sXml = mSXmlDeclaration + Environment.NewLine;
+                sXml += mSXmlDocType + Environment.NewLine;
                 sXml += "<svg xmlns=\"http://www.w3.org/2000/svg\"  xmlns:xlink=\"http://www.w3.org/1999/xlink\"  xmlns:cge=\"http://www.cim.com\" version=\"1.1\" width=\"" + _mOriginalSize.Width.ToString(CultureInfo.InvariantCulture) +
-                "\" height=\"" + _mOriginalSize.Height.ToString(CultureInfo.InvariantCulture) + "\">" + "\r\n";
-                sXml += "<desc>" + Description + "</desc>" + "\r\n";
+                "\" height=\"" + _mOriginalSize.Height.ToString(CultureInfo.InvariantCulture) + "\">" + Environment.NewLine;
+                sXml += "<desc>" + Description + "</desc>" + Environment.NewLine;
                 //sXml += _graphicsList.GetXmlString(_mScale);//将每一个图形都转换为标准格式
                 sXml += SVGFactory.GenerateSVGXml(_mScale,GraphicsList);//改为新的svg内容
-                sXml += "\r\n";
-                sXml += "</svg>" + "\r\n";
+                sXml += Environment.NewLine;
+                sXml += "</svg>" + Environment.NewLine;
                 sw.Write(sXml);
                 sw.Close();
                 return true;

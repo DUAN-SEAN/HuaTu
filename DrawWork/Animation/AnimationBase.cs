@@ -14,7 +14,8 @@ namespace DrawWork.Animation
     {
         None,
         Animation,
-        AnimationColor
+        AnimationColor,
+        AnimationPath
 
     }
 
@@ -40,6 +41,7 @@ namespace DrawWork.Animation
             get => _timeTimingAttribute;
         }
 
+        public virtual AnimationType AnimationType { get; }
 
         public AnimationType _animationType;//动画类型
         protected TimingAttribute _timeTimingAttribute;//时间属性
@@ -118,6 +120,11 @@ namespace DrawWork.Animation
             set => KeySplines = value;
         }
 
+        public override AnimationType AnimationType
+        {
+            get => AnimationType.Animation;
+        }
+
         protected string _calcMode = "linear";//discrete|linear|paced|spline
         protected string _values ;//值列表
         protected string _from;//从某个值开始
@@ -190,7 +197,10 @@ namespace DrawWork.Animation
         private string _accumulate;//-none|sum
         private PointF[] _path;//路径
         private string origin;//default
-
+        public override AnimationType AnimationType
+        {
+            get => AnimationType.AnimationPath;
+        }
         public AnimationPath(PointF[] path)
         {
             _path = path;

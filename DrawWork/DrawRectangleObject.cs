@@ -212,7 +212,7 @@ namespace DrawWork
         //    s += GetStringStyle(stroke, fill, strokewidth, scale);//GetStrStyle(scale);
         //    s += GetRectStringXml(rect, scale, shapeName);
         //    s += GetTransformXML(angle, center);
-        //    s += " />" + "\r\n";
+        //    s += " />" + Environment.NewLine;
         //    return s;
         //}
         /// <summary>
@@ -485,7 +485,7 @@ namespace DrawWork
             s += GetRectStringXml(RectangleF, scale, Name);
             s += GetTransformXML(_angle, fixedCenter);//添加变化
             s += noAnimation ? " />" : " >";
-            s += "\r\n";
+            s += Environment.NewLine;
             return s;
         }
 

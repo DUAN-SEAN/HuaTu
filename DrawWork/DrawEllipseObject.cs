@@ -166,7 +166,7 @@ namespace DrawWork
             s += " ry = \"" + ry.ToString(CultureInfo.InvariantCulture) + "\"";
             s += GetTransform(_angle, fixedCenter);
             s += noAnimation ? " />" : " >";
-            s += "\r\n";
+            s += Environment.NewLine;
           
             return s;
         }

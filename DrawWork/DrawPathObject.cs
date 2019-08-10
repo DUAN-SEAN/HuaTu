@@ -341,7 +341,7 @@ namespace DrawWork
                         s = s.Trim();
 
                         if (prevCommand == 'Z')
-                            s += "\r\n";
+                            s += Environment.NewLine;
 
                         s += curCommand.ToString();
                         s += x.ToString(CultureInfo.InvariantCulture) + " " + y.ToString(CultureInfo.InvariantCulture);
@@ -367,7 +367,7 @@ namespace DrawWork
             if (Name.Length > 0)
                 s += " ShapeName = \"" + Name + "\"";
 
-            s += " />" + "\r\n";
+            s += " />" + Environment.NewLine;
             return s;
         }
 

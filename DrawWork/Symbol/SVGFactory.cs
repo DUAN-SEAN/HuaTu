@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms.VisualStyles;
+using DrawWork.Animation;
 using DrawWork.NewDeviceDrawObject;
 using SVGHelper;
 using SVGHelper.Base;
@@ -51,6 +52,9 @@ namespace DrawWork.Symbol
                             drawConnectObject.Id = int.Parse(group.Id);
                             list.Add(drawConnectObject);
                             group = group.getNext() as SVGGroup;
+                        }else if (svg.Id == SVGDefine.AnimationClass)
+                        {
+
                         }
                         else
                         {
@@ -213,10 +217,57 @@ namespace DrawWork.Symbol
         public static string GenerateSVGXml(SizeF scale ,DrawObjectList list)
         {
             string s = "";
-            s+=GetDefXML();//得到定义
+            s+= GetDefXML();//得到定义
 
             s += GetGroupXML(scale,list);//得到生成的设备实体
             s += GetConnectXML(scale, list);
+            s += GetAnimationXml(scale, list);
+            return s;
+        }
+
+        private static string GetAnimationXml(SizeF scale, DrawObjectList list)
+        {
+            string s = "<g id=\"" + SVGDefine.AnimationClass + "\">";
+            s += Environment.NewLine;
+            foreach (var obj in list.GraphicsList)
+            {
+                var drawobj = obj as DrawObject;
+                if(drawobj.AnimationBases==null||drawobj.AnimationBases.Count==0) continue;
+
+                s += drawobj.GetXmlStr(scale, false);
+                foreach (var anim in drawobj.AnimationBases)
+                {
+                    s += "     < ";
+                    switch (anim._animationType)
+                    {
+                        case AnimationType.None:
+                            s += "animate";
+                            break;
+                        case AnimationType.Animation:
+                            s += "animate";
+                            break;
+                        case AnimationType.AnimationColor:
+                            s += "animateColor";
+                            break;
+                        case AnimationType.AnimationPath:
+                            s += "animateMotion";
+                            break;
+                        default:
+                            throw new ArgumentOutOfRangeException();
+                    }
+                    s += anim.GetXmlStr();
+                    s += " />";
+                    s += Environment.NewLine;
+                }
+
+                s += drawobj.GetXmlEnd();
+            }
+
+            s += Environment.NewLine;
+
+
+            s += "</g>";
+
             return s;
         }
 
@@ -233,29 +284,29 @@ namespace DrawWork.Symbol
                 else
                 {
                     s += (drawObj as DrawObject)?.GetXmlStr(scale, true);
-                    s += "\r\n";
+                    s += Environment.NewLine;
                 }
               
             }
             s += "</g>";
-            s += "\r\n";
+            s += Environment.NewLine;
             return s;
         }
 
         private static string GetConnectXML(SizeF scale ,DrawObjectList list)
         {
             string connect = "<g id=\"" + SVGDefine.ConnectLineClass + "\">";
-            connect += "\r\n";
+            connect += Environment.NewLine;
             foreach (var drawObj in list.GraphicsList)
             {
                 if (drawObj is DrawConnectObject)
                 {
                     var dco = drawObj as DrawConnectObject;
                     connect += "<g id=\"" + dco.Id + "\">";
-                    connect += "\r\n";
+                    connect += Environment.NewLine;
                     connect += dco.GetXmlStr(scale);
                     connect += "</g>";
-                    connect += "\r\n";
+                    connect += Environment.NewLine;
                 }
               
             }
@@ -270,7 +321,7 @@ namespace DrawWork.Symbol
             foreach (var symBolUnit in SymbolUnit._Dic.Values)
             {
                 s+=symBolUnit.GetSymbolXml();
-                s += "\r\n";
+                s += Environment.NewLine;
             }
 
             s += "</defs>";

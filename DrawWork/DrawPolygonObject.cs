@@ -181,7 +181,7 @@ namespace DrawWork
             }
             s += "\"";
             s += noAnimation ? " />" : " >";
-            s += "\r\n";
+            s += Environment.NewLine;
             return s;
         }
 

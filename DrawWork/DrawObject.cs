@@ -494,7 +494,7 @@ namespace DrawWork
                 s += "<animate ";
                 s += animation.GetXmlStr();
                 s += " />";
-                s += "\r\n";
+                s += Environment.NewLine;
             }
 
 
@@ -508,7 +508,7 @@ namespace DrawWork
         /// <returns></returns>
         public  virtual  string GetXmlEnd()
         {
-            return "\r\n";
+            return Environment.NewLine;
         }
         #region 段瑞 旋转
         /// <summary>

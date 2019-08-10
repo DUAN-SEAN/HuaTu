@@ -91,7 +91,7 @@ namespace DrawWork
     //            s += " connectId=\"" + ConnectDevice.DeviceId + "\"";
 
     //        s += GetDeviceType();
-    //        s += " >" + "\r\n";
+    //        s += " >" + Environment.NewLine;
     //        //添加圆形图案
 
     //        if (base.AnimationBases == null || base.AnimationBases.Count == 0)
