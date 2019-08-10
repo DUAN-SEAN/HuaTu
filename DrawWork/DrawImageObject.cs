@@ -248,7 +248,7 @@ namespace DrawWork
                 s += " id= \"" + _id + "\" ";
             }
 
-            s += GetRectStringXml(RectangleF, scale, "") + "\r\n";
+            s += GetRectStringXml(RectangleF, scale, "") + Environment.NewLine;
             // trim directory name
             string flnm = _fileName;
             if (_fileName.IndexOf(":", 0) > 0)
@@ -260,8 +260,8 @@ namespace DrawWork
                 }
             }
 
-            s += " xlink:href = \"" + flnm + "\">" + "\r\n";
-            s += "</" + Tag + ">" + "\r\n";
+            s += " xlink:href = \"" + flnm + "\">" + Environment.NewLine;
+            s += "</" + Tag + ">" + Environment.NewLine;
             return s;
         }
 

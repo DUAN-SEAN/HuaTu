@@ -350,7 +350,7 @@ namespace DrawWork
                 s+="/>";
 
                 s += "</g>";
-                s += "\r\n";
+                s += Environment.NewLine;
             }
             
             return s;

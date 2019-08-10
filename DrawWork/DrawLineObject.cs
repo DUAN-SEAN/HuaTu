@@ -182,7 +182,7 @@ namespace DrawWork
             s += " x2 = \"" + x2.ToString(CultureInfo.InvariantCulture) + "\"";
             s += " y2 = \"" + y2.ToString(CultureInfo.InvariantCulture) + "\"";
             s += noAnimation ? " />" : " >";
-            s += "\r\n";
+            s += Environment.NewLine;
             return s;
         }
 

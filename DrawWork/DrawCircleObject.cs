@@ -244,11 +244,11 @@ namespace DrawWork
             s += GetTransformXML(_angle, fixedCenter);
 
 
-           
+            
            
 
             s += noAnimation ? " />" : " >";
-            s += "\r\n";
+            s += Environment.NewLine;
             return s;
         }
 

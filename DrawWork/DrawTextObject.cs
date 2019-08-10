@@ -145,7 +145,7 @@ namespace DrawWork
             s += txt;
             s += "</" + Tag + ">";
             s += noAnimation ? " />" : " >";
-            s += "\r\n";
+            s += Environment.NewLine;
             return s;
         }
 

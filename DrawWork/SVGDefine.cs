@@ -9,5 +9,7 @@ namespace DrawWork
     public class SVGDefine
     {
         public const string ConnectLineClass = "ConnectiveLineClass";
+
+        public const string AnimationClass = "AnimationClass";
     }
 }

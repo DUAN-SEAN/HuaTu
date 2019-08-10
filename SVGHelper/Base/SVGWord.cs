@@ -504,9 +504,9 @@ namespace SVGHelper.Base
 
             string sXML;
 
-            sXML = m_sXmlDeclaration + "\r\n";
+            sXML = m_sXmlDeclaration + Environment.NewLine;
             sXML += m_sXmlDocType;
-            sXML += "\r\n";
+            sXML += Environment.NewLine;
 
             sXML += m_root.GetXML();
 
