@@ -185,17 +185,49 @@ namespace DrawWork.Animation
     //动画路径
     public class AnimationPath : Animation
     {
+
         private string _additive;//-replace|sum
         private string _accumulate;//-none|sum
-        private object _path;//路径
+        private PointF[] _path;//路径
         private string origin;//default
 
-        public AnimationPath()
+        public AnimationPath(PointF[] path)
         {
-
+            _path = path;
         }
         public AnimationPath(SVGAnimate svgAnimate) : base(svgAnimate)
         {
+        }
+
+        public override string GetXmlStr()
+        {
+
+
+            string s =" path=\"M";
+            foreach (var p in _path)
+            {
+                s += " " + p.X + " " + p.Y;
+            }
+
+            s += "Z\" ";
+
+
+            if (CheckValue(CalcMode))
+                s += " calcMode=\"" + CalcMode + "\" ";
+            if (CheckValue(Values))
+                s += " values=\"" + Values + "\" ";
+            if (CheckValue(From))
+                s += " from=\"" + From + "\" ";
+            if (CheckValue(To))
+                s += " to=\"" + To + "\" ";
+            if (CheckValue(By))
+                s += " by=\"" + By + "\" ";
+            if (CheckValue(KeyTimes))
+                s += " keyTimes=\"" + KeyTimes + "\" ";
+            if (CheckValue(KeySplines))
+                s += " keySplines=\"" + KeySplines + "\" ";
+
+            return s;
         }
     }
 
