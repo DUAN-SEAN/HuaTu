@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DrawWork.Animation;
 using DrawWork.Command;
 using SVGHelper;
 using SVGHelper.Base;
@@ -91,7 +92,7 @@ namespace DrawWork
         protected void AddAnimation()
         {
             //TODO 添加动画对象到animationList中
-
+            AnimationPath path = new AnimationPath();
 
 
 

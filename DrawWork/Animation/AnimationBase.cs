@@ -190,6 +190,10 @@ namespace DrawWork.Animation
         private object _path;//路径
         private string origin;//default
 
+        public AnimationPath()
+        {
+
+        }
         public AnimationPath(SVGAnimate svgAnimate) : base(svgAnimate)
         {
         }
